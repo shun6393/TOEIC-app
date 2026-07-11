@@ -72,7 +72,7 @@
     <div class="word-list-wrap">
       <table class="word-list">
         <thead>
-          <tr><th>英単語</th><th>意味</th><th>ヒント</th><th>学習状況</th></tr>
+          <tr><th>英単語</th><th>意味</th><th>ヒント</th><th>学習状況</th><th>操作</th></tr>
         </thead>
         <tbody id="wordListBody"></tbody>
       </table>
@@ -94,6 +94,46 @@
     </div>
   </details>
 </div>
+
+<dialog class="modal" id="editWordDialog" aria-labelledby="editWordTitle">
+  <form id="editWordForm">
+    <div class="modal-header">
+      <h2 id="editWordTitle">単語を編集</h2>
+      <button class="modal-close" id="editCancelTopBtn" type="button" aria-label="閉じる">×</button>
+    </div>
+    <input type="hidden" id="editWordId">
+    <div class="form-grid">
+      <label>英単語 <input id="editWord" required></label>
+      <label>日本語の意味 <input id="editMeaning" required></label>
+      <label class="form-wide">ヒント <textarea id="editHint"></textarea></label>
+      <label>習熟レベル <input type="number" id="editLevel" min="0" max="6" required></label>
+      <label>学習回数 <input type="number" id="editSeen" min="0" required></label>
+      <label>正解回数 <input type="number" id="editCorrect" min="0" required></label>
+      <label>不正解回数 <input type="number" id="editWrong" min="0" required></label>
+      <label class="form-wide">次回復習日時 <input type="datetime-local" id="editNext"></label>
+    </div>
+    <p class="small" id="editHistoryInfo"></p>
+    <p class="form-error" id="editWordError" role="alert"></p>
+    <div class="modal-actions">
+      <button class="ghost" id="editCancelBtn" type="button">キャンセル</button>
+      <button class="primary" type="submit">保存</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog class="modal" id="deleteWordDialog" aria-labelledby="deleteWordTitle">
+  <div class="modal-header">
+    <h2 id="deleteWordTitle">単語を削除</h2>
+    <button class="modal-close" id="deleteCancelTopBtn" type="button" aria-label="閉じる">×</button>
+  </div>
+  <p id="deleteWordMessage"></p>
+  <div class="delete-history" id="deleteHistoryInfo"></div>
+  <p class="danger-text">この操作は元に戻せません。</p>
+  <div class="modal-actions">
+    <button class="ghost" id="deleteCancelBtn" type="button">キャンセル</button>
+    <button class="danger" id="confirmDeleteBtn" type="button">削除する</button>
+  </div>
+</dialog>
 
 <script src="words.js"></script>
 <script src="script.js"></script>

@@ -16,6 +16,7 @@ let words = [];
 let current = null;
 let revealed = false;
 let wordListPage = 1;
+let pendingDeleteWordId = null;
 
 function now(){ return Date.now(); }
 function todayKey(){ return new Date().toISOString().slice(0,10); }
@@ -176,6 +177,54 @@ function appendWordCell(row, text, label, className=""){
   return cell;
 }
 
+function openModal(dialog){
+  if(typeof dialog.showModal==="function") dialog.showModal();
+  else dialog.setAttribute("open","");
+}
+
+function closeModal(dialog){
+  if(typeof dialog.close==="function") dialog.close();
+  else dialog.removeAttribute("open");
+}
+
+function toDateTimeLocal(timestamp){
+  if(!timestamp) return "";
+  const date=new Date(timestamp);
+  const local=new Date(date.getTime()-date.getTimezoneOffset()*60000);
+  return local.toISOString().slice(0,16);
+}
+
+function openWordEditor(id){
+  const entry=words.find(word=>word.id===id);
+  if(!entry) return;
+  editWordId.value=entry.id;
+  editWord.value=entry.word;
+  editMeaning.value=entry.meaning;
+  editHint.value=entry.hint||"";
+  editLevel.value=entry.level||0;
+  editSeen.value=entry.seen||0;
+  editCorrect.value=entry.correct||0;
+  editWrong.value=entry.wrong||0;
+  editNext.value=toDateTimeLocal(entry.next||0);
+  editHistoryInfo.textContent=entry.last
+    ? `最終回答：${new Date(entry.last).toLocaleString("ja-JP")}（単語IDは変更されません）`
+    : "学習履歴はまだありません（単語IDは変更されません）。";
+  editWordError.textContent="";
+  openModal(editWordDialog);
+}
+
+function openDeleteConfirmation(id){
+  const entry=words.find(word=>word.id===id);
+  if(!entry) return;
+  pendingDeleteWordId=entry.id;
+  deleteWordMessage.textContent=`「${entry.word}」を削除しますか？`;
+  const hasHistory=(entry.seen||0)>0 || (entry.correct||0)>0 || (entry.wrong||0)>0;
+  deleteHistoryInfo.textContent=hasHistory
+    ? `学習回数：${entry.seen||0}回／正解：${entry.correct||0}回／不正解：${entry.wrong||0}回／習熟レベル：${entry.level||0}。単語を削除すると、この学習履歴も削除されます。`
+    : "この単語には学習履歴がありません。";
+  openModal(deleteWordDialog);
+}
+
 function renderWordList(){
   const query=wordSearch.value.trim().toLocaleLowerCase("ja-JP");
   const filtered=words.filter(entry=>
@@ -204,6 +253,18 @@ function renderWordList(){
     badge.className=`status ${status.className}`;
     badge.textContent=status.label;
     statusCell.appendChild(badge);
+    const actionCell=appendWordCell(row,"","操作","word-actions");
+    const editButton=document.createElement("button");
+    editButton.type="button";
+    editButton.className="ghost";
+    editButton.textContent="編集";
+    editButton.addEventListener("click",()=>openWordEditor(entry.id));
+    const deleteButton=document.createElement("button");
+    deleteButton.type="button";
+    deleteButton.className="danger";
+    deleteButton.textContent="削除";
+    deleteButton.addEventListener("click",()=>openDeleteConfirmation(entry.id));
+    actionCell.append(editButton,deleteButton);
     wordListBody.appendChild(row);
   }
 
@@ -225,6 +286,70 @@ dailyGoal.addEventListener("change",()=>{save();refreshStats();});
 wordSearch.addEventListener("input",()=>{wordListPage=1;renderWordList();});
 prevPageBtn.addEventListener("click",()=>{wordListPage--;renderWordList();});
 nextPageBtn.addEventListener("click",()=>{wordListPage++;renderWordList();});
+editCancelBtn.addEventListener("click",()=>closeModal(editWordDialog));
+editCancelTopBtn.addEventListener("click",()=>closeModal(editWordDialog));
+deleteCancelBtn.addEventListener("click",()=>{pendingDeleteWordId=null;closeModal(deleteWordDialog);});
+deleteCancelTopBtn.addEventListener("click",()=>{pendingDeleteWordId=null;closeModal(deleteWordDialog);});
+
+editWordForm.addEventListener("submit",event=>{
+  event.preventDefault();
+  const entry=words.find(word=>word.id===editWordId.value);
+  if(!entry) return;
+  const updatedWord=editWord.value.trim();
+  const updatedMeaning=editMeaning.value.trim();
+  if(!updatedWord || !updatedMeaning){
+    editWordError.textContent="英単語と日本語の意味は必須です。";
+    return;
+  }
+  const duplicate=words.some(word=>
+    word.id!==entry.id && word.word.trim().toLocaleLowerCase("en-US")===updatedWord.toLocaleLowerCase("en-US")
+  );
+  if(duplicate){
+    editWordError.textContent="同じ英単語がすでに登録されています。";
+    return;
+  }
+  const updatedSeen=Math.max(0,Number(editSeen.value)||0);
+  const updatedCorrect=Math.max(0,Number(editCorrect.value)||0);
+  const updatedWrong=Math.max(0,Number(editWrong.value)||0);
+  if(updatedCorrect+updatedWrong>updatedSeen){
+    editWordError.textContent="学習回数は、正解回数と不正解回数の合計以上にしてください。";
+    return;
+  }
+
+  entry.word=updatedWord;
+  entry.meaning=updatedMeaning;
+  entry.hint=editHint.value.trim();
+  entry.level=Math.min(6,Math.max(0,Number(editLevel.value)||0));
+  entry.seen=updatedSeen;
+  entry.correct=updatedCorrect;
+  entry.wrong=updatedWrong;
+  entry.next=editNext.value ? new Date(editNext.value).getTime() : 0;
+  if(current && current.id===entry.id){
+    word.textContent=entry.word;
+    meaning.textContent=entry.meaning;
+    hint.textContent=entry.hint;
+    if(revealed) hint.style.display=entry.hint ? "block" : "none";
+  }
+  save();
+  refreshStats();
+  closeModal(editWordDialog);
+});
+
+confirmDeleteBtn.addEventListener("click",()=>{
+  const index=words.findIndex(word=>word.id===pendingDeleteWordId);
+  if(index<0) return;
+  const deletingCurrent=Boolean(current && current.id===words[index].id);
+  words.splice(index,1);
+  pendingDeleteWordId=null;
+  save();
+  closeModal(deleteWordDialog);
+  if(deletingCurrent){
+    current=null;
+    chooseNext();
+  } else {
+    refreshStats();
+  }
+});
 
 resetTodayBtn.addEventListener("click",()=>{
   const td=todayKey();

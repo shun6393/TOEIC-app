@@ -49,6 +49,8 @@
   .word-list th,.word-list td{border-bottom:1px solid var(--line);padding:10px 8px;vertical-align:top}
   .word-list th{font-size:12px;color:var(--muted);white-space:nowrap}
   .word-list td:first-child{font-weight:700}
+  .word-actions{display:flex;gap:6px;white-space:nowrap}
+  .word-actions button{padding:7px 9px;font-size:12px}
   .status{display:inline-block;border-radius:999px;padding:3px 8px;font-size:11px;white-space:nowrap}
   .status-unseen{background:#e5e7eb;color:#4b5563}
   .status-learning{background:#fef3c7;color:#92400e}
@@ -57,6 +59,20 @@
   .pagination{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px}
   .pagination button{padding:8px 12px}
   .word-import{border-top:1px solid var(--line);margin-top:14px;padding-top:2px}
+  .modal{width:min(620px,calc(100% - 28px));border:0;border-radius:16px;padding:20px;color:var(--text);box-shadow:0 18px 50px rgba(0,0,0,.22)}
+  .modal::backdrop{background:rgba(17,24,39,.48)}
+  .modal-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+  .modal-header h2{font-size:19px;margin:0}
+  .modal-close{background:transparent;color:var(--muted);font-size:24px;line-height:1;padding:4px 8px}
+  .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .form-grid label{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:700}
+  .form-grid input,.form-grid textarea{width:100%}
+  .form-grid textarea{min-height:76px;margin:0}
+  .form-wide{grid-column:1/-1}
+  .form-error{color:var(--bad);font-size:13px;min-height:1.5em;margin:8px 0 0}
+  .modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+  .delete-history{background:var(--bg);border-radius:12px;padding:12px;line-height:1.7;font-size:14px}
+  .danger-text{color:var(--bad);font-weight:700}
   textarea{width:100%;min-height:120px;margin-top:10px}
   .empty{color:var(--muted);line-height:1.8}
   @media(max-width:600px){
@@ -67,6 +83,8 @@
     .word-list tr{border:1px solid var(--line);border-radius:12px;padding:8px 10px;margin-bottom:8px}
     .word-list td{border:0;padding:4px 0 4px 88px;position:relative;min-height:28px}
     .word-list td::before{content:attr(data-label);position:absolute;left:0;width:80px;color:var(--muted);font-size:12px;font-weight:400}
+    .form-grid{grid-template-columns:1fr}
+    .form-wide{grid-column:auto}
     .word{font-size:34px}
     .buttons{grid-template-columns:1fr}
   }
