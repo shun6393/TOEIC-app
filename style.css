@@ -1,0 +1,43 @@
+  :root{
+    --bg:#f5f6f8; --card:#ffffff; --text:#181a1f; --muted:#6b7280;
+    --line:#e5e7eb; --accent:#2563eb; --bad:#dc2626; --mid:#d97706; --good:#16a34a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI","Noto Sans JP",sans-serif;background:var(--bg);color:var(--text)}
+  .wrap{max-width:760px;margin:auto;padding:18px}
+  h1{font-size:22px;margin:4px 0 14px}
+  .top,.panel,.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 4px 18px rgba(0,0,0,.04)}
+  .top{padding:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+  .stat{text-align:center}
+  .stat b{display:block;font-size:22px}
+  .stat span{font-size:12px;color:var(--muted)}
+  .panel{padding:14px;margin-bottom:14px}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  input,textarea,button,select{font:inherit}
+  input,textarea,select{border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff}
+  button{border:0;border-radius:12px;padding:12px 14px;cursor:pointer;font-weight:700}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  .primary{background:var(--accent);color:white}
+  .ghost{background:#eef2ff;color:#1e3a8a}
+  .danger{background:#fee2e2;color:#991b1b}
+  .card{min-height:330px;padding:26px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+  .word{font-size:42px;font-weight:800;letter-spacing:.3px;word-break:break-word}
+  .meaning{font-size:22px;margin-top:18px;display:none}
+  .hint{font-size:14px;color:var(--muted);margin-top:12px;display:none;line-height:1.7}
+  .tap{margin-top:28px;color:var(--muted);font-size:14px}
+  .buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+  .bad{background:#fee2e2;color:#991b1b}
+  .mid{background:#fef3c7;color:#92400e}
+  .good{background:#dcfce7;color:#166534}
+  .progress{height:10px;background:#e5e7eb;border-radius:999px;overflow:hidden;margin-top:12px}
+  .bar{height:100%;width:0;background:var(--accent)}
+  .small{font-size:12px;color:var(--muted)}
+  details{margin-top:14px}
+  summary{cursor:pointer;font-weight:700}
+  textarea{width:100%;min-height:120px;margin-top:10px}
+  .empty{color:var(--muted);line-height:1.8}
+  @media(max-width:600px){
+    .top{grid-template-columns:repeat(2,1fr)}
+    .word{font-size:34px}
+    .buttons{grid-template-columns:1fr}
+  }
