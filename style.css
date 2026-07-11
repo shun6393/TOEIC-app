@@ -59,6 +59,15 @@
   .pagination{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px}
   .pagination button{padding:8px 12px}
   .word-import{border-top:1px solid var(--line);margin-top:14px;padding-top:2px}
+  .word-import h2{font-size:16px;margin:14px 0 6px}
+  .csv-options{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap;margin-top:10px}
+  .csv-options label{display:flex;flex-direction:column;gap:5px;font-size:12px;font-weight:700}
+  .csv-options input[type="file"]{max-width:280px}
+  .import-result{display:none;background:var(--bg);border-radius:12px;padding:12px;margin-top:12px}
+  .import-summary{display:flex;gap:16px;flex-wrap:wrap}
+  .import-summary b{font-size:18px}
+  .import-result details{margin-top:8px}
+  .import-errors{max-height:180px;overflow:auto;margin:8px 0 0;padding-left:28px;color:var(--bad);font-size:13px;line-height:1.6}
   .modal{width:min(620px,calc(100% - 28px));border:0;border-radius:16px;padding:20px;color:var(--text);box-shadow:0 18px 50px rgba(0,0,0,.22)}
   .modal::backdrop{background:rgba(17,24,39,.48)}
   .modal-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}

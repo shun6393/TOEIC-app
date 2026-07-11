@@ -11,6 +11,12 @@ const VOCAB_TARGETS = Object.freeze({
 });
 const DAILY_REVIEW_MULTIPLIER = 3;
 const WORDS_PER_PAGE = 50;
+const VALID_WORD_TARGET_SCORES = new Set([400,500,600,700,800,900]);
+const CSV_HEADER_FIELDS = new Map([
+  ["word","word"], ["meaning","meaning"], ["hint","hint"],
+  ["targetscore","targetScore"], ["level","level"],
+  ["priority","priority"], ["partofspeech","partOfSpeech"]
+]);
 
 let words = [];
 let current = null;
@@ -206,6 +212,9 @@ function openWordEditor(id){
   editCorrect.value=entry.correct||0;
   editWrong.value=entry.wrong||0;
   editNext.value=toDateTimeLocal(entry.next||0);
+  editTargetScore.value=entry.targetScore||"";
+  editPriority.value=entry.priority||"";
+  editPartOfSpeech.value=entry.partOfSpeech||"";
   editHistoryInfo.textContent=entry.last
     ? `最終回答：${new Date(entry.last).toLocaleString("ja-JP")}（単語IDは変更されません）`
     : "学習履歴はまだありません（単語IDは変更されません）。";
@@ -274,6 +283,183 @@ function renderWordList(){
   nextPageBtn.disabled=wordListPage===totalPages;
 }
 
+function parseCsv(text){
+  const records=[];
+  const errors=[];
+  let row=[];
+  let field="";
+  let inQuotes=false;
+  let line=1;
+  let recordLine=1;
+  let invalidLine=null;
+
+  function finishRecord(){
+    row.push(field);
+    if(row.some(value=>value.trim()!=="")) records.push({line:recordLine,cells:row,invalidLine});
+    row=[];
+    field="";
+    invalidLine=null;
+    recordLine=line;
+  }
+
+  const source=text.replace(/^\uFEFF/,"");
+  for(let index=0;index<source.length;index++){
+    const char=source[index];
+    if(inQuotes){
+      if(char==='"'){
+        if(source[index+1]==='"'){
+          field+='"';
+          index++;
+        } else {
+          inQuotes=false;
+        }
+      } else {
+        field+=char;
+        if(char==="\n") line++;
+      }
+      continue;
+    }
+    if(char==='"'){
+      if(field.trim()===""){
+        field="";
+        inQuotes=true;
+      } else {
+        invalidLine=invalidLine||line;
+        field+=char;
+      }
+    } else if(char===","){
+      row.push(field);
+      field="";
+    } else if(char==="\n"){
+      finishRecord();
+      line++;
+      recordLine=line;
+    } else if(char!=="\r"){
+      field+=char;
+    }
+  }
+  if(inQuotes){
+    errors.push({line:recordLine,reason:"ダブルクォートが閉じていません。"});
+  } else if(field!=="" || row.length){
+    finishRecord();
+  }
+  return {records,errors};
+}
+
+function normalizeHeader(value){
+  return value.trim().toLocaleLowerCase("en-US").replace(/[\s_-]/g,"");
+}
+
+function getCsvColumnMap(records){
+  const first=records[0];
+  const normalized=first ? first.cells.map(normalizeHeader) : [];
+  const autoHeader=normalized.includes("word") && normalized.includes("meaning");
+  const hasHeader=headerMode.value==="yes" || (headerMode.value==="auto" && autoHeader);
+  if(!hasHeader){
+    return {
+      hasHeader:false,
+      map:{word:0,meaning:1,hint:2,[fourthColumnType.value]:3,priority:4,partOfSpeech:5},
+      errors:[]
+    };
+  }
+  const map={};
+  const errors=[];
+  const headerLine=first ? first.line : 1;
+  normalized.forEach((name,index)=>{
+    const fieldName=CSV_HEADER_FIELDS.get(name);
+    if(fieldName && map[fieldName]===undefined) map[fieldName]=index;
+  });
+  if(map.word===undefined) errors.push({line:headerLine,reason:"ヘッダーにword列がありません。"});
+  if(map.meaning===undefined) errors.push({line:headerLine,reason:"ヘッダーにmeaning列がありません。"});
+  return {hasHeader:true,map,errors};
+}
+
+function csvValue(cells,map,name){
+  return map[name]===undefined ? "" : (cells[map[name]]||"").trim();
+}
+
+function validateCsvRow(record,map){
+  const value={
+    word:csvValue(record.cells,map,"word"),
+    meaning:csvValue(record.cells,map,"meaning"),
+    hint:csvValue(record.cells,map,"hint"),
+    targetScore:csvValue(record.cells,map,"targetScore"),
+    level:csvValue(record.cells,map,"level"),
+    priority:csvValue(record.cells,map,"priority"),
+    partOfSpeech:csvValue(record.cells,map,"partOfSpeech")
+  };
+  if(record.invalidLine) return {error:"値の途中に不正なダブルクォートがあります。"};
+  if(!value.word) return {error:"wordが空です。"};
+  if(!value.meaning) return {error:"meaningが空です。"};
+  if(value.targetScore && (!/^\d+$/.test(value.targetScore) || !VALID_WORD_TARGET_SCORES.has(Number(value.targetScore)))){
+    return {error:"targetScoreは400〜900の100点刻みで指定してください。"};
+  }
+  if(value.level && (!/^\d+$/.test(value.level) || Number(value.level)>6)){
+    return {error:"levelは0〜6の整数で指定してください。"};
+  }
+  if(value.priority && (!/^\d+$/.test(value.priority) || Number(value.priority)<1 || Number(value.priority)>5)){
+    return {error:"priorityは1〜5の整数で指定してください。"};
+  }
+  return {value};
+}
+
+function showImportResult(success,duplicates,errors){
+  importSuccessCount.textContent=success;
+  importDuplicateCount.textContent=duplicates;
+  importErrorCount.textContent=errors.length;
+  importErrorList.replaceChildren();
+  for(const error of errors){
+    const item=document.createElement("li");
+    item.textContent=`${error.line}行目：${error.reason}`;
+    importErrorList.appendChild(item);
+  }
+  importErrorDetails.style.display=errors.length ? "block" : "none";
+  importErrorDetails.open=errors.length>0;
+  importResult.style.display="block";
+}
+
+function importCsvText(text){
+  const parsed=parseCsv(text);
+  const columnInfo=getCsvColumnMap(parsed.records);
+  const errors=[...parsed.errors,...columnInfo.errors];
+  if(columnInfo.errors.length){
+    showImportResult(0,0,errors);
+    return;
+  }
+  const records=columnInfo.hasHeader ? parsed.records.slice(1) : parsed.records;
+  const knownWords=new Set(words.map(entry=>entry.word.trim().toLocaleLowerCase("en-US")));
+  let added=0;
+  let duplicates=0;
+
+  for(const record of records){
+    const result=validateCsvRow(record,columnInfo.map);
+    if(result.error){
+      errors.push({line:record.line,reason:result.error});
+      continue;
+    }
+    const value=result.value;
+    const normalized=value.word.toLocaleLowerCase("en-US");
+    if(knownWords.has(normalized)){
+      duplicates++;
+      continue;
+    }
+    knownWords.add(normalized);
+    words.push({
+      id:crypto.randomUUID ? crypto.randomUUID() : String(Date.now()+Math.random()),
+      word:value.word, meaning:value.meaning, hint:value.hint,
+      targetScore:value.targetScore ? Number(value.targetScore) : undefined,
+      priority:value.priority ? Number(value.priority) : undefined,
+      partOfSpeech:value.partOfSpeech||undefined,
+      level:value.level ? Number(value.level) : 0,
+      correct:0, wrong:0, next:0, seen:0, last:0
+    });
+    added++;
+  }
+  if(added) save();
+  refreshStats();
+  showImportResult(added,duplicates,errors);
+}
+
 card.addEventListener("click", reveal);
 startBtn.addEventListener("click", chooseNext);
 badBtn.addEventListener("click",()=>answer("bad"));
@@ -311,6 +497,11 @@ editWordForm.addEventListener("submit",event=>{
   const updatedSeen=Math.max(0,Number(editSeen.value)||0);
   const updatedCorrect=Math.max(0,Number(editCorrect.value)||0);
   const updatedWrong=Math.max(0,Number(editWrong.value)||0);
+  const updatedPriority=editPriority.value==="" ? undefined : Number(editPriority.value);
+  if(updatedPriority!==undefined && (!Number.isInteger(updatedPriority) || updatedPriority<1 || updatedPriority>5)){
+    editWordError.textContent="優先度は1〜5の整数で指定してください。";
+    return;
+  }
   if(updatedCorrect+updatedWrong>updatedSeen){
     editWordError.textContent="学習回数は、正解回数と不正解回数の合計以上にしてください。";
     return;
@@ -324,6 +515,9 @@ editWordForm.addEventListener("submit",event=>{
   entry.correct=updatedCorrect;
   entry.wrong=updatedWrong;
   entry.next=editNext.value ? new Date(editNext.value).getTime() : 0;
+  entry.targetScore=editTargetScore.value ? Number(editTargetScore.value) : undefined;
+  entry.priority=updatedPriority;
+  entry.partOfSpeech=editPartOfSpeech.value.trim()||undefined;
   if(current && current.id===entry.id){
     word.textContent=entry.word;
     meaning.textContent=entry.meaning;
@@ -357,23 +551,19 @@ resetTodayBtn.addEventListener("click",()=>{
   save(); refreshStats();
 });
 
-addBtn.addEventListener("click",()=>{
-  const lines=importBox.value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
-  let added=0;
-  for(const line of lines){
-    const [w,m,...h]=line.split(",").map(x=>x.trim());
-    if(!w||!m) continue;
-    if(words.some(x=>x.word.toLowerCase()===w.toLowerCase())) continue;
-    words.push({
-      id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()+Math.random()),
-      word:w, meaning:m, hint:h.join(","),
-      level:0, correct:0, wrong:0, next:0, seen:0, last:0
-    });
-    added++;
-  }
-  save(); refreshStats();
-  alert(`${added}語追加したよ`);
-  importBox.value="";
+addBtn.addEventListener("click",()=>importCsvText(importBox.value));
+
+csvFile.addEventListener("change",()=>{
+  const file=csvFile.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.addEventListener("load",()=>{importBox.value=String(reader.result||"");});
+  reader.addEventListener("error",()=>showImportResult(0,0,[{line:1,reason:"CSVファイルを読み込めませんでした。"}]));
+  reader.readAsText(file,"UTF-8");
+});
+
+headerMode.addEventListener("change",()=>{
+  fourthColumnLabel.style.display=headerMode.value==="yes" ? "none" : "flex";
 });
 
 exportBtn.addEventListener("click",()=>{
