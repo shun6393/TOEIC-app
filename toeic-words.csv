@@ -1,0 +1,1541 @@
+word,meaning,hint,partOfSpeech,scoreTier,difficulty,priority,tags
+abandon,放棄する,abandon a plan,verb,600,3,4,business|planning
+acquire,獲得する,会社や技能を手に入れる,verb,600,3,4,business|skills
+additional,追加の,addの仲間,adjective,500,2,4,business|general
+adequate,十分な,必要量を満たす,adjective,600,3,3,business|evaluation
+approximately,およそ,aboutと同じ感覚,adverb,600,3,4,numbers|reports
+arrange,手配する、整える,予定や物を整える,verb,500,2,5,scheduling|business
+available,利用できる、空いている,人・物・時間に使う,adjective,400,2,5,scheduling|general
+benefit,利益、恩恵,beneficialもセット,"noun, verb",400,2,5,business|employment
+confirm,確認する,予約確認で頻出,verb,400,2,5,reservations|communication
+conduct,実施する,conduct a survey,verb,600,3,4,research|business
+consider,検討する,consider doing,verb,400,2,5,planning|decision
+contract,契約,sign a contract,noun,400,2,5,contracts|business
+convenient,便利な,場所や時間にも使う,adjective,500,2,4,services|general
+delay,遅らせる、遅延,flight delay,"noun, verb",400,2,5,travel|scheduling
+deliver,配達する、届ける,deliveryの動詞,verb,400,2,5,shipping|business
+department,部門、部署,sales department,noun,400,2,5,company|organization
+despite,〜にもかかわらず,後ろは名詞,preposition,600,3,4,grammar|general
+determine,決定する,determine whether,verb,600,3,4,decision|business
+effective,効果的な,effectは名詞,adjective,500,2,5,evaluation|business
+employee,従業員,employerは雇用主,noun,400,2,5,employment|company
+ensure,確実にする,make sureに近い,verb,500,3,5,quality|business
+equipment,設備、機器,不可算名詞,noun,500,2,5,office|facilities
+estimate,見積もる、見積もり,price estimate,"noun, verb",500,3,5,finance|planning
+facility,施設、設備,複数形facilitiesも頻出,noun,500,3,5,facilities|company
+frequently,頻繁に,oftenより硬め,adverb,500,2,4,frequency|general
+increase,増加する、増加,名詞と動詞,"noun, verb",400,2,5,reports|finance
+indicate,示す,グラフ説明で頻出,verb,600,3,5,reports|data
+maintain,維持する,maintenanceもセット,verb,500,3,5,facilities|quality
+negotiate,交渉する,negotiate with,verb,600,4,4,contracts|communication
+notify,知らせる,notify A of B,verb,500,3,5,communication|business
+participate,参加する,participate in,verb,500,3,5,events|meetings
+policy,方針、規定,company policy,noun,400,2,5,company|rules
+postpone,延期する,put offと同じ,verb,600,3,4,scheduling|events
+purchase,購入する、購入,buyより硬い,"noun, verb",400,2,5,purchasing|business
+require,必要とする,require A to do,verb,500,2,5,rules|business
+schedule,予定、予定を組む,発音はスケジュール,"noun, verb",400,2,5,scheduling|business
+submit,提出する,submit a report,verb,500,3,5,documents|business
+temporary,一時的な,temporary staff,adjective,500,3,4,employment|general
+vacant,空いている,部屋・役職に使う,adjective,500,3,4,employment|property
+verify,確認する、検証する,情報が正しいか確かめる,verb,600,3,4,quality|data
+vacation,"休暇,休み(holiday)",「vacation」：文中での品詞を意識する,"noun, verb",400,1,5,general
+memo,連絡メモ,「memo」：office procedureとセットで,noun,400,1,5,office|business
+logical,論理的な,「logical」：TOEIC文書での用法を確認,adjective,400,1,5,general
+sincerely,"真心込めて,心から",「sincerely」：文中での品詞を意識する,adverb,400,1,5,general
+sometime,いつか,「sometime」：文中での品詞を意識する,"adjective, adverb",400,1,5,general
+goods,商品、品物,「goods」：TOEIC文書での用法を確認,noun,400,1,5,general
+workshop,研修会、作業場,「workshop」：会議動詞との組合せを確認,noun,400,1,5,meeting|business
+downtown,中心街の、中心街で,「downtown」：前後の語との組合せを覚える,"noun, adjective",400,1,5,general
+noon,正午,「noon」：前後の語との組合せを覚える,noun,400,1,5,general
+accountant,"会計係,会計士,計理士",「accountant」：社内人事メールでよく使う,noun,400,2,5,employment|business
+clerk,"行員,社員",「clerk」：job descriptionの文脈で確認,"noun, verb",400,1,5,employment|business
+lobby,ロビー(公共的建物・ホテルの玄関から部屋へ行くまでの間の広間または廊下),「lobby」：文中での品詞を意識する,"noun, verb",400,1,5,general
+publish,"出版する,発行する",「publish」：前後の語との組合せを覚える,verb,400,1,5,general
+technician,"専門家,専門技術者",「technician」：job descriptionの文脈で確認,noun,400,2,5,employment|business
+traveler,"旅行者,旅人",「traveler」：出張・交通案内で頻出,noun,400,1,5,travel|business
+caller,"訪問客,来訪者,呼ぶ人(物) (スクエアダンスで)ステップを大声で指示する人",「caller」：TOEIC文書での用法を確認,"noun, adjective",400,1,5,general
+subway,"地下鉄(underground, tube)",「subway」：前後の語との組合せを覚える,noun,400,1,5,general
+luggage,"手荷物,小荷物,トランク・スーツケースなどの旅行かばん類",「luggage」：旅程表の文脈で確認,noun,400,1,5,travel|business
+infer,"推論する,推量する",「infer」：前後の語との組合せを覚える,verb,400,1,5,general
+waiter,"給仕人,ウエーター",「waiter」：前後の語との組合せを覚える,noun,400,1,5,general
+rental,"賃貸料,地代,家賃",「rental」：前後の語との組合せを覚える,"noun, adjective",400,1,5,general
+chef,"コック長,料理長",「chef」：前後の語との組合せを覚える,noun,400,1,5,general
+elevator,"エレベーター,昇降機(lift)",「elevator」：工事・点検案内でよく使う,noun,400,1,5,facility|business
+reception,受付、歓迎会,「reception」：office procedureとセットで,noun,400,1,5,office|event
+correctly,"正しく,正確に",「correctly」：文中での品詞を意識する,adverb,400,1,5,general
+lease,"借地(借家)契約,借地(借家)権",「lease」：TOEIC文書での用法を確認,"noun, verb",400,1,5,general
+preview,"試写会,試演会,(展覧会などの)内見(ないけん)",「preview」：TOEIC文書での用法を確認,"noun, verb",400,1,5,general
+attendant,付き添いの,「attendant」：文中での品詞を意識する,"noun, adjective",400,1,5,general
+subscription,予約,「subscription」：文中での品詞を意識する,noun,400,2,5,general
+manual,手引書、手作業の,「manual」：提出書類の文脈で確認,"noun, adjective",400,1,5,document|business
+clue,"手がかり,(研究などの)糸口,端緒",「clue」：文中での品詞を意識する,"noun, verb",400,1,5,general
+garage,車庫,「garage」：TOEIC文書での用法を確認,"noun, verb",400,1,5,general
+oval,卵形の,「oval」：文中での品詞を意識する,noun,400,1,5,general
+most,"最も多い,最高の,最大の",「most」：前後の語との組合せを覚える,noun,400,1,5,general
+outdoor,"戸外の,野外の",「outdoor」：前後の語との組合せを覚える,adjective,400,1,5,general
+need,"必要,入用",「need」：前後の語との組合せを覚える,"noun, verb",400,1,5,general
+suitcase,"スーツケース,(長方形で平たい)小型旅行かばん",「suitcase」：文中での品詞を意識する,noun,400,1,5,general
+destination,"目的地,行き先",「destination」：出張・交通案内で頻出,noun,400,2,5,travel|business
+occupation,"職業,仕事",「occupation」：採用・人事の場面で頻出,noun,400,2,5,employment|business
+contradict,"否定する,反ばくする(deny)",「contradict」：文中での品詞を意識する,verb,400,2,5,general
+umbrella,"傘(かさ),こうもり傘,雨傘,日傘",「umbrella」：文中での品詞を意識する,noun,400,1,5,general
+inference,"推量,推論,推測",「inference」：TOEIC文書での用法を確認,noun,400,1,5,general
+compact,"ぎっしり詰まった,目詰んだ,緊密な",「compact」：文中での品詞を意識する,"noun, verb",400,1,5,general
+merchandise,商品(goods),「merchandise」：sales reportの文脈で確認,"noun, verb",400,2,5,sales|retail
+dentist,"歯科医,歯医者",「dentist」：前後の語との組合せを覚える,noun,400,1,5,general
+identification,"同一であることの確認(証明),身元確認,身分証明",「identification」：前後の語との組合せを覚える,noun,400,2,5,general
+coupon,クーポン(切り取って使う切符),「coupon」：TOEIC文書での用法を確認,noun,400,1,5,general
+depart,"(遠くへ)立ち去る,出発する",「depart」：前後の語との組合せを覚える,verb,400,1,5,general
+change,"変える,改める",「change」：文中での品詞を意識する,"noun, verb",400,1,5,general
+renovation,刷新(修繕)すること,「renovation」：施設案内で頻出,noun,400,2,5,facility|business
+upgrade,更新する、格上げする,「upgrade」：TOEIC文書での用法を確認,"noun, verb",400,1,5,general
+precede,…より先に来る(行く),「precede」：TOEIC文書での用法を確認,verb,400,1,5,general
+replacement,"置き換わること,取り替えること,元へ戻すこと",「replacement」：文中での品詞を意識する,noun,400,2,5,general
+dine,正餐(晩餐)をとる,「dine」：文中での品詞を意識する,noun,400,1,5,general
+problem,"問題,やっかいな事態",「problem」：前後の語との組合せを覚える,noun,400,1,5,general
+write,"書く,記す",「write」：TOEIC文書での用法を確認,verb,400,1,5,general
+passport,"旅券,パスポート",「passport」：旅程表の文脈で確認,noun,400,1,5,travel|business
+coworker,仕事仲間,「coworker」：採用・人事の場面で頻出,noun,400,1,5,employment|business
+upcoming,"なって来る,やがて起こる(現れる),まもなく公開される",「upcoming」：TOEIC文書での用法を確認,noun,400,1,5,general
+cabinet,キャビネット(引出し・たな・仕切などのある箱・戸だな),「cabinet」：社内業務の場面で頻出,noun,400,1,5,office|business
+appliance,"器具,機械,装置",「appliance」：機器の説明・点検で頻出,noun,400,1,5,equipment|business
+explanatory,"解説の,説明に役立つ",「explanatory」：TOEIC文書での用法を確認,adjective,400,2,5,general
+instructor,"教師,指導者",「instructor」：研修・講習の場面で頻出,noun,400,2,5,training|business
+keyboard,鍵盤(けんばん),「keyboard」：前後の語との組合せを覚える,"noun, verb",400,1,5,general
+media,mediumの複数形,「media」：商品紹介文での用法を確認,noun,400,1,5,marketing|advertising
+help,"手伝う,助ける,の役に立つ",「help」：利用案内の文脈で確認,"noun, verb",400,1,5,service|business
+supermarket,スーパーマーケット(食料品や家庭用品などを売るセルフサービス式の大型小売店),「supermarket」：TOEIC文書での用法を確認,noun,400,2,5,general
+valid,"妥当な,しっかりした根拠のある",「valid」：契約条件の文脈で頻出,adjective,400,1,5,contract|business
+admission,"入ることを許すこと,入場(入学,入会)許可,(…へ)入る権利",「admission」：make a reservationと関連,noun,400,1,5,reservation|business
+talk,"話す,しゃべる,物を言う,口を利く",「talk」：文中での品詞を意識する,"noun, verb",400,1,5,general
+something,"何か,あるもの,あること",「something」：TOEIC文書での用法を確認,adverb,400,1,5,general
+underline,に下線を引く,「underline」：文中での品詞を意識する,"noun, verb",400,1,5,general
+electrical,電気と関係のある,「electrical」：前後の語との組合せを覚える,adjective,400,2,5,general
+become,なる,「become」：前後の語との組合せを覚える,verb,400,1,5,general
+interest,"興味,関心",「interest」：数値表現とセットで覚える,"noun, verb",400,1,5,finance|business
+country,"国,国家,国土",「country」：文中での品詞を意識する,noun,400,1,5,general
+assignment,"割り当てられた仕事(持ち場,任務)",「assignment」：文中での品詞を意識する,noun,400,2,5,general
+exit,出口,「exit」：前後の語との組合せを覚える,"noun, verb",400,1,5,general
+cruise,巡航(遊航)する,「cruise」：TOEIC文書での用法を確認,"noun, verb",400,1,5,general
+high,"高い,高い所にある",「high」：文中での品詞を意識する,noun,400,1,5,general
+different,"異なった,違う",「different」：前後の語との組合せを覚える,adjective,400,1,5,general
+next,"次の,すぐ後に続く",「next」：TOEIC文書での用法を確認,"adjective, adverb",400,1,5,general
+end,"端,先端",「end」：文中での品詞を意識する,"noun, verb",400,1,5,general
+comprehension,理解,「comprehension」：文中での品詞を意識する,noun,400,2,5,general
+live,"生きている,生命がある",「live」：TOEIC文書での用法を確認,"verb, adjective",400,1,5,general
+mall,木陰の散歩道,「mall」：文中での品詞を意識する,noun,400,1,5,general
+medication,"薬剤,医薬品",「medication」：前後の語との組合せを覚える,noun,400,2,5,general
+recycle,再利用する,「recycle」：文中での品詞を意識する,"noun, verb",400,1,5,general
+week,"週,(ある日からの)1週間",「week」：文中での品詞を意識する,"noun, adverb",400,1,5,general
+renew,新しくする,「renew」：契約文書での用法を確認,verb,400,1,5,contract|business
+play,"遊ぶ,戯れる",「play」：TOEIC文書での用法を確認,"noun, verb",400,1,5,general
+tenant,"借地人,借家人",「tenant」：文中での品詞を意識する,"noun, verb",400,1,5,general
+departure,"(遠くへ)立ち去ること,出発",「departure」：前後の語との組合せを覚える,noun,400,1,5,general
+mini,ミニスカート,「mini」：TOEIC文書での用法を確認,noun,400,1,5,general
+course,"進路,道筋,方向,水路",「course」：研修・講習の場面で頻出,"noun, verb",400,1,5,training|business
+fitness,"適性,ふさわしさ",「fitness」：文中での品詞を意識する,noun,400,1,5,general
+report,"報告,報道",「report」：report that節での用法を確認,"noun, verb",400,1,5,report|business
+inconvenience,"不便,不都合,不自由",「inconvenience」：TOEIC文書での用法を確認,"noun, verb",400,2,5,general
+group,"群れ,集まり,小集団",「group」：文中での品詞を意識する,"noun, verb",400,1,5,general
+banquet,宴会,「banquet」：催事・会場案内で頻出,"noun, verb",400,1,5,event|business
+case,"実例,事例",「case」：前後の語との組合せを覚える,"noun, verb",400,1,5,general
+unreal,実体のない,「unreal」：文中での品詞を意識する,adjective,400,1,5,general
+seem,"(…のように)見える,思われる",「seem」：TOEIC文書での用法を確認,verb,400,1,5,general
+expire,"満了する,切れる",「expire」：文中での品詞を意識する,verb,400,1,5,general
+let,"に(…)させる,させておく,を(…する)ままにしておく(受動態にできない)",「let」：前後の語との組合せを覚える,"noun, verb",400,1,5,general
+folder,紙ばさみ,「folder」：TOEIC文書での用法を確認,noun,400,1,5,general
+again,"再び,もう一度(once more)",「again」：文中での品詞を意識する,adverb,400,1,5,general
+photocopy,"写真複写する,コピーする",「photocopy」：社内業務の場面で頻出,"noun, verb",400,1,5,office|business
+kind,"親切な,優しい,思いやりのある",「kind」：文中での品詞を意識する,noun,400,1,5,general
+keep,"ずっと持っている,保持する",「keep」：前後の語との組合せを覚える,"noun, verb",400,1,5,general
+renovate,"元どおりに新しくする,修復する",「renovate」：TOEIC文書での用法を確認,verb,400,1,5,general
+hear,"が聞こえる,を聞く(進行形にできない)",「hear」：文中での品詞を意識する,verb,400,1,5,general
+sunny,日のよくさす(当たる),「sunny」：TOEIC文書での用法を確認,noun,400,1,5,general
+system,"体系,系統,組織,装置",「system」：機器トラブル表現と関連,noun,400,1,5,technology|business
+calendar,"暦,カレンダー",「calendar」：office procedureとセットで,"noun, verb",400,1,5,office|schedule
+question,"質問,問い",「question」：文中での品詞を意識する,"noun, verb",400,1,5,general
+donation,"寄贈,寄付",「donation」：前後の語との組合せを覚える,noun,400,1,5,general
+big,大きい,「big」：TOEIC文書での用法を確認,"adjective, adverb",400,1,5,general
+shortly,"まもなく(in a short time),すぐに(soon)",「shortly」：TOEIC文書での用法を確認,adverb,400,1,5,general
+set,置く・すえる・(ある物に)…をつける・あてがう・当てる・,「set」：文中での品詞を意識する,"noun, verb",400,1,5,general
+snack,"軽食,スナック",「snack」：TOEIC文書での用法を確認,"noun, verb",400,1,5,general
+study,"勉強,学習すること",「study」：文中での品詞を意識する,"noun, verb",400,1,5,general
+follow,…の後について行く,「follow」：文中での品詞を意識する,"noun, verb",400,1,5,general
+copier,複写する人,「copier」：TOEIC文書での用法を確認,noun,400,1,5,general
+begin,"始まる,開始する",「begin」：前後の語との組合せを覚える,verb,400,1,5,general
+provider,供給者,「provider」：文中での品詞を意識する,noun,400,1,5,general
+important,"重要な,重大な",「important」：前後の語との組合せを覚える,adjective,400,1,5,general
+since,"…以後,…以来",「since」：文中での品詞を意識する,adverb,400,1,5,general
+beverage,"飲み物,飲料(drink)",「beverage」：前後の語との組合せを覚える,noun,400,1,5,general
+hungry,"飢えた,空腹の",「hungry」：TOEIC文書での用法を確認,adjective,400,1,5,general
+under,"…の下に,に覆われて",「under」：文中での品詞を意識する,adverb,400,1,5,general
+inspection,"検査,点検",「inspection」：前後の語との組合せを覚える,noun,400,2,5,general
+recipient,受取人,「recipient」：前後の語との組合せを覚える,"noun, adjective",400,1,5,general
+bring,持ってくる,「bring」：文中での品詞を意識する,verb,400,1,5,general
+inspect,"検査する,念入りに調べる",「inspect」：前後の語との組合せを覚える,verb,400,1,5,general
+without,"…なしに,を持たないで,を使わないで",「without」：前後の語との組合せを覚える,adverb,400,1,5,general
+eligible,"適格な,適任の,選ばれる資格のある",「eligible」：TOEIC文書での用法を確認,adjective,400,1,5,general
+indoor,"室内の,屋内の",「indoor」：TOEIC文書での用法を確認,adjective,400,1,5,general
+against,"…に対して,に逆らって(in opposition to)",「against」：TOEIC文書での用法を確認,verb,400,1,5,general
+believe,"信じる,信用する",「believe」：前後の語との組合せを覚える,verb,400,1,5,general
+though,"…にもかかわらず,…だけれども(although)",「though」：前後の語との組合せを覚える,adverb,400,1,5,general
+happen,"起こる,発生する,生ずる",「happen」：TOEIC文書での用法を確認,"verb, adverb",400,1,5,general
+donate,"寄贈する,寄付する",「donate」：文中での品詞を意識する,verb,400,1,5,general
+outstanding,"目立つ,顕著な,傑出して",「outstanding」：前後の語との組合せを覚える,adjective,400,2,5,general
+understand,"理解する,の意味をつかむ",「understand」：TOEIC文書での用法を確認,verb,400,2,5,general
+thank,"に感謝する,礼を言う",「thank」：TOEIC文書での用法を確認,verb,400,1,5,general
+inquire,"尋ねる,問う",「inquire」：文中での品詞を意識する,verb,400,1,5,general
+overnight,"一晩じゅう,夜通し",「overnight」：TOEIC文書での用法を確認,"adjective, adverb",400,1,5,general
+prohibit,"禁止する,禁ずる(forbid)",「prohibit」：前後の語との組合せを覚える,verb,400,1,5,general
+quite,"全く,完全に",「quite」：TOEIC文書での用法を確認,adverb,400,1,5,general
+sure,"確信して,自信をもって",「sure」：TOEIC文書での用法を確認,"adjective, adverb",400,1,5,general
+delicious,おいしい,「delicious」：TOEIC文書での用法を確認,adjective,400,1,5,general
+least,(littleの最上級,「least」：TOEIC文書での用法を確認,"adjective, adverb",400,1,5,general
+supervise,"監督する,管理する",「supervise」：TOEIC文書での用法を確認,verb,400,1,5,general
+speak,"話す,しゃべる,物を言う,口をきく",「speak」：前後の語との組合せを覚える,verb,400,1,5,general
+often,"しばしば,たびたび,よく",「often」：TOEIC文書での用法を確認,"adjective, adverb",400,1,5,general
+subscribe,予約する,「subscribe」：文中での品詞を意識する,verb,400,1,5,general
+administrative,行政上の,「administrative」：TOEIC文書での用法を確認,adjective,400,2,5,general
+lose,"失う,なくす,を見失う,を失う",「lose」：TOEIC文書での用法を確認,verb,400,1,5,general
+accommodate,"宿泊させる,収容する,適応させる,調停する",「accommodate」：文中での品詞を意識する,verb,400,2,5,general
+annoy,"困らせる,悩ませる,いらいらさせる",「annoy」：TOEIC文書での用法を確認,verb,400,1,5,general
+commute,"振り替える,切り替える",「commute」：TOEIC文書での用法を確認,verb,400,1,5,general
+quit,"やめる,中止する",「quit」：前後の語との組合せを覚える,"verb, adjective",400,1,5,general
+complimentary,"あいさつの,お祝いの",「complimentary」：前後の語との組合せを覚える,adjective,400,2,5,general
+rainy,"雨の,雨降りの",「rainy」：前後の語との組合せを覚える,adjective,400,1,5,general
+grow,"成長する,育つ,生える,茂る",「grow」：TOEIC文書での用法を確認,verb,400,1,5,general
+relocate,移す,「relocate」：TOEIC文書での用法を確認,verb,400,1,5,general
+unhappy,"悲しい,気の滅入る",「unhappy」：文中での品詞を意識する,adjective,400,1,5,general
+incomplete,不完全な,「incomplete」：文中での品詞を意識する,adjective,400,2,5,general
+remember,思い出す,「remember」：TOEIC文書での用法を確認,verb,400,1,5,general
+worldwide,"全世界に知れ渡った,世界的な",「worldwide」：文中での品詞を意識する,adjective,400,1,5,general
+designate,"指摘する,示す,明示する",「designate」：TOEIC文書での用法を確認,"verb, adjective",400,1,5,general
+remain,"残る,存続する",「remain」：TOEIC文書での用法を確認,verb,400,1,5,general
+cater,"(…の)食物を調達する,料理をまかなう",「cater」：文中での品詞を意識する,verb,400,1,5,general
+involve,"伴う,引き起こす,含む(受動態にできない)",「involve」：文中での品詞を意識する,verb,400,1,5,general
+productive,"生産的な,好ましい結果を生み出す",「productive」：TOEIC文書での用法を確認,adjective,400,2,5,general
+political,"国家の,政府の",「political」：前後の語との組合せを覚える,adjective,400,1,5,general
+omit,"省略する,省く",「omit」：TOEIC文書での用法を確認,verb,400,1,5,general
+further,"もっと遠い,さらに先の",「further」：TOEIC文書での用法を確認,"verb, adjective",400,1,5,general
+appear,"姿を現す,出現する",「appear」：TOEIC文書での用法を確認,verb,400,1,5,general
+toward,"…のほうへ,に向かって",「toward」：TOEIC文書での用法を確認,adjective,400,1,5,general
+easy,"容易な,骨の折れない",「easy」：文中での品詞を意識する,"verb, adjective",400,1,5,general
+defective,"欠点のある,欠陥のある",「defective」：前後の語との組合せを覚える,adjective,400,1,5,general
+add,合計する,「add」：TOEIC文書での用法を確認,verb,400,1,5,general
+urgent,"急を要する,緊急の",「urgent」：前後の語との組合せを覚える,adjective,400,1,5,general
+agree,"意見が一致する,合意する",「agree」：TOEIC文書での用法を確認,verb,400,1,5,general
+delete,"削除する,消す",「delete」：TOEIC文書での用法を確認,verb,400,1,5,general
+illogical,"非論理的な,不合理な",「illogical」：前後の語との組合せを覚える,adjective,400,1,5,general
+minimize,最小限にする,「minimize」：文中での品詞を意識する,verb,400,1,5,general
+optional,"選択が自由の,随意の",「optional」：前後の語との組合せを覚える,adjective,400,1,5,general
+polite,"礼儀正しい,ていねいな",「polite」：文中での品詞を意識する,adjective,400,1,5,general
+describe,"描写する,の特徴を述べる",「describe」：TOEIC文書での用法を確認,verb,400,1,5,general
+sightsee,見物(遊覧)する,「sightsee」：文中での品詞を意識する,verb,400,1,5,general
+difficult,"難しい,困難な,骨の折れる",「difficult」：前後の語との組合せを覚える,adjective,400,1,5,general
+please,"喜ばせる,満足させる,の気に入る",「please」：前後の語との組合せを覚える,"verb, adverb",400,1,5,general
+eat,食べる,「eat」：文中での品詞を意識する,verb,400,1,5,general
+themselves,"彼ら自身,彼女ら自身,それら自身",「themselves」：TOEIC文書での用法を確認,"verb, preposition",400,2,5,general
+enroll,の氏名を名簿に記入する,「enroll」：前後の語との組合せを覚える,verb,400,1,5,general
+frustrate,"ざ折させる,失敗させる",「frustrate」：前後の語との組合せを覚える,"verb, adjective",400,1,5,general
+decorate,"飾る,飾り立てる",「decorate」：TOEIC文書での用法を確認,verb,400,1,5,general
+aisle,座席間の通路,「aisle」：前後の語との組合せを覚える,noun,500,2,4,general
+mechanic,"機械工,職工",「mechanic」：TOEIC文書での用法を確認,noun,500,2,4,general
+merger,吸収合併,「merger」：TOEIC文書での用法を確認,noun,500,2,4,general
+fact,"事実,実際にある(あった)事",「fact」：TOEIC文書での用法を確認,noun,500,2,4,general
+sweater,セーター,「sweater」：前後の語との組合せを覚える,noun,500,2,4,general
+area,面積,「area」：前後の語との組合せを覚える,noun,500,2,4,general
+ingredient,"成分,原料",「ingredient」：文中での品詞を意識する,noun,500,2,4,general
+rewrite,書き直す,「rewrite」：文中での品詞を意識する,"noun, verb",500,2,4,general
+read,読む,「read」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+itinerary,"旅程,旅行日程",「itinerary」：前後の語との組合せを覚える,"noun, adjective",500,2,4,general
+architect,"建築家,建築技師",「architect」：TOEIC文書での用法を確認,noun,500,2,4,general
+business,"職業,商売",「business」：文中での品詞を意識する,noun,500,2,4,general
+convenience,"都合のよいこと,便利,便宜・便利なもの",「convenience」：苦情・依頼対応でよく使う,noun,500,3,5,customer|business
+information,"情報,知識",「information」：前後の語との組合せを覚える,noun,500,3,4,general
+government,"政府,行政府,内閣",「government」：前後の語との組合せを覚える,noun,500,2,4,general
+baggage,手荷物(luggage),「baggage」：旅程表の文脈で確認,noun,500,2,5,travel|business
+word,"語,単語",「word」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+click,カチリという音,「click」：文中での品詞を意識する,"noun, verb",500,2,4,general
+dial,文字盤,「dial」：文中での品詞を意識する,"noun, verb",500,2,4,general
+container,"容器,入れ物(箱・かんなど)",「container」：shipping noticeの文脈で確認,noun,500,2,5,shipping|business
+build,"組み立てる,造る,建造する,建築する",「build」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+drawer,引き出し,「drawer」：TOEIC文書での用法を確認,noun,500,2,4,general
+lab,Labour Party(英国の)労働党,「lab」：TOEIC文書での用法を確認,noun,500,2,4,general
+submission,"服従,屈服,降伏",「submission」：TOEIC文書での用法を確認,noun,500,2,4,general
+bulletin,公報,「bulletin」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+certificate,"証明書,証書,証券",「certificate」：formやfileと関連,"noun, verb",500,3,5,document|business
+love,"愛,愛情",「love」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+highway,"幹線道路,公道",「highway」：文中での品詞を意識する,noun,500,2,4,general
+job,ヨブ(旧約聖書で苦難に耐える人の典型とされる),「job」：採用・人事の場面で頻出,"noun, verb",500,2,4,employment|business
+respondent,"答える,応答する",「respondent」：前後の語との組合せを覚える,"noun, adjective",500,2,4,general
+jewelry,装身具類,「jewelry」：前後の語との組合せを覚える,noun,500,2,4,general
+away,"離れて,遠くに",「away」：文中での品詞を意識する,"noun, adjective",500,2,4,general
+overtime,超過勤務,「overtime」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+example,"例,実例(instance)",「example」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+battery,砲兵中隊,「battery」：install・repairと関連,noun,500,2,5,equipment|business
+close,"閉じる,閉める(shut)",「close」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+program,プログラム(資料の処理の指示),「program」：機器トラブル表現と関連,"noun, verb",500,2,5,technology|business
+skim,"から上澄みを取る,浮遊物をすくい取る",「skim」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+lead,"導く,案内する",「lead」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+briefcase,ブリーフケース(書類などを入れるおもに皮製の平たいかばん),「briefcase」：TOEIC文書での用法を確認,noun,500,2,4,general
+buy,買う,「buy」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+dessert,デザート(食事の最後のコースとして出るくだもの・菓子・ナッツなど,「dessert」：TOEIC文書での用法を確認,noun,500,2,4,general
+far,"遠くに,遠くへ,はるかに",「far」：前後の語との組合せを覚える,"noun, adjective",500,2,4,general
+today,"きょう,本日",「today」：文中での品詞を意識する,"noun, adverb",500,2,4,general
+hope,"望む,期待する",「hope」：文中での品詞を意識する,"noun, verb",500,2,4,general
+venue,会場、開催地,「venue」：meeting agendaの文脈で確認,noun,500,2,5,meeting|business
+commuter,"定期券使用者,(郊外からの)通勤者",「commuter」：TOEIC文書での用法を確認,noun,500,2,4,general
+newsletter,時事通信,「newsletter」：TOEIC文書での用法を確認,noun,500,2,4,general
+advisor,"忠告者,助言者",「advisor」：文中での品詞を意識する,noun,500,2,4,general
+cartridge,交換用カートリッジ,「cartridge」：TOEIC文書での用法を確認,noun,500,2,4,general
+photographer,"写真をとる人,(特にプロの)写真家",「photographer」：文中での品詞を意識する,noun,500,3,4,general
+shopper,買物客,「shopper」：前後の語との組合せを覚える,noun,500,2,4,general
+level,水準、段階,「level」：文中での品詞を意識する,"noun, verb",500,2,4,general
+tag,"札,下げ札,荷札",「tag」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+experience,"経験,体験",「experience」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+announcer,"知らせる人,告知者",「announcer」：文中での品詞を意識する,noun,500,2,4,general
+once,"1度,1回",「once」：前後の語との組合せを覚える,"noun, adverb",500,2,4,general
+aspect,"顔つき,表情",「aspect」：前後の語との組合せを覚える,noun,500,2,4,general
+member,"一員,会員,メンバー",「member」：文中での品詞を意識する,noun,500,2,4,general
+audit,会計検査(監査),「audit」：financial reportで用法を確認,"noun, verb",500,2,5,finance|business
+contractor,"契約人,請負人",「contractor」：前後の語との組合せを覚える,noun,500,2,4,general
+able,できる,「able」：文中での品詞を意識する,"noun, adjective",500,2,4,general
+password,合い言葉(watchword),「password」：online serviceの文脈で確認,noun,500,2,5,technology|business
+stadium,"競技場,スタジアム,球場",「stadium」：TOEIC文書での用法を確認,noun,500,2,4,general
+line,"線,筋,けい",「line」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+terminal,空港バス発着場,「terminal」：出張・交通案内で頻出,"noun, adjective",500,2,5,travel|business
+side,面,「side」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+weekday,平日,「weekday」：前後の語との組合せを覚える,noun,500,2,4,general
+although,"…ではあるが,…とはいいながら,…だが(though)",「although」：TOEIC文書での用法を確認,noun,500,2,4,general
+bonus,"ボーナス,特別手当",「bonus」：文中での品詞を意識する,noun,500,2,4,general
+cart,"二輪車,荷馬車,荷車",「cart」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+term,"専門用語,術語",「term」：契約文書での用法を確認,"noun, verb",500,2,5,contract|business
+age,"年齢,寿命",「age」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+ink,のインク,「ink」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+low,"低い,低い所にある",「low」：文中での品詞を意識する,noun,500,2,4,general
+waitress,"女給仕人,ウエートレス",「waitress」：TOEIC文書での用法を確認,noun,500,2,4,general
+cleaner,掃除機,「cleaner」：前後の語との組合せを覚える,noun,500,2,4,general
+public,"公の,公共の,公衆の",「public」：TOEIC文書での用法を確認,"noun, adjective",500,2,4,general
+developer,"開発者,啓発者",「developer」：TOEIC文書での用法を確認,noun,500,2,4,general
+possible,"可能な,実行できる",「possible」：前後の語との組合せを覚える,"noun, adjective",500,2,4,general
+shuttle,杼(ひ)(縦糸の間を走り横糸を通す器具),「shuttle」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+actually,"実際に,現に,ほんとうに",「actually」：文中での品詞を意識する,adverb,500,2,4,general
+rather,"いくぶん,やや",「rather」：前後の語との組合せを覚える,adverb,500,2,4,general
+stationery,文房具,「stationery」：社内業務の場面で頻出,noun,500,2,5,office|business
+view,"見ること,ながめること,一見,一覧",「view」：文中での品詞を意識する,"noun, verb",500,2,4,general
+together,"いっしょに,共に,連れ立って",「together」：前後の語との組合せを覚える,adverb,500,2,4,general
+alike,"同じように,等しく(similarly)",「alike」：文中での品詞を意識する,adverb,500,2,4,general
+flavor,"風味,味",「flavor」：文中での品詞を意識する,"noun, verb",500,2,4,general
+parent,親(父または母),「parent」：文中での品詞を意識する,noun,500,2,4,general
+picnic,"ピクニック,(野外の食事を伴う)遠足",「picnic」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+hard,"堅い,(手触りが)堅固な,しっかりした",「hard」：前後の語との組合せを覚える,"noun, adjective",500,2,4,general
+recipe,"作り方,処方",「recipe」：文中での品詞を意識する,noun,500,2,4,general
+refreshment,"元気回復,気分爽快(そうかい)",「refreshment」：TOEIC文書での用法を確認,noun,500,3,4,general
+control,"統制,抑制,制御",「control」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+already,"もう,すでに",「already」：前後の語との組合せを覚える,adverb,500,2,4,general
+concern,"…に関係する,かかわる,影響する",「concern」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+commonly,"一般に,通例,普通",「commonly」：文中での品詞を意識する,adverb,500,2,4,general
+story,"話,実話",「story」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+almost,"ほとんど,たいてい(nearly)",「almost」：文中での品詞を意識する,adverb,500,2,4,general
+stand,"立つ,立っている",「stand」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+whole,"全体の,全部の,全…",「whole」：TOEIC文書での用法を確認,"noun, adjective",500,2,4,general
+yet,まだ,「yet」：文中での品詞を意識する,adverb,500,2,4,general
+rate,料金、割合,「rate」：数値表現とセットで覚える,"noun, verb",500,2,5,finance|business
+coordinate,"対等の,等位の",「coordinate」：文中での品詞を意識する,"noun, verb",500,2,4,general
+effect,効果、影響,「effect」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+paperwork,"書類仕事,文書仕事",「paperwork」：job descriptionの文脈で確認,noun,500,2,4,employment|business
+sort,種類、分類する,「sort」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+cause,"原因,起因",「cause」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+fall,"落下する,落ちる",「fall」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+flu,"インフルエンザ,流感",「flu」：TOEIC文書での用法を確認,noun,500,2,4,general
+deal,取引き,「deal」：ビジネス場面の基本語,"noun, verb",500,2,5,business
+captain,"長,かしら(chief)",「captain」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+installation,"取り付け,据え付け",「installation」：前後の語との組合せを覚える,noun,500,3,4,general
+trainer,"訓練する人,仕込む人,(運動選手の)トレーナー,調教師",「trainer」：前後の語との組合せを覚える,noun,500,2,4,general
+soon,"間もなく,近いうちに",「soon」：TOEIC文書での用法を確認,adverb,500,2,4,general
+availability,"利用できること,有用性,利用価値",「availability」：前後の語との組合せを覚える,noun,500,3,4,general
+base,基礎、拠点,「base」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+bargain,"契約,売買契約,取引き",「bargain」：文中での品詞を意識する,"noun, verb",500,2,4,general
+probably,"たぶん,おそらく",「probably」：前後の語との組合せを覚える,adverb,500,2,4,general
+hike,ハイキング(徒歩旅行)する,「hike」：TOEIC文書での用法を確認,noun,500,2,4,general
+past,"過ぎ去った,終わった(over)",「past」：文中での品詞を意識する,noun,500,2,4,general
+midnight,"真夜中,夜の12時",「midnight」：TOEIC文書での用法を確認,"noun, adverb",500,2,4,general
+test,"試験,考査,テスト",「test」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+center,"中心,中央,中核",「center」：文中での品詞を意識する,"noun, verb",500,2,4,general
+trainee,"訓練(特に職業訓練)を受けている人,徒弟,見習い",「trainee」：研修・講習の場面で頻出,noun,500,2,5,training|business
+value,"価格,値段",「value」：financial reportで用法を確認,"noun, verb",500,2,5,finance|business
+automobile,自動車,「automobile」：TOEIC文書での用法を確認,noun,500,2,4,general
+record,"記録,(…を)記録すること",「record」：報告書・グラフで頻出,"noun, verb",500,2,5,report|document
+force,"力,勢い",「force」：文中での品詞を意識する,"noun, verb",500,2,4,general
+questionnaire,"質問表,アンケート",「questionnaire」：TOEIC文書での用法を確認,noun,500,3,4,general
+stop,止める,「stop」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+dock,"波止場,埠頭(ふとう)",「dock」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+lately,"近ごろ,最近",「lately」：TOEIC文書での用法を確認,adverb,500,2,4,general
+share,"分け前,取り分",「share」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+machinery,機械,「machinery」：機器の説明・点検で頻出,noun,500,2,5,equipment|business
+real,"現実の,実際の,真実の",「real」：TOEIC文書での用法を確認,"noun, adjective",500,2,4,general
+presenter,テレビ(ラジオ)ショーの司会者,「presenter」：TOEIC文書での用法を確認,noun,500,2,4,general
+figure,数字、人物、図,「figure」：報告書・グラフで頻出,"noun, verb",500,2,5,report|business
+signature,署名,「signature」：formやfileと関連,noun,500,2,5,document|business
+letter,手紙、文字,「letter」：文中での品詞を意識する,"noun, verb",500,2,4,general
+carrier,航空母艦,「carrier」：出張・交通案内で頻出,noun,500,2,5,travel|business
+subject,"主題,問題,議題,話題",「subject」：文中での品詞を意識する,"noun, verb",500,2,4,general
+development,"発達,発展,発育,成長",「development」：文中での品詞を意識する,noun,500,3,4,general
+exclusive,"除外する,排他的な",「exclusive」：前後の語との組合せを覚える,"noun, adjective",500,2,4,general
+grocery,"食料品店(ではgrocer's, grocery shopなどが普通)",「grocery」：TOEIC文書での用法を確認,noun,500,2,4,general
+homework,自宅でする仕事,「homework」：job descriptionの文脈で確認,noun,500,2,4,employment|business
+memorandum,"連絡メモ,回覧,回報",「memorandum」：社内案内での用法を確認,noun,500,2,5,office|business
+break,"壊す,割る,砕く",「break」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+photocopier,写真複写機,「photocopier」：前後の語との組合せを覚える,noun,500,3,4,general
+future,"未来,将来",「future」：前後の語との組合せを覚える,"noun, adjective",500,2,4,general
+thorough,"完全な,完ぺきな",「thorough」：前後の語との組合せを覚える,noun,500,2,4,general
+per,"…につき,…ごとに",「per」：TOEIC文書での用法を確認,noun,500,2,4,general
+bookstore,"書,本屋(bookshop)",「bookstore」：前後の語との組合せを覚える,noun,500,2,4,general
+top,"いちばん上の部分,最先端,頂上",「top」：TOEIC文書での用法を確認,noun,500,2,4,general
+dental,"歯の,歯科医の",「dental」：文中での品詞を意識する,"noun, adjective",500,2,4,general
+win,"(…に)勝つ,優勝する",「win」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+duration,"持続,存続,継続",「duration」：締切・期間表現とセットで,noun,500,2,5,schedule|business
+lounge,"ゆったりと寄り掛かる(座る,横になる)",「lounge」：文中での品詞を意識する,noun,500,2,4,general
+reach,"に着く,到着する",「reach」：文中での品詞を意識する,"noun, verb",500,2,4,general
+painter,画家,「painter」：TOEIC文書での用法を確認,noun,500,2,4,general
+social,"社会の,社会的な",「social」：文中での品詞を意識する,"noun, adjective",500,2,4,general
+patron,"後援者,保護者,パトロール",「patron」：TOEIC文書での用法を確認,noun,500,2,4,general
+period,期間,「period」：締切・期間表現とセットで,noun,500,2,5,schedule|business
+prescription,指示(規定)すること,「prescription」：前後の語との組合せを覚える,noun,500,3,4,general
+note,"覚え書き,控え,メモ",「note」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+salad,サラダ,「salad」：前後の語との組合せを覚える,noun,500,2,4,general
+drive,"追い立てる,追い払う,追い出す",「drive」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+along,"…をたどって,…に沿って",「along」：前後の語との組合せを覚える,adverb,500,2,4,general
+delegate,"代表,使節",「delegate」：会議の案内・進行で頻出,"noun, verb",500,2,5,meeting|business
+type,"型,タイプ,類型,種類(kind)",「type」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+sound,"音,音響,響き・音の聞こえる範囲・(音声としての)音",「sound」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+salesperson,販売員,「salesperson」：TOEIC文書での用法を確認,noun,500,3,4,general
+calculator,計算者,「calculator」：文中での品詞を意識する,noun,500,2,4,general
+completion,"完成,成就",「completion」：前後の語との組合せを覚える,noun,500,2,4,general
+defect,"欠点,弱点,欠陥",「defect」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+garbage,"生ごみ,食べかす,残飯",「garbage」：文中での品詞を意識する,noun,500,2,4,general
+moment,"瞬間,瞬時",「moment」：文中での品詞を意識する,noun,500,2,4,general
+sale,"販売,売却,売れ行き,需要",「sale」：前後の語との組合せを覚える,noun,500,2,4,general
+spite,"悪意,意地悪",「spite」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+cab,Civil Aeronautics Board民間航空委員会,「cab」：TOEIC文書での用法を確認,noun,500,2,4,general
+correspondence,"一致,調和類似",「correspondence」：メール・連絡表現で頻出,noun,500,3,5,communication|business
+general,"全部の,全部を含む",「general」：文中での品詞を意識する,"noun, adjective",500,2,4,general
+ladder,はしご,「ladder」：文中での品詞を意識する,"noun, verb",500,2,4,general
+photography,写真術,「photography」：前後の語との組合せを覚える,noun,500,3,4,general
+sculpture,"彫刻,彫刻術",「sculpture」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+team,チーム,「team」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+anniversary,"記念日,記念祭",「anniversary」：文中での品詞を意識する,"noun, adjective",500,3,4,general
+individual,"個々の,個別の(separate)",「individual」：文中での品詞を意識する,"noun, adjective",500,2,4,general
+full,"いっぱいの,満ちた",「full」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+sense,感覚,「sense」：文中での品詞を意識する,"noun, verb",500,2,4,general
+perhaps,"おそらく,ことによると,ひょっとしたら,たぶん",「perhaps」：TOEIC文書での用法を確認,adverb,500,2,4,general
+leak,漏れること,「leak」：文中での品詞を意識する,"noun, verb",500,2,4,general
+rule,"規則,規定",「rule」：文中での品詞を意識する,"noun, verb",500,2,4,general
+occupancy,占有,「occupancy」：TOEIC文書での用法を確認,noun,500,2,4,general
+pass,"通り過ぎる,通る",「pass」：前後の語との組合せを覚える,noun,500,2,4,general
+proficiency,"熟達,熟練(skill)",「proficiency」：前後の語との組合せを覚える,noun,500,3,4,general
+produce,"産出する,生産する",「produce」：文中での品詞を意識する,"noun, verb",500,2,4,general
+renewal,"新しく直すこと,(…の)更新",「renewal」：TOEIC文書での用法を確認,noun,500,2,4,general
+annually,"年々,毎年",「annually」：文中での品詞を意識する,adverb,500,2,4,general
+law,法,「law」：TOEIC文書での用法を確認,noun,500,2,4,general
+basketball,"バスケットボール,篭(ろう)球",「basketball」：TOEIC文書での用法を確認,noun,500,2,4,general
+research,"研究,調査",「research」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+pet,"愛がん動物,ペット",「pet」：文中での品詞を意識する,"noun, verb",500,2,4,general
+near,"(…の)近くに,(…に)接近して",「near」：文中での品詞を意識する,"noun, verb",500,2,4,general
+textbook,教科書,「textbook」：文中での品詞を意識する,noun,500,2,4,general
+human,"人間の,人の",「human」：TOEIC文書での用法を確認,"noun, adjective",500,2,4,general
+computer,計算機,「computer」：機器の説明・点検で頻出,noun,500,2,5,equipment|business
+accurately,"正確に,精密に,綿密に",「accurately」：TOEIC文書での用法を確認,adverb,500,2,4,general
+situation,"立場,状態,境遇",「situation」：前後の語との組合せを覚える,noun,500,2,4,general
+cabin,小屋,「cabin」：文中での品詞を意識する,"noun, verb",500,2,4,general
+activity,"活動,働き",「activity」：前後の語との組合せを覚える,noun,500,2,4,general
+conductor,"指導者,案内者",「conductor」：TOEIC文書での用法を確認,noun,500,2,4,general
+film,"薄皮,薄膜,薄い層",「film」：前後の語との組合せを覚える,"noun, verb",500,2,4,general
+inspector,"視察官,調査官,監査人(役)",「inspector」：文中での品詞を意識する,noun,500,2,4,general
+intern,インターン(企業などで短期間で勤務する社員)/ 実習生,「intern」：文中での品詞を意識する,"noun, verb",500,2,4,general
+war,"戦争,戦争状態",「war」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+semester,"一学期,前(後)期(通例15‐18週)",「semester」：TOEIC文書での用法を確認,noun,500,2,4,general
+confirmation,確認,「confirmation」：TOEIC文書での用法を確認,noun,500,3,4,general
+major,"大きい(多い)ほうの,いっそう重要な",「major」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+someone,"だれか,ある人",「someone」：文中での品詞を意識する,noun,500,2,4,general
+congratulation,"(…に対する)祝いの言葉,祝辞",「congratulation」：前後の語との組合せを覚える,noun,500,3,4,general
+above,"…の上方へ,より高いところへ",「above」：TOEIC文書での用法を確認,"noun, adjective",500,2,4,general
+expertise,専門技術,「expertise」：文中での品詞を意識する,noun,500,2,4,general
+graph,"グラフ,図表",「graph」：report that節での用法を確認,"noun, verb",500,2,5,report|business
+event,"でき事,事件",「event」：TOEIC文書での用法を確認,noun,500,2,4,general
+sometimes,"ときどき,ときには",「sometimes」：文中での品詞を意識する,adverb,500,2,4,general
+utility,役に立つこと,「utility」：文中での品詞を意識する,noun,500,2,4,general
+carry,"運ぶ,運搬する,持って行く(来る)",「carry」：文中での品詞を意識する,"noun, verb",500,2,4,general
+voucher,"証書,受領証・証拠物件",「voucher」：前後の語との組合せを覚える,noun,500,2,4,general
+banker,"銀行家,銀行経営者",「banker」：TOEIC文書での用法を確認,noun,500,2,4,general
+behalf,"大義, 大目的",「behalf」：前後の語との組合せを覚える,noun,500,2,4,general
+decision,"決定,解決",「decision」：前後の語との組合せを覚える,noun,500,2,4,general
+forward,"前方へ,前方に",「forward」：前後の語との組合せを覚える,noun,500,2,4,general
+main,"おもな,主要な",「main」：前後の語との組合せを覚える,noun,500,2,4,general
+paycheck,給料支払い小切手,「paycheck」：金額・会計の文脈で頻出,noun,500,2,4,finance|business
+die,"死ぬ,枯れる",「die」：TOEIC文書での用法を確認,"noun, verb",500,2,4,general
+protective,"保護の,保護する",「protective」：TOEIC文書での用法を確認,"noun, adjective",500,2,4,general
+cut,"切る,傷つける",「cut」：文中での品詞を意識する,"noun, verb",500,2,4,general
+seller,"売る人,売り手",「seller」：文中での品詞を意識する,noun,500,2,4,general
+sidewalk,歩道,「sidewalk」：TOEIC文書での用法を確認,noun,500,2,4,general
+strong,力の強い,「strong」：TOEIC文書での用法を確認,noun,500,2,4,general
+maybe,"たぶん,おそらく,ことによると",「maybe」：前後の語との組合せを覚える,adverb,500,2,4,general
+promptly,"敏速に,即座に",「promptly」：TOEIC文書での用法を確認,adverb,500,2,4,general
+cumulative,"しだいに増加する,累加する,累積的な",「cumulative」：前後の語との組合せを覚える,adjective,500,2,4,general
+knowledgeable,"博識の,物知りの",「knowledgeable」：文中での品詞を意識する,adjective,500,3,4,general
+economic,経済の,「economic」：TOEIC文書での用法を確認,adjective,500,2,4,general
+overdue,"支払いの期限が過ぎた,未払いの",「overdue」：前後の語との組合せを覚える,adjective,500,2,4,general
+finally,最後に(at the end),「finally」：前後の語との組合せを覚える,adverb,500,2,4,general
+definite,"一定の,(明確に)限定された",「definite」：前後の語との組合せを覚える,adjective,500,2,4,general
+economical,"節約する,倹約家の",「economical」：文中での品詞を意識する,adjective,500,2,4,general
+generous,気前のよい,「generous」：文中での品詞を意識する,adjective,500,2,4,general
+profitable,利益の上がる,「profitable」：前後の語との組合せを覚える,adjective,500,2,4,general
+reimburse,に弁償する,「reimburse」：文中での品詞を意識する,verb,500,2,4,general
+certainly,"確かに,確実",「certainly」：TOEIC文書での用法を確認,adverb,500,2,4,general
+itself,"それ自身,それ自体,そのもの",「itself」：文中での品詞を意識する,"verb, preposition",500,2,4,general
+teach,"教える,に教える",「teach」：前後の語との組合せを覚える,verb,500,2,4,general
+confidential,"秘密の,内々の(secret)",「confidential」：文中での品詞を意識する,adjective,500,3,4,general
+marginal,"縁の,へりの",「marginal」：前後の語との組合せを覚える,adjective,500,2,4,general
+realistic,"現実主義の,現実的(実際的)な",「realistic」：文中での品詞を意識する,adjective,500,2,4,general
+thoroughly,"徹底的に,完ぺきに,全く",「thoroughly」：前後の語との組合せを覚える,adverb,500,2,4,general
+automate,"に自動装置をつける,をオートメーション化する",「automate」：文中での品詞を意識する,verb,500,2,4,general
+finalize,"完成する,仕上げる",「finalize」：前後の語との組合せを覚える,verb,500,2,4,general
+incur,"招く,こうむる",「incur」：文中での品詞を意識する,verb,500,2,4,general
+realize,完全に理解する,「realize」：前後の語との組合せを覚える,verb,500,2,4,general
+usually,"普通は,通例,通常,いつもは",「usually」：TOEIC文書での用法を確認,adverb,500,2,4,general
+instruct,"…に知識(情報,技術など)を与える,教える,知らせる",「instruct」：前後の語との組合せを覚える,verb,500,2,4,general
+loyal,"忠実な,誠実な(faithful)",「loyal」：文中での品詞を意識する,adjective,500,2,4,general
+strategic,"戦略の,計略の",「strategic」：前後の語との組合せを覚える,adjective,500,2,4,general
+spacious,"広い,ゆったりとした",「spacious」：TOEIC文書での用法を確認,adjective,500,2,4,general
+accustom,"慣らす,習慣づける",「accustom」：文中での品詞を意識する,verb,500,2,4,general
+organizational,"組織上の,構成上の",「organizational」：文中での品詞を意識する,adjective,500,3,4,general
+listen,"聞く,耳を澄ます",「listen」：前後の語との組合せを覚える,verb,500,2,4,general
+monetary,"貨幣の,通貨の",「monetary」：文中での品詞を意識する,adjective,500,2,4,general
+reinforce,"増強する,補強する",「reinforce」：TOEIC文書での用法を確認,verb,500,2,4,general
+payable,採算のとれる,「payable」：金額・会計の文脈で頻出,adjective,500,2,4,finance|business
+distract,"の注意(気持ち,関心)をそらす,をそらす",「distract」：前後の語との組合せを覚える,verb,500,2,4,general
+furnish,に家具を備え付ける,「furnish」：文中での品詞を意識する,verb,500,2,4,general
+hourly,時間の,「hourly」：TOEIC文書での用法を確認,"adjective, adverb",500,2,4,general
+promotional,"昇進の,昇格の",「promotional」：TOEIC文書での用法を確認,adjective,500,3,4,general
+particularly,"特に,とりわけ",「particularly」：文中での品詞を意識する,adverb,500,3,4,general
+residential,"住居の,居住の",「residential」：文中での品詞を意識する,adjective,500,3,4,general
+temporarily,"一時的に,仮に",「temporarily」：TOEIC文書での用法を確認,adverb,500,3,4,general
+unattended,付き添いのない,「unattended」：前後の語との組合せを覚える,adjective,500,2,4,general
+suppose,"…と仮定する,考えてみる",「suppose」：TOEIC文書での用法を確認,verb,500,2,4,general
+accessible,"近づきやすい,入りやすい,達しうる",「accessible」：TOEIC文書での用法を確認,adjective,500,2,4,general
+afterward,"あとで,以後,その後",「afterward」：前後の語との組合せを覚える,adverb,500,2,4,general
+assemble,"集める,集合させる",「assemble」：物流工程の文脈で確認,verb,500,2,5,logistics|business
+poor,"貧乏な,貧しい",「poor」：前後の語との組合せを覚える,adjective,500,2,4,general
+classify,"分類する,類別する,等級別にする",「classify」：前後の語との組合せを覚える,verb,500,2,4,general
+risky,"危険な,危ない",「risky」：前後の語との組合せを覚える,adjective,500,2,4,general
+durable,"耐久力のある,もちのよい",「durable」：TOEIC文書での用法を確認,adjective,500,2,4,general
+foreign,外国の,「foreign」：文中での品詞を意識する,adjective,500,2,4,general
+prospective,"未来の,将来の",「prospective」：前後の語との組合せを覚える,adjective,500,3,4,general
+maximize,最大限にする,「maximize」：文中での品詞を意識する,verb,500,2,4,general
+relate,物語る,「relate」：前後の語との組合せを覚える,verb,500,2,4,general
+forget,忘れる,「forget」：文中での品詞を意識する,verb,500,2,4,general
+costly,高価な,「costly」：financial reportで用法を確認,adjective,500,2,4,finance|business
+allocate,"配分する,割り当てる",「allocate」：前後の語との組合せを覚える,verb,500,2,4,general
+equip,"にしたくさせる,に装備する,(…に備えて)…にしたくさせる,を装備する",「equip」：文中での品詞を意識する,verb,500,2,4,general
+graphic,"絵を見るような,生き生きとした(vivid)",「graphic」：前後の語との組合せを覚える,adjective,500,2,4,general
+represent,"表す,象徴する",「represent」：文中での品詞を意識する,verb,500,2,4,general
+lengthy,非常に長い,「lengthy」：文中での品詞を意識する,adjective,500,2,4,general
+contain,"含む,入れている",「contain」：前後の語との組合せを覚える,verb,500,2,4,general
+merge,"合併する,合体する",「merge」：TOEIC文書での用法を確認,verb,500,2,4,general
+myself,私自身,「myself」：文中での品詞を意識する,"verb, preposition",500,2,4,general
+terminate,終わらせる,「terminate」：TOEIC文書での用法を確認,verb,500,2,4,general
+unfamiliar,"よく知らない,未知の見慣ない,聞き慣ない",「unfamiliar」：文中での品詞を意識する,adjective,500,2,4,general
+whatever,…するもの(こと)は何でも,「whatever」：文中での品詞を意識する,adjective,500,2,4,general
+congratulate,"にお祝いを言う,喜びを述べる",「congratulate」：文中での品詞を意識する,verb,500,3,4,general
+various,"互いに異なる,いろいろな,さまざまの",「various」：文中での品詞を意識する,adjective,500,2,4,general
+inexpensive,"安い,費用のかからない",「inexpensive」：TOEIC文書での用法を確認,adjective,500,3,4,general
+rearrange,"整理し直す,配列し直す",「rearrange」：文中での品詞を意識する,verb,500,2,4,general
+reopen,再び開ける,「reopen」：前後の語との組合せを覚える,verb,500,2,4,general
+establish,"設立する,創設する",「establish」：文中での品詞を意識する,verb,500,2,4,general
+faulty,欠点(欠陥)のある,「faulty」：前後の語との組合せを覚える,adjective,500,2,4,general
+informal,"正式でない,略式の",「informal」：前後の語との組合せを覚える,adjective,500,2,4,general
+mislead,誤って道案内する,「mislead」：前後の語との組合せを覚える,verb,500,2,4,general
+misplace,置き間違える,「misplace」：TOEIC文書での用法を確認,verb,500,2,4,general
+occur,起こる,「occur」：TOEIC文書での用法を確認,verb,500,2,4,general
+remodel,"作り直す,改造する,…の型を直す",「remodel」：TOEIC文書での用法を確認,verb,500,2,4,general
+significant,"重要な,重大な",「significant」：TOEIC文書での用法を確認,adjective,500,3,4,general
+optimal,最適な,「optimal」：TOEIC文書での用法を確認,adjective,500,2,4,general
+unlimited,"限りない,果てしない(boundless)",「unlimited」：文中での品詞を意識する,adjective,500,2,4,general
+direct,"まっすぐな,一直線の(straight),直進する",「direct」：文中での品詞を意識する,"verb, adjective",500,2,4,general
+disclose,"あらわにする,見せる(uncover)",「disclose」：文中での品詞を意識する,verb,500,2,4,general
+depend,"頼る,依存する,当てにする",「depend」：TOEIC文書での用法を確認,verb,500,2,4,general
+deduct,"差し引く,控除する",「deduct」：TOEIC文書での用法を確認,verb,500,2,4,general
+recognize,確かに認める,「recognize」：前後の語との組合せを覚える,verb,500,2,4,general
+enthusiastic,"熱狂的な,熱烈な",「enthusiastic」：文中での品詞を意識する,adjective,500,3,4,general
+icy,"氷の,氷で覆われた",「icy」：前後の語との組合せを覚える,adjective,500,2,4,general
+argue,"議論する,論争する,言い争う",「argue」：前後の語との組合せを覚える,verb,500,2,4,general
+managerial,経営上の,「managerial」：前後の語との組合せを覚える,adjective,500,2,4,general
+prove,証明する,「prove」：前後の語との組合せを覚える,verb,500,2,4,general
+proofread,校正する,「proofread」：TOEIC文書での用法を確認,verb,500,2,4,general
+liable,責任(義務)のある,「liable」：文中での品詞を意識する,adjective,500,2,4,general
+sorry,"悲しいと思う,すまないと思う,残念に思う",「sorry」：文中での品詞を意識する,adjective,500,2,4,general
+defer,"延ばす,延期する(postpone)",「defer」：文中での品詞を意識する,verb,500,2,4,general
+ethical,"倫理の,道徳の",「ethical」：前後の語との組合せを覚える,adjective,500,2,4,general
+marry,"…と結婚する,を夫(妻)にする",「marry」：TOEIC文書での用法を確認,verb,500,2,4,general
+optimistic,楽天主義の,「optimistic」：前後の語との組合せを覚える,adjective,500,2,4,general
+seek,"捜し求める,捜す",「seek」：前後の語との組合せを覚える,verb,500,2,4,general
+solar,"太陽の,太陽からの",「solar」：文中での品詞を意識する,adjective,500,2,4,general
+unsure,"不安定な,不確実な",「unsure」：文中での品詞を意識する,adjective,500,2,4,general
+popular,"人気がある,評判のよい",「popular」：前後の語との組合せを覚える,adjective,500,2,4,general
+beautiful,"美しい,きれいな",「beautiful」：TOEIC文書での用法を確認,adjective,500,2,4,general
+restructure,"編成し直す,組み立て直す",「restructure」：文中での品詞を意識する,verb,500,3,4,general
+serious,"まじめな,厳粛な",「serious」：前後の語との組合せを覚える,adjective,500,2,4,general
+absent,"不在の,欠席した,欠けている,心を失った(忘却の)",「absent」：前後の語との組合せを覚える,"verb, adjective",500,2,4,general
+accumulate,"蓄積する,ためる",「accumulate」：TOEIC文書での用法を確認,verb,500,2,4,general
+execute,"実行する,遂行する",「execute」：文中での品詞を意識する,verb,500,2,4,general
+colorful,"色彩に富んだ,多彩な,はなやかな",「colorful」：TOEIC文書での用法を確認,adjective,500,2,4,general
+compensate,に補償する,「compensate」：文中での品詞を意識する,verb,500,2,4,general
+deem,…と思う(think),「deem」：TOEIC文書での用法を確認,verb,500,2,4,general
+facilitate,"容易にする,楽にする,助ける,促進する",「facilitate」：文中での品詞を意識する,verb,500,2,4,general
+yourself,"あなた自身,ご自身",「yourself」：前後の語との組合せを覚える,"verb, preposition",500,2,4,general
+dynamic,"動力の,動的な",「dynamic」：TOEIC文書での用法を確認,adjective,500,2,4,general
+inappropriate,"不適当な,ふさわしくない",「inappropriate」：TOEIC文書での用法を確認,adjective,500,3,4,general
+statistical,"統計の,統計学上の",「statistical」：文中での品詞を意識する,adjective,500,3,4,general
+plausible,もっともらしい,「plausible」：前後の語との組合せを覚える,adjective,500,2,4,general
+enforce,"実施する,施行する",「enforce」：TOEIC文書での用法を確認,verb,500,2,4,general
+simplify,"簡単にする,平易にする,単純にする",「simplify」：前後の語との組合せを覚える,verb,500,2,4,general
+unexpected,"予期しない,思いがけない",「unexpected」：文中での品詞を意識する,adjective,500,2,4,general
+adhere,"くっつく,付着する,粘着する",「adhere」：文中での品詞を意識する,verb,500,2,4,general
+suffer,"苦しむ,悩む,心を痛める,(…で)苦しむ",「suffer」：TOEIC文書での用法を確認,verb,500,2,4,general
+except,"…を除いて,のほかは",「except」：前後の語との組合せを覚える,verb,500,2,4,general
+tend,"傾向がある,(…)しがちである",「tend」：前後の語との組合せを覚える,verb,500,2,4,general
+diversify,"多様化する,いろいろ変化させる",「diversify」：前後の語との組合せを覚える,verb,500,2,4,general
+avoid,"避ける,回避する(keep away from)",「avoid」：TOEIC文書での用法を確認,verb,500,2,4,general
+fasten,"固定する,つなぐ",「fasten」：文中での品詞を意識する,verb,500,2,4,general
+harmful,"有害な,害になる",「harmful」：TOEIC文書での用法を確認,adjective,500,2,4,general
+informative,"知識(情報)を与える,有益な",「informative」：文中での品詞を意識する,adjective,500,3,4,general
+indirect,"真っすぐでない,回り道の",「indirect」：前後の語との組合せを覚える,adjective,500,2,4,general
+nominate,指名する,「nominate」：文中での品詞を意識する,"verb, adjective",500,2,4,general
+huge,"巨大な,ばく大な",「huge」：文中での品詞を意識する,adjective,500,2,4,general
+opt,選ぶ,「opt」：TOEIC文書での用法を確認,verb,500,2,4,general
+recreational,"レクリエーションの,気晴らしの,娯楽の",「recreational」：TOEIC文書での用法を確認,adjective,500,3,4,general
+rehearse,"けいこする,リハーサルをする",「rehearse」：TOEIC文書での用法を確認,verb,500,2,4,general
+satisfactory,"満足を与える,満足な,申し分のない",「satisfactory」：前後の語との組合せを覚える,adjective,500,3,4,general
+seasonal,"季節の,季節的,季節ごとの",「seasonal」：TOEIC文書での用法を確認,adjective,500,2,4,general
+propose,"提案する,申し出る",「propose」：TOEIC文書での用法を確認,verb,500,2,4,general
+technological,科学技術の(に関する),「technological」：文中での品詞を意識する,adjective,500,3,4,general
+unnecessary,"必要のない,無用の,よけいな",「unnecessary」：前後の語との組合せを覚える,adjective,500,3,4,general
+multinational,多国籍企業(多数の国に系列会社を持つ巨大企業)・多国籍の,「multinational」：前後の語との組合せを覚える,adjective,500,3,4,general
+applicable,適用(応用)できる,「applicable」：TOEIC文書での用法を確認,adjective,500,2,4,general
+unclear,はっきりしない,「unclear」：文中での品詞を意識する,adjective,500,2,4,general
+separate,"分離する,引き分ける",「separate」：文中での品詞を意識する,"verb, adjective",500,2,4,general
+culinary,台所の,「culinary」：文中での品詞を意識する,adjective,500,2,4,general
+central,"中心の,中央の,中心からの",「central」：前後の語との組合せを覚える,adjective,500,2,4,general
+elegant,"優雅な,上品な",「elegant」：前後の語との組合せを覚える,adjective,500,2,4,general
+excessive,"度を越した,過度の,極端な",「excessive」：前後の語との組合せを覚える,adjective,500,2,4,general
+generic,属(genus)の,「generic」：前後の語との組合せを覚える,adjective,500,2,4,general
+operational,操作上の,「operational」：前後の語との組合せを覚える,adjective,500,3,4,general
+protect,"守る,保護する",「protect」：文中での品詞を意識する,verb,500,2,4,general
+consolidate,"固める,を強化する",「consolidate」：TOEIC文書での用法を確認,verb,500,3,4,general
+encourage,"勇気づける,励ます",「encourage」：前後の語との組合せを覚える,verb,500,2,4,general
+reflect,"反射する,はね返す",「reflect」：TOEIC文書での用法を確認,verb,500,2,4,general
+earn,かせぐ,「earn」：文中での品詞を意識する,verb,500,2,4,general
+define,"定義する,の意味で明らかにする",「define」：前後の語との組合せを覚える,verb,500,2,4,general
+amuse,"楽しませる,おかしがらせる",「amuse」：文中での品詞を意識する,verb,500,2,4,general
+perform,成し遂げる,「perform」：文中での品詞を意識する,verb,500,2,4,general
+repay,返す,「repay」：数値表現とセットで覚える,verb,500,2,4,finance|business
+certify,"証明する,保証する,確認する",「certify」：文中での品詞を意識する,verb,500,2,4,general
+multiply,"増す,ふやす",「multiply」：文中での品詞を意識する,verb,500,2,4,general
+discover,"発見する,見付ける",「discover」：文中での品詞を意識する,verb,500,2,4,general
+extend,"延ばす,延長する",「extend」：TOEIC文書での用法を確認,verb,500,2,4,general
+detach,"引き離す,分離する,取り外す",「detach」：文中での品詞を意識する,verb,500,2,4,general
+familiarize,慣れ親しませる,「familiarize」：前後の語との組合せを覚える,verb,500,3,4,general
+irritate,"怒らせる,いらだたせる",「irritate」：前後の語との組合せを覚える,verb,500,2,4,general
+undermine,"…の下を掘る,下に穴(トンネル)を掘る",「undermine」：TOEIC文書での用法を確認,verb,500,2,4,general
+sue,"告訴する,訴える",「sue」：TOEIC文書での用法を確認,verb,500,2,4,general
+compile,まとめる,「compile」：前後の語との組合せを覚える,verb,500,2,4,general
+customize,注文どおりに作る,「customize」：文中での品詞を意識する,verb,500,2,4,general
+diagnose,診断する,「diagnose」：TOEIC文書での用法を確認,verb,500,2,4,general
+discontinue,"やめる,停止する,中止する",「discontinue」：TOEIC文書での用法を確認,verb,500,3,4,general
+economize,"節約する,倹約する",「economize」：前後の語との組合せを覚える,verb,500,2,4,general
+correct,"事実に合った,正しい,正確な",「correct」：前後の語との組合せを覚える,"verb, adjective",500,2,4,general
+admit,"入れる,に入ることを許す",「admit」：文中での品詞を意識する,verb,500,2,4,general
+relieve,"和らげる,軽減する",「relieve」：前後の語との組合せを覚える,verb,500,2,4,general
+rumor,"うわさ,うわさ話,流言",「rumor」：前後の語との組合せを覚える,verb,500,2,4,general
+shorten,"短くする,縮める",「shorten」：TOEIC文書での用法を確認,verb,500,2,4,general
+subtract,"(…から)…を引く,減じる",「subtract」：TOEIC文書での用法を確認,verb,500,2,4,general
+vend,"売る,行商する",「vend」：TOEIC文書での用法を確認,verb,500,2,4,general
+inform,に知らせる,「inform」：メール・連絡表現で頻出,"verb, adjective",500,2,5,communication|business
+utilize,"利用する,役立たせる",「utilize」：TOEIC文書での用法を確認,verb,500,2,4,general
+dissatisfy,に不満を抱かせる,「dissatisfy」：前後の語との組合せを覚える,verb,500,2,4,general
+observe,"観察する,注意して見る",「observe」：TOEIC文書での用法を確認,verb,500,2,4,general
+examine,"調べる,検討する",「examine」：文中での品詞を意識する,verb,500,2,4,general
+violate,"破る,犯す",「violate」：契約文書での用法を確認,"verb, adjective",500,2,5,contract|business
+intend,"意図する,のつもりである",「intend」：TOEIC文書での用法を確認,verb,500,2,4,general
+weaken,弱くする,「weaken」：文中での品詞を意識する,verb,500,2,4,general
+slow,"遅い,のろい",「slow」：TOEIC文書での用法を確認,"verb, adjective",500,2,4,general
+accrue,"生じる,発生する",「accrue」：TOEIC文書での用法を確認,verb,500,2,4,general
+tidy,"きちんとした,整然とした",「tidy」：前後の語との組合せを覚える,"verb, adjective",500,2,4,general
+suppress,"鎮圧する,…の活動を押える",「suppress」：文中での品詞を意識する,verb,500,2,4,general
+warn,に警告する,「warn」：文中での品詞を意識する,verb,500,2,4,general
+absorb,"吸収する,吸い込む",「absorb」：TOEIC文書での用法を確認,verb,500,2,4,general
+administer,管理する,「administer」：前後の語との組合せを覚える,verb,500,2,4,general
+excite,興奮させる,「excite」：TOEIC文書での用法を確認,verb,500,2,4,general
+conform,"従って行動する(考える)・(…と)一致する,符合する・(…に)…を一致させる",「conform」：TOEIC文書での用法を確認,verb,500,2,4,general
+diminish,"小さくする,減らす,少なくする",「diminish」：前後の語との組合せを覚える,verb,500,2,4,general
+select,"選ぶ,選抜する,選出する",「select」：前後の語との組合せを覚える,"verb, adjective",500,2,4,general
+approximate,"近似の,おおよその",「approximate」：文中での品詞を意識する,"verb, adjective",500,3,4,general
+await,待つ,「await」：TOEIC文書での用法を確認,verb,500,2,4,general
+accelerate,"…の速度を速める,加速する",「accelerate」：前後の語との組合せを覚える,verb,500,2,4,general
+transmit,"送る,(ある人・場所・物から他へ)…を伝える,移す",「transmit」：前後の語との組合せを覚える,verb,500,2,4,general
+emerge,"出てくる,現れる(appear)",「emerge」：文中での品詞を意識する,verb,500,2,4,general
+disconnect,の関係を絶つ,「disconnect」：TOEIC文書での用法を確認,verb,500,2,4,general
+survive,"…の後まで生きる, …より長生きする",「survive」：文中での品詞を意識する,verb,500,2,4,general
+disrupt,混乱させる,「disrupt」：文中での品詞を意識する,verb,500,2,4,general
+solve,"解く,解明する,解決する",「solve」：前後の語との組合せを覚える,verb,500,2,4,general
+rise,増加する、上昇,「rise」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+transit,"通過,通行",「transit」：文中での品詞を意識する,"noun, verb",600,3,3,general
+wallet,"紙入れ,財布",「wallet」：前後の語との組合せを覚える,noun,600,3,3,general
+community,"共同会社,地域会社・共同体",「community」：文中での品詞を意識する,noun,600,3,3,general
+else,"そのほかに,それ以外に",「else」：文中での品詞を意識する,noun,600,3,3,general
+particular,"特にこの(あの),特定の",「particular」：TOEIC文書での用法を確認,"noun, adjective",600,3,3,general
+cashier,現金出納係,「cashier」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+role,役,「role」：文中での品詞を意識する,noun,600,3,3,general
+casual,"むぞうさな,さりげない(offhand)",「casual」：TOEIC文書での用法を確認,"noun, adjective",600,3,3,general
+drill,"きり,ドリル,穴あけ機",「drill」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+fountain,泉(spring),「fountain」：文中での品詞を意識する,noun,600,3,3,general
+juice,"汁,液,ジュース",「juice」：TOEIC文書での用法を確認,noun,600,3,3,general
+difference,"違い,相違点,意見などの食い違い",「difference」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+action,"行動,活動",「action」：文中での品詞を意識する,noun,600,3,3,general
+lane,"小道,横町,路地,いなか道",「lane」：文中での品詞を意識する,"noun, adjective",600,3,3,general
+popularity,"人気,好評,流行",「popularity」：TOEIC文書での用法を確認,noun,600,3,3,general
+poster,"ポスター,びら",「poster」：広告文で頻出,noun,600,3,5,advertising|business
+step,"一歩,歩み",「step」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+true,"ほんとうの,真実の",「true」：前後の語との組合せを覚える,noun,600,3,3,general
+retailer,小売り商人,「retailer」：販売・注文の場面で頻出,noun,600,3,5,sales|retail
+draw,"引く,引っぱる",「draw」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+bench,"ベンチ,長いす",「bench」：文中での品詞を意識する,"noun, verb",600,3,3,general
+date,"日付,年月日",「date」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+practice,"練習,けいこ",「practice」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+model,"(…の)模型,ひな型",「model」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+directory,"人名簿,住所録",「directory」：文中での品詞を意識する,"noun, adjective",600,3,3,general
+raise,"上げる,持ち上げる",「raise」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+disposal,"配置,配列",「disposal」：文中での品詞を意識する,noun,600,3,3,general
+front,"前面,表",「front」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+housekeeper,主婦,「housekeeper」：前後の語との組合せを覚える,noun,600,3,3,general
+internship,インターンとしての勤務期間,「internship」：文中での品詞を意識する,noun,600,3,3,general
+outside,"外側,外部,外面",「outside」：前後の語との組合せを覚える,"noun, adjective",600,3,3,general
+behind,"…の後ろに,の陰に",「behind」：TOEIC文書での用法を確認,"noun, adverb",600,3,3,general
+organizer,組織者,「organizer」：文中での品詞を意識する,noun,600,3,3,general
+site,場所,「site」：工事・点検案内でよく使う,"noun, verb",600,3,5,facility|business
+prediction,予報(予言)すること,「prediction」：文中での品詞を意識する,noun,600,3,3,general
+subscriber,"予約者,定期講読者",「subscriber」：苦情・依頼対応でよく使う,noun,600,3,5,customer|business
+land,"陸,陸地",「land」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+booklet,"小冊子,パンフレット",「booklet」：文中での品詞を意識する,noun,600,3,3,general
+claim,"要求する,請求する,を自分の物だと主張する",「claim」：文中での品詞を意識する,"noun, verb",600,3,3,general
+relationship,関係、関連,「relationship」：前後の語との組合せを覚える,noun,600,4,3,general
+garment,衣服,「garment」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+equity,"公平,公正,無私",「equity」：前後の語との組合せを覚える,noun,600,3,3,general
+orientation,オリエンテーション,「orientation」：training sessionと関連,noun,600,3,5,training|business
+death,"死,死亡",「death」：文中での品詞を意識する,noun,600,3,3,general
+nice,ニース(フランス南東部の地中海に臨む港市,「nice」：前後の語との組合せを覚える,noun,600,3,3,general
+outlet,"出口,はけ口",「outlet」：販売・注文の場面で頻出,noun,600,3,5,sales|retail
+dividend,配当,「dividend」：数値表現とセットで覚える,noun,600,3,5,finance|business
+amount,"総計(…に)なる,(…に)のぼる",「amount」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+packet,包み,「packet」：文中での品詞を意識する,"noun, verb",600,3,3,general
+portfolio,"折りかばん,書類かばん",「portfolio」：前後の語との組合せを覚える,noun,600,3,3,general
+plumber,"鉛管工,配管工",「plumber」：前後の語との組合せを覚える,noun,600,3,3,general
+sponsorship,保証人であること,「sponsorship」：文中での品詞を意識する,noun,600,3,3,general
+specification,"詳説,詳述",「specification」：前後の語との組合せを覚える,noun,600,4,3,general
+regard,"みなす,考える(consider)",「regard」：文中での品詞を意識する,"noun, verb",600,3,3,general
+auto,自動車、自動の,「auto」：TOEIC文書での用法を確認,noun,600,3,3,general
+organization,"組織化,編成",「organization」：業務文書での用法を確認,noun,600,4,5,business
+couple,2個,「couple」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+deduction,差し引き,「deduction」：文中での品詞を意識する,noun,600,3,3,general
+act,行動する、行為,「act」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+range,幅,「range」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+quality,"特質,特性",「quality」：TOEIC文書での用法を確認,noun,600,3,3,general
+round,"…を回って,を一周して",「round」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+hedge,生け垣,「hedge」：文中での品詞を意識する,"noun, verb",600,3,3,general
+flyer,飛ぶもの,「flyer」：TOEIC文書での用法を確認,noun,600,3,3,general
+franchise,"(…の)免許,一手販売権",「franchise」：文中での品詞を意識する,"noun, verb",600,3,3,general
+accord,"一致する,調和する",「accord」：文中での品詞を意識する,"noun, verb",600,3,3,general
+premium,"無料提供品,値引き品,おまけ",「premium」：金額・会計の文脈で頻出,noun,600,3,5,finance|business
+list,"表,一覧表,目録,明細書",「list」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+wish,…であればよいのにと思う,「wish」：文中での品詞を意識する,"noun, verb",600,3,3,general
+interrupt,"さえぎる,妨げる",「interrupt」：文中での品詞を意識する,"noun, verb",600,3,3,general
+therefore,"それゆえ,それで",「therefore」：文中での品詞を意識する,noun,600,3,3,general
+oven,"天火,かまど,オーブン",「oven」：文中での品詞を意識する,noun,600,3,3,general
+wear,身につけている,「wear」：文中での品詞を意識する,"noun, verb",600,3,3,general
+pant,"あえぐ,息を切らす",「pant」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+rest,"休息,休憩,休養",「rest」：文中での品詞を意識する,"noun, verb",600,3,3,general
+industry,"事業,実業,生事業",「industry」：ビジネス場面の基本語,noun,600,3,5,business
+refrigerator,冷蔵庫,「refrigerator」：前後の語との組合せを覚える,noun,600,4,3,general
+education,教育,「education」：受講案内での用法を確認,noun,600,3,5,training|business
+maturity,"成熟,円熟",「maturity」：文中での品詞を意識する,noun,600,3,3,general
+measure,"寸法,分量,広さ,重さ",「measure」：文中での品詞を意識する,"noun, verb",600,3,3,general
+showroom,陳列室,「showroom」：前後の語との組合せを覚える,noun,600,3,3,general
+kill,"殺す,死亡させる",「kill」：文中での品詞を意識する,"noun, verb",600,3,3,general
+vegetarian,"菜食主義者(道徳上または健康上の理由で魚・肉を食べず,野菜だけを食べる人)",「vegetarian」：前後の語との組合せを覚える,"noun, adjective",600,3,3,general
+administrator,"為政者,行政官",「administrator」：社内人事メールでよく使う,noun,600,4,5,employment|business
+economist,経済学者,「economist」：TOEIC文書での用法を確認,noun,600,3,3,general
+national,国民の,「national」：TOEIC文書での用法を確認,noun,600,3,3,general
+broker,"ブローカー,仲買人",「broker」：TOEIC文書での用法を確認,noun,600,3,3,general
+cancellation,"まっ殺,取り消し,削除",「cancellation」：空席・日程の文脈で確認,noun,600,4,5,reservation|business
+field,"野原,草地",「field」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+security,"安全,無事(safety)",「security」：建物・設備の文脈で確認,noun,600,3,5,facility|business
+jet,"噴出,噴射",「jet」：文中での品詞を意識する,"noun, verb",600,3,3,general
+trade,"商業,商売",「trade」：販売・注文の場面で頻出,"noun, verb",600,3,5,sales|business
+risk,危険,「risk」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+trash,"価値のないもの,役に立たないもの",「trash」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+news,"報道,記事",「news」：前後の語との組合せを覚える,noun,600,3,3,general
+usage,"用い方,用法",「usage」：文中での品詞を意識する,noun,600,3,3,general
+vote,票,「vote」：文中での品詞を意識する,"noun, verb",600,3,3,general
+windy,"風の吹く,風の強い",「windy」：TOEIC文書での用法を確認,noun,600,3,3,general
+percent,"パーセント,100につき(…の割),100分(の…)%",「percent」：前後の語との組合せを覚える,"noun, adjective",600,3,3,general
+focus,焦点,「focus」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+stage,舞台・on stage 舞台上で・・off stage 舞台の陰で :ステージ,「stage」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+ferry,"渡し船,連絡船(ferryboat),連絡船の便",「ferry」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+consumption,消費(…の)消費高(量),「consumption」：文中での品詞を意識する,noun,600,3,3,general
+space,"空間,広がり",「space」：工事・点検案内でよく使う,"noun, verb",600,3,5,facility|business
+variance,"変化,多様性",「variance」：文中での品詞を意識する,noun,600,3,3,general
+depreciation,"下落,低落",「depreciation」：前後の語との組合せを覚える,noun,600,4,3,general
+data,"資料,事実",「data」：report that節での用法を確認,noun,600,3,5,report|business
+single,"たった一つ(一人)の,単独の",「single」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+address,"あて名,住所",「address」：社内外の連絡でよく使う,"noun, verb",600,3,5,communication|business
+luncheon,昼食,「luncheon」：TOEIC文書での用法を確認,noun,600,3,3,general
+anti,反対する人,「anti」：文中での品詞を意識する,"noun, adjective",600,3,3,general
+microphone,"マイクロフォン,拡声器",「microphone」：文中での品詞を意識する,noun,600,3,3,general
+chance,"偶然,偶然のでき事",「chance」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+recession,景気後退,「recession」：TOEIC文書での用法を確認,noun,600,3,3,general
+overview,"概観,大要",「overview」：前後の語との組合せを覚える,noun,600,3,3,general
+society,"社会,世間,すべての人々",「society」：TOEIC文書での用法を確認,noun,600,3,3,general
+entity,"実在するもの,実体",「entity」：TOEIC文書での用法を確認,noun,600,3,3,general
+projector,"計画者,発案者",「projector」：前後の語との組合せを覚える,noun,600,3,3,general
+technology,"科学技術,工業技術・科学(工業)技術的な方法(過程)・文明の環境利用",「technology」：TOEIC文書での用法を確認,noun,600,3,3,general
+choice,"選択,えり好み",「choice」：前後の語との組合せを覚える,"noun, adjective",600,3,3,general
+save,"救う,救援する",「save」：文中での品詞を意識する,"noun, verb",600,3,3,general
+accomplishment,"完成,成就(じょうじゅ)",「accomplishment」：TOEIC文書での用法を確認,noun,600,4,3,general
+common,"共通の,共同の,共有の",「common」：前後の語との組合せを覚える,"noun, adjective",600,3,3,general
+culture,教養,「culture」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+total,"総計の,全体の",「total」：report that節での用法を確認,"noun, verb",600,3,5,report|business
+clinic,臨床講義,「clinic」：文中での品詞を意識する,noun,600,3,3,general
+overhead,"頭上高く,空に",「overhead」：文中での品詞を意識する,"noun, adjective",600,3,3,general
+material,"材料,原料",「material」：倉庫・配送語彙とセットで,"noun, adjective",600,3,5,logistics|business
+limit,"限界,",「limit」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+jog,軽く揺り動かす,「jog」：文中での品詞を意識する,"noun, verb",600,3,3,general
+commodity,"日用品,必需品",「commodity」：前後の語との組合せを覚える,noun,600,3,3,general
+leisure,"暇,余暇",「leisure」：TOEIC文書での用法を確認,noun,600,3,3,general
+due,"支払われるべき,支払期日が来ている,満期の",「due」：TOEIC文書での用法を確認,"noun, adverb",600,3,3,general
+nap,"ひと眠り,昼寝",「nap」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+wrong,"正しくない,間違っている,誤った",「wrong」：文中での品詞を意識する,"noun, verb",600,3,3,general
+aggregate,集める,「aggregate」：文中での品詞を意識する,"noun, verb",600,3,3,general
+effort,"努力,骨折り",「effort」：前後の語との組合せを覚える,noun,600,3,3,general
+sender,"発送人,送り主,差し出し人",「sender」：文中での品詞を意識する,noun,600,3,3,general
+attention,"注意,注意力",「attention」：TOEIC文書での用法を確認,noun,600,3,3,general
+valuation,"評価,見積り",「valuation」：TOEIC文書での用法を確認,noun,600,3,3,general
+upon,…の上に,「upon」：TOEIC文書での用法を確認,noun,600,3,3,general
+vacuum,真空,「vacuum」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+fiscal,国庫の,「fiscal」：文中での品詞を意識する,"noun, adjective",600,3,3,general
+wireless,"無線,無線電信",「wireless」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+yearly,年1回の,「yearly」：文中での品詞を意識する,"noun, adjective",600,3,3,general
+lie,"横たわる,横になる",「lie」：文中での品詞を意識する,"noun, verb",600,3,3,general
+pick,"選ぶ,選び取る",「pick」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+appreciation,"正しく認識すること,(…の)識別,評価",「appreciation」：TOEIC文書での用法を確認,noun,600,4,3,general
+default,"不履行,怠慢",「default」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+cargo,"積荷,貨物",「cargo」：荷物追跡表現とセットで,noun,600,3,5,shipping|business
+personal,"一個人の,個人的",「personal」：TOEIC文書での用法を確認,"noun, adjective",600,3,3,general
+ground,"地面,地表",「ground」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+calculation,"見積もり,算定",「calculation」：TOEIC文書での用法を確認,noun,600,3,3,general
+subsidiary,子会社、補助的な,「subsidiary」：前後の語との組合せを覚える,"noun, adjective",600,3,3,general
+exemption,免除,「exemption」：文中での品詞を意識する,noun,600,3,3,general
+allocation,配分、割り当て,「allocation」：前後の語との組合せを覚える,noun,600,3,3,general
+laundry,洗濯,「laundry」：前後の語との組合せを覚える,noun,600,3,3,general
+mandatory,強制的な,「mandatory」：前後の語との組合せを覚える,"noun, adjective",600,3,3,general
+fine,罰金、申し分のない,「fine」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+mechanical,"機械の,道具の",「mechanical」：文中での品詞を意識する,"noun, adjective",600,3,3,general
+volatility,変動性,「volatility」：前後の語との組合せを覚える,noun,600,3,3,general
+pharmacy,薬学,「pharmacy」：TOEIC文書での用法を確認,noun,600,3,3,general
+former,"かつての,以前の",「former」：TOEIC文書での用法を確認,"noun, adjective",600,3,3,general
+quarterly,"年4回の,3か月ごとの",「quarterly」：前後の語との組合せを覚える,"noun, adjective",600,3,3,general
+deviation,"外れること,(…からの)脱線,逸脱",「deviation」：文中での品詞を意識する,noun,600,3,3,general
+sport,"スポーツ,運動競技",「sport」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+receivable,"受け取りうる,受け取っていい",「receivable」：TOEIC文書での用法を確認,"noun, adjective",600,3,3,general
+scholarship,奨学金,「scholarship」：TOEIC文書での用法を確認,noun,600,3,3,general
+equilibrium,"釣り合い,均衡",「equilibrium」：文中での品詞を意識する,noun,600,3,3,general
+seeker,"追求者,探求者",「seeker」：TOEIC文書での用法を確認,noun,600,3,3,general
+voice,声,「voice」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+piece,"部分,断片,破片",「piece」：文中での品詞を意識する,"noun, verb",600,3,3,general
+towel,"タオル,手ぬぐい,手ふき",「towel」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+creditor,"債権者,貸し主",「creditor」：前後の語との組合せを覚える,noun,600,3,3,general
+derivative,"派生した,由来した",「derivative」：文中での品詞を意識する,"noun, adjective",600,3,3,general
+president,米国大統領,「president」：社内外の説明でよく使う,noun,600,3,5,business
+apology,"わび,謝罪",「apology」：社内外の連絡でよく使う,noun,600,3,5,communication|business
+surplus,"余り,余剰",「surplus」：TOEIC文書での用法を確認,"noun, adjective",600,3,3,general
+automatic,"自動の,自動装置(機械)の",「automatic」：文中での品詞を意識する,"noun, adjective",600,3,3,general
+annuity,"年金,年賦金",「annuity」：TOEIC文書での用法を確認,noun,600,3,3,general
+boardroom,重役会議室,「boardroom」：TOEIC文書での用法を確認,noun,600,3,3,general
+knowledge,"知識,精通,認識,理解",「knowledge」：文中での品詞を意識する,noun,600,3,3,general
+carpenter,大工(だいく),「carpenter」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+disclosure,"露見,暴露",「disclosure」：前後の語との組合せを覚える,noun,600,3,3,general
+laugh,笑う,「laugh」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+caterer,"料理の仕出し屋,まかない人",「caterer」：前後の語との組合せを覚える,noun,600,3,3,general
+regime,政治体制,「regime」：TOEIC文書での用法を確認,noun,600,3,3,general
+source,"水源,源",「source」：TOEIC文書での用法を確認,noun,600,3,3,general
+consultation,"相談,協議",「consultation」：TOEIC文書での用法を確認,noun,600,4,3,general
+leverage,てこの作用(力),「leverage」：前後の語との組合せを覚える,noun,600,3,3,general
+simply,"簡単に,分かり易く",「simply」：前後の語との組合せを覚える,adverb,600,3,3,general
+bank,"土手,堤",「bank」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+firm,"堅い,堅固な,引き締まった",「firm」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+hardware,"金物類,鉄器類",「hardware」：機器の説明・点検で頻出,noun,600,3,5,equipment|business
+cell,独房,「cell」：文中での品詞を意識する,noun,600,3,3,general
+malfunction,"機能不全,不調",「malfunction」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+article,"(…についての)記事,論説",「article」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+attack,"襲う,攻撃する",「attack」：文中での品詞を意識する,"noun, verb",600,3,3,general
+patience,"忍耐,忍耐力,しんぼう",「patience」：前後の語との組合せを覚える,noun,600,3,3,general
+postcard,郵便はがき,「postcard」：TOEIC文書での用法を確認,noun,600,3,3,general
+surprise,"驚かす,びっくりさせる",「surprise」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+parliament,"議会,国会",「parliament」：前後の語との組合せを覚える,noun,600,3,3,general
+feature,顔の造作の一つ(目・耳・鼻・口など),「feature」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+factor,"要因,(…を生み出す)要素",「factor」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+coalition,"(…間の)連立,提携",「coalition」：文中での品詞を意識する,noun,600,3,3,general
+revision,改正(改訂)校閲,「revision」：文中での品詞を意識する,noun,600,3,3,general
+strictly,"厳格に,厳重に",「strictly」：前後の語との組合せを覚える,adverb,600,3,3,general
+affect,…に影響する,「affect」：文中での品詞を意識する,"noun, verb",600,3,3,general
+beta,ベータ(ギリシア語アルファベットの第2文字,「beta」：前後の語との組合せを覚える,noun,600,3,3,general
+drop,"したたる,垂れる",「drop」：文中での品詞を意識する,"noun, verb",600,3,3,general
+tray,"浅いへりのついた平たい容器,(料理などを運んだり盛ったりするための)盆,皿",「tray」：前後の語との組合せを覚える,noun,600,3,3,general
+lender,貸す人,「lender」：前後の語との組合せを覚える,noun,600,3,3,general
+vendor,"売る人,行商人",「vendor」：販売・注文の場面で頻出,noun,600,3,5,sales|business
+official,"公務の,職務の",「official」：前後の語との組合せを覚える,"noun, adjective",600,3,3,general
+gross,"全体の,総計の(entire)",「gross」：TOEIC文書での用法を確認,noun,600,3,3,general
+withdrawal,"引っ込めること,引っ込むこと,退くこと",「withdrawal」：前後の語との組合せを覚える,noun,600,3,3,general
+anytime,いつでも(at any time),「anytime」：前後の語との組合せを覚える,adverb,600,3,3,general
+miss,未婚婦人,「miss」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+badge,"記章,バッジ",「badge」：前後の語との組合せを覚える,noun,600,3,3,general
+stockholder,株主,「stockholder」：前後の語との組合せを覚える,noun,600,3,3,general
+brake,"ブレーキ,制動機,歯止め",「brake」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+private,"私的な,個人的な",「private」：文中での品詞を意識する,"noun, adjective",600,3,3,general
+pause,"小休止,中断,休息",「pause」：文中での品詞を意識する,"noun, verb",600,3,3,general
+everyone,"すべての人,万人,だれでもみな",「everyone」：前後の語との組合せを覚える,noun,600,3,3,general
+fraud,"詐欺,ごまかし",「fraud」：文中での品詞を意識する,noun,600,3,3,general
+coordinator,調和させる人(物),「coordinator」：文中での品詞を意識する,noun,600,3,3,general
+worry,"心配する,くよくよする",「worry」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+regulator,取り締まり人,「regulator」：TOEIC文書での用法を確認,noun,600,3,3,general
+excursion,"小旅行,遠足",「excursion」：TOEIC文書での用法を確認,noun,600,3,3,general
+opinion,"意見,見解所信",「opinion」：TOEIC文書での用法を確認,noun,600,3,3,general
+inexperience,"経験のないこと,未熟,不慣れ",「inexperience」：前後の語との組合せを覚える,noun,600,4,3,general
+par,"同等,同価,同水準,同程度",「par」：文中での品詞を意識する,"noun, adjective",600,3,3,general
+swap,"交換,取り換え",「swap」：文中での品詞を意識する,"noun, verb",600,3,3,general
+inside,"内部,内側",「inside」：TOEIC文書での用法を確認,"noun, adjective",600,3,3,general
+librarian,"司書,図書館員,図書係",「librarian」：TOEIC文書での用法を確認,noun,600,3,3,general
+bankruptcy,"破産,倒産",「bankruptcy」：TOEIC文書での用法を確認,noun,600,3,3,general
+meantime,その間に,「meantime」：TOEIC文書での用法を確認,"noun, adverb",600,3,3,general
+international,インターナショナル(19‐20世紀に結成された国際的な社会主義的労働者組織),「international」：TOEIC文書での用法を確認,noun,600,4,3,general
+performer,"実行する人,遂行する人",「performer」：文中での品詞を意識する,noun,600,3,3,general
+regression,後退,「regression」：前後の語との組合せを覚える,noun,600,3,3,general
+wonder,"驚くべきもの(こと),驚異",「wonder」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+pharmacist,薬剤師,「pharmacist」：文中での品詞を意識する,noun,600,3,3,general
+nature,"自然,自然界,万物",「nature」：前後の語との組合せを覚える,noun,600,3,3,general
+turnover,"転覆,転倒",「turnover」：前後の語との組合せを覚える,"noun, adjective",600,3,3,general
+structure,建造物,「structure」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+section,"部分,部品",「section」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+criteria,criterionの複数形,「criteria」：前後の語との組合せを覚える,noun,600,3,3,general
+resignation,"辞職,辞任",「resignation」：文中での品詞を意識する,noun,600,3,3,general
+exactly,"正確に,きちんと",「exactly」：TOEIC文書での用法を確認,adverb,600,3,3,general
+reviewer,"批評家,評論家",「reviewer」：文中での品詞を意識する,noun,600,3,3,general
+plant,"植物,草木・(樹木に対して)草,草本(そうほん)",「plant」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+constitution,"構成,構造",「constitution」：文中での品詞を意識する,noun,600,4,3,general
+translation,"訳すこと,翻訳",「translation」：文中での品詞を意識する,noun,600,3,3,general
+worker,"仕事をする人,勉強をする人",「worker」：採用・人事の場面で頻出,noun,600,3,3,employment|business
+trader,"商人,貿易業者",「trader」：TOEIC文書での用法を確認,noun,600,3,3,general
+press,"押す,圧する",「press」：文中での品詞を意識する,"noun, verb",600,3,3,general
+monopoly,"独占,(商品の)専売",「monopoly」：前後の語との組合せを覚える,noun,600,3,3,general
+actress,女優,「actress」：文中での品詞を意識する,noun,600,3,3,general
+region,"地域,地帯",「region」：文中での品詞を意識する,noun,600,3,3,general
+adjacent,"近接の,隣接している",「adjacent」：前後の語との組合せを覚える,"noun, adjective",600,3,3,general
+correlation,相互関係,「correlation」：前後の語との組合せを覚える,noun,600,3,3,general
+alternate,"交互の,かわるがわるの",「alternate」：文中での品詞を意識する,"noun, verb",600,3,3,general
+influence,"影響,感化,効力",「influence」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+respect,"尊敬,敬意",「respect」：文中での品詞を意識する,"noun, verb",600,3,3,general
+ex,"先妻,先夫",「ex」：文中での品詞を意識する,noun,600,3,3,general
+escort,"付き添い,護衛者,(特に,パーティーなどで)女性に付き添う男性",「escort」：文中での品詞を意識する,"noun, verb",600,3,3,general
+catch,"捕らえる,捕まえる・をつかみ取る,受け止める・に間に合う",「catch」：文中での品詞を意識する,"noun, verb",600,3,3,general
+thus,"このように,かくかくして",「thus」：文中での品詞を意識する,adverb,600,3,3,general
+mask,"仮面,覆面",「mask」：文中での品詞を意識する,"noun, verb",600,3,3,general
+breach,"破ること,破棄,違反,不履行",「breach」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+skill,"熟練,技量,腕",「skill」：研修・講習の場面で頻出,noun,600,3,5,training|business
+purchaser,買い手,「purchaser」：TOEIC文書での用法を確認,noun,600,3,3,general
+attempt,"企てる,試みる",「attempt」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+subsidy,"補助金,助成金,奨励金",「subsidy」：TOEIC文書での用法を確認,noun,600,3,3,general
+purse,ハンドバッグ,「purse」：前後の語との組合せを覚える,"noun, verb",600,3,3,general
+simple,"簡単な,容易な,分かりやすい",「simple」：文中での品詞を意識する,"noun, adjective",600,3,3,general
+realtor,real estate agent ・全米不動産業協会,「realtor」：文中での品詞を意識する,noun,600,3,3,general
+medium,"中間(中程度)にあるもの,中庸(mean)",「medium」：文中での品詞を意識する,"noun, adjective",600,3,3,general
+average,平均,「average」：TOEIC文書での用法を確認,"noun, verb",600,3,3,general
+indeed,"実に,全く",「indeed」：文中での品詞を意識する,adverb,600,3,3,general
+considerably,"かなり,相当に,非常に",「considerably」：TOEIC文書での用法を確認,adverb,600,4,3,general
+alone,"ひとりで,一つで,単独で",「alone」：文中での品詞を意識する,adverb,600,3,3,general
+clearly,"はっきりと,明白に",「clearly」：前後の語との組合せを覚える,adverb,600,3,3,general
+steadily,"着実に,堅実に,たゆまずに",「steadily」：TOEIC文書での用法を確認,adverb,600,3,3,general
+below,"…の下方へ,より低い位置へ",「below」：TOEIC文書での用法を確認,adverb,600,3,3,general
+publicly,"公に,公然と",「publicly」：TOEIC文書での用法を確認,adverb,600,3,3,general
+quickly,"速く,すみやかに,機敏に,ただちに",「quickly」：文中での品詞を意識する,adverb,600,3,3,general
+safely,"安全に,無事に",「safely」：文中での品詞を意識する,adverb,600,3,3,general
+generally,普通は(usually),「generally」：文中での品詞を意識する,adverb,600,3,3,general
+locally,"地方的に,局部的に",「locally」：TOEIC文書での用法を確認,adverb,600,3,3,general
+separately,分かれて,「separately」：TOEIC文書での用法を確認,adverb,600,3,3,general
+accordingly,"従って,それだから,それゆえ(therefore)",「accordingly」：前後の語との組合せを覚える,adverb,600,3,3,general
+obviously,"明らかに,明白に",「obviously」：文中での品詞を意識する,adverb,600,3,3,general
+beforehand,"前もって,あらかじめ",「beforehand」：前後の語との組合せを覚える,adverb,600,3,3,general
+anyway,とにかく,「anyway」：文中での品詞を意識する,adverb,600,3,3,general
+sharply,鋭く,「sharply」：TOEIC文書での用法を確認,adverb,600,3,3,general
+throughout,…じゅう,「throughout」：文中での品詞を意識する,adverb,600,3,3,general
+ongoing,進行中の,「ongoing」：前後の語との組合せを覚える,adjective,600,3,3,general
+previous,"前の,先の,以前の",「previous」：文中での品詞を意識する,adjective,600,3,3,general
+aboard,乗って,「aboard」：文中での品詞を意識する,adverb,600,3,3,general
+thereby,それによって(by that means),「thereby」：文中での品詞を意識する,adverb,600,3,3,general
+linear,"線の,直線の",「linear」：文中での品詞を意識する,adjective,600,3,3,general
+consistently,一貫して,「consistently」：TOEIC文書での用法を確認,adverb,600,4,3,general
+descriptive,"記述的な,叙述的な,説明的な",「descriptive」：文中での品詞を意識する,adjective,600,3,3,general
+essentially,本質的に,「essentially」：TOEIC文書での用法を確認,adverb,600,3,3,general
+completely,"完全に,全く,十分に",「completely」：文中での品詞を意識する,adverb,600,3,3,general
+rational,"道理にかなった,合理的な",「rational」：文中での品詞を意識する,adjective,600,3,3,general
+easily,容易に,「easily」：文中での品詞を意識する,adverb,600,3,3,general
+identical,"同一の,全く同じの",「identical」：文中での品詞を意識する,adjective,600,3,3,general
+smoothly,"滑らかに,円滑に",「smoothly」：前後の語との組合せを覚える,adverb,600,3,3,general
+legal,"法律の,法律上",「legal」：agreementの周辺語として覚える,adjective,600,3,5,contract|business
+substantially,"概して,本質的に",「substantially」：TOEIC文書での用法を確認,adverb,600,4,3,general
+favorable,"好意的な,賛成の",「favorable」：前後の語との組合せを覚える,adjective,600,3,3,general
+ambitious,"大望を抱いた,野心のある,大志を抱いた",「ambitious」：TOEIC文書での用法を確認,adjective,600,3,3,general
+traditional,"伝説の,慣習の",「traditional」：TOEIC文書での用法を確認,adjective,600,3,3,general
+suddenly,"突然に,だしぬけに",「suddenly」：TOEIC文書での用法を確認,adverb,600,3,3,general
+unless,"もし…でなければ,…でないかぎり",「unless」：TOEIC文書での用法を確認,adjective,600,3,3,general
+notably,"著しく,際立って",「notably」：TOEIC文書での用法を確認,adverb,600,3,3,general
+widespread,広げた,「widespread」：文中での品詞を意識する,adjective,600,3,3,general
+ideally,"理想的に,申し分なく",「ideally」：前後の語との組合せを覚える,adverb,600,3,3,general
+inclusive,"全部を含んだ,包括的な",「inclusive」：TOEIC文書での用法を確認,adjective,600,3,3,general
+insufficient,"不十分な,不適当な",「insufficient」：前後の語との組合せを覚える,adjective,600,4,3,general
+introductory,紹介の,「introductory」：前後の語との組合せを覚える,adjective,600,4,3,general
+noisy,"やかましい,騒々しい,(場所が)騒音に満ちている",「noisy」：前後の語との組合せを覚える,adjective,600,3,3,general
+punctual,"時間(期限)を守る,時間どおりの",「punctual」：文中での品詞を意識する,adjective,600,3,3,general
+aware,"知っている,気づいている,感づいている",「aware」：TOEIC文書での用法を確認,adjective,600,3,3,general
+specially,"特に,わざわざ",「specially」：文中での品詞を意識する,adverb,600,3,3,general
+parliamentary,"議会の,議会に関する",「parliamentary」：TOEIC文書での用法を確認,adjective,600,4,3,general
+otherwise,"ほかの点では,それを別にすると",「otherwise」：前後の語との組合せを覚える,"adjective, adverb",600,3,3,general
+expensive,"費用のかかる,高価な",「expensive」：TOEIC文書での用法を確認,adjective,600,3,3,general
+advisory,"勧告の,忠告の",「advisory」：文中での品詞を意識する,adjective,600,3,3,general
+asleep,眠って,「asleep」：前後の語との組合せを覚える,"adjective, adverb",600,3,3,general
+authentic,"信頼できる,確かな",「authentic」：TOEIC文書での用法を確認,adjective,600,3,3,general
+compatible,"両立できる,矛盾のない",「compatible」：文中での品詞を意識する,adjective,600,3,3,general
+upward,"上のほうへ,上向きに",「upward」：文中での品詞を意識する,"adjective, adverb",600,3,3,general
+wonderful,"驚くべき,不思議な",「wonderful」：文中での品詞を意識する,adjective,600,3,3,general
+vulnerable,傷つきやすい,「vulnerable」：前後の語との組合せを覚える,adjective,600,3,3,general
+enjoyable,"おもしろい,愉快な,楽しめる",「enjoyable」：TOEIC文書での用法を確認,adjective,600,3,3,general
+hazardous,"冒険的な,危険な",「hazardous」：TOEIC文書での用法を確認,adjective,600,3,3,general
+influential,"有力な,影響を及ばす",「influential」：TOEIC文書での用法を確認,adjective,600,3,3,general
+nationwide,全国的な,「nationwide」：TOEIC文書での用法を確認,adjective,600,3,3,general
+postal,郵便の,「postal」：荷物追跡表現とセットで,adjective,600,3,5,shipping|business
+reluctant,"気が進まない,(行為などが)いやいやながらの",「reluctant」：文中での品詞を意識する,adjective,600,3,3,general
+electoral,選挙の,「electoral」：前後の語との組合せを覚える,adjective,600,3,3,general
+ample,"広い,広々とした",「ample」：文中での品詞を意識する,adjective,600,3,3,general
+systematic,"系統だった,組織的な",「systematic」：前後の語との組合せを覚える,adjective,600,3,3,general
+careless,"不注意な,軽率な",「careless」：前後の語との組合せを覚える,adjective,600,3,3,general
+virtual,"事実上の,実際上の",「virtual」：TOEIC文書での用法を確認,adjective,600,3,3,general
+energetic,"精力的な,元気旺盛な",「energetic」：前後の語との組合せを覚える,adjective,600,3,3,general
+quantitative,"量の,量的な",「quantitative」：文中での品詞を意識する,adjective,600,4,3,general
+excellent,"すぐれた,優秀な",「excellent」：文中での品詞を意識する,adjective,600,3,3,general
+hesitant,ちゅうちょする,「hesitant」：TOEIC文書での用法を確認,adjective,600,3,3,general
+global,"球の,球形の",「global」：前後の語との組合せを覚える,adjective,600,3,3,general
+offshore,沖に向かう,「offshore」：文中での品詞を意識する,"adjective, adverb",600,3,3,general
+comparable,"比較できる,類似点がある",「comparable」：前後の語との組合せを覚える,adjective,600,3,3,general
+municipal,"市の,町の,地方自治体の",「municipal」：TOEIC文書での用法を確認,adjective,600,3,3,general
+timely,時宜を得た,「timely」：TOEIC文書での用法を確認,"adjective, adverb",600,3,3,general
+uncomfortable,心地よくない,「uncomfortable」：TOEIC文書での用法を確認,adjective,600,4,3,general
+hostile,"敵の,敵国(軍)の",「hostile」：TOEIC文書での用法を確認,adjective,600,3,3,general
+nuclear,"核の,細胞核の",「nuclear」：TOEIC文書での用法を確認,adjective,600,3,3,general
+periodic,"定期的な,周期的な",「periodic」：TOEIC文書での用法を確認,adjective,600,3,3,general
+charitable,"慈悲深い,情け深い",「charitable」：文中での品詞を意識する,adjective,600,3,3,general
+dependable,"信頼できる,頼りになる,当てにできる(reliable)",「dependable」：文中での品詞を意識する,adjective,600,3,3,general
+habitual,"癖になった,いつもの,常習的な",「habitual」：TOEIC文書での用法を確認,adjective,600,3,3,general
+invaluable,計り知れないほど貴重な,「invaluable」：文中での品詞を意識する,adjective,600,3,3,general
+tighten,きつく締める,「tighten」：文中での品詞を意識する,verb,600,3,3,general
+recur,"再び起こる,繰り返される",「recur」：文中での品詞を意識する,verb,600,3,3,general
+amend,"改める,改良する",「amend」：前後の語との組合せを覚える,verb,600,3,3,general
+reproduce,"再現する,を再生する",「reproduce」：文中での品詞を意識する,verb,600,3,3,general
+adopt,"取り入れる,採用する",「adopt」：文中での品詞を意識する,verb,600,3,3,general
+tempt,"誘惑する,そそのかす",「tempt」：文中での品詞を意識する,verb,600,3,3,general
+unload,降ろす,「unload」：前後の語との組合せを覚える,verb,600,3,3,general
+vacate,"あける,立ちのく",「vacate」：前後の語との組合せを覚える,verb,600,3,3,general
+architectural,建築術(学)の,「architectural」：TOEIC文書での用法を確認,adjective,600,4,3,general
+attain,"達成する,獲得する(gain, accomplish)",「attain」：文中での品詞を意識する,verb,600,3,3,general
+uncertain,"確信が持てない,はっきり分からない",「uncertain」：文中での品詞を意識する,adjective,600,3,3,general
+cultural,文化的な,「cultural」：前後の語との組合せを覚える,adjective,600,3,3,general
+cautious,"用心深い,慎重な",「cautious」：TOEIC文書での用法を確認,adjective,600,3,3,general
+convey,"運ぶ,運搬する",「convey」：TOEIC文書での用法を確認,verb,600,3,3,general
+appreciate,"認める,認識する,…のよさを認める",「appreciate」：TOEIC文書での用法を確認,verb,600,3,3,general
+critical,"評論の,批評の",「critical」：文中での品詞を意識する,adjective,600,3,3,general
+seize,"ぐいとつかむ,ひっつかむ",「seize」：前後の語との組合せを覚える,verb,600,3,3,general
+evident,"明白な,はっきりした",「evident」：前後の語との組合せを覚える,adjective,600,3,3,general
+attract,"引きつける,引き寄せる",「attract」：TOEIC文書での用法を確認,verb,600,3,3,general
+engage,雇う,「engage」：TOEIC文書での用法を確認,verb,600,3,3,general
+powerful,"強力な,強い",「powerful」：文中での品詞を意識する,"adjective, adverb",600,3,3,general
+inflate,ふくらます,「inflate」：TOEIC文書での用法を確認,verb,600,3,3,general
+meaningful,"有意義な,意義のある",「meaningful」：前後の語との組合せを覚える,adjective,600,3,3,general
+memorize,"記憶する,暗記する",「memorize」：TOEIC文書での用法を確認,verb,600,3,3,general
+oversee,監督する,「oversee」：TOEIC文書での用法を確認,verb,600,3,3,general
+endorse,に裏書きをする,「endorse」：文中での品詞を意識する,verb,600,3,3,general
+commit,"犯す,を行う",「commit」：前後の語との組合せを覚える,verb,600,3,3,general
+obvious,"明白な,明らかな,すぐ分かれる",「obvious」：文中での品詞を意識する,adjective,600,3,3,general
+publicize,"広告する,宣伝する(advertise)",「publicize」：TOEIC文書での用法を確認,verb,600,3,3,general
+redecorate,改装する,「redecorate」：TOEIC文書での用法を確認,verb,600,3,3,general
+refresh,"再び元気にする,を再びさわやかにする",「refresh」：前後の語との組合せを覚える,verb,600,3,3,general
+statutory,"法定の,法令による",「statutory」：前後の語との組合せを覚える,adjective,600,3,3,general
+actual,"現実の,実際上の(real)",「actual」：前後の語との組合せを覚える,adjective,600,3,3,general
+strange,"奇妙な,異常な,変な",「strange」：TOEIC文書での用法を確認,"adjective, adverb",600,3,3,general
+unused,使用していない,「unused」：TOEIC文書での用法を確認,adjective,600,3,3,general
+impossible,"不可能な,できない",「impossible」：前後の語との組合せを覚える,adjective,600,3,3,general
+waive,自分から放棄する(撤回する),「waive」：TOEIC文書での用法を確認,verb,600,3,3,general
+enable,"…に可能(容易)にする,…に(…する)能力(資格)を与える",「enable」：TOEIC文書での用法を確認,verb,600,3,3,general
+afraid,"恐れて,こわがって",「afraid」：TOEIC文書での用法を確認,adjective,600,3,3,general
+activate,活動的にする,「activate」：TOEIC文書での用法を確認,verb,600,3,3,general
+convince,納得させる,「convince」：前後の語との組合せを覚える,verb,600,3,3,general
+vary,"変わる,変化する",「vary」：TOEIC文書での用法を確認,verb,600,3,3,general
+environmental,環境の,「environmental」：TOEIC文書での用法を確認,adjective,600,4,3,general
+healthy,"健康な,健全な",「healthy」：TOEIC文書での用法を確認,adjective,600,3,3,general
+invest,投資する,「invest」：文中での品詞を意識する,verb,600,3,3,general
+consecutive,"連続した,引き続く",「consecutive」：TOEIC文書での用法を確認,adjective,600,3,3,general
+proceed,"取りかかる,始める",「proceed」：前後の語との組合せを覚える,verb,600,3,3,general
+cordless,ひものない,「cordless」：文中での品詞を意識する,adjective,600,3,3,general
+deluxe,"豪華な,ぜいたくな",「deluxe」：文中での品詞を意識する,"adjective, adverb",600,3,3,general
+dull,"鈍い,なまくらの",「dull」：前後の語との組合せを覚える,"verb, adjective",600,3,3,general
+capitalize,大文字で書く(印刷する),「capitalize」：前後の語との組合せを覚える,verb,600,3,3,general
+contractual,契約の,「contractual」：前後の語との組合せを覚える,adjective,600,3,3,general
+comfortable,"気持ちのよい,快適な,安楽な,気楽な",「comfortable」：文中での品詞を意識する,adjective,600,3,3,general
+unfair,"不公平な,不当な,かたよった",「unfair」：TOEIC文書での用法を確認,adjective,600,3,3,general
+inter,埋葬する,「inter」：TOEIC文書での用法を確認,verb,600,3,3,general
+induce,に勧めて(…)させる,「induce」：文中での品詞を意識する,verb,600,3,3,general
+homeless,家のない,「homeless」：前後の語との組合せを覚える,adjective,600,3,3,general
+historical,"歴史の,史学の",「historical」：文中での品詞を意識する,adjective,600,3,3,general
+oppose,"…に反対する,抵抗する(object to)",「oppose」：文中での品詞を意識する,verb,600,3,3,general
+demographic,人口統計学の,「demographic」：文中での品詞を意識する,adjective,600,3,3,general
+prominent,"突き出た,隆起した",「prominent」：文中での品詞を意識する,adjective,600,3,3,general
+belong,所有である,「belong」：前後の語との組合せを覚える,verb,600,3,3,general
+personalize,人格化する,「personalize」：TOEIC文書での用法を確認,verb,600,3,3,general
+poorly,"貧しく,乏しく,不十分に",「poorly」：文中での品詞を意識する,"adjective, adverb",600,3,3,general
+dangerous,"危険な, 危ない",「dangerous」：文中での品詞を意識する,adjective,600,3,3,general
+prestigious,"誉れの高い,高名な",「prestigious」：前後の語との組合せを覚える,adjective,600,3,3,general
+reassure,に自信を取り戻させる,「reassure」：TOEIC文書での用法を確認,verb,600,3,3,general
+resume,"再び始める,再び続ける",「resume」：採用・人事の場面で頻出,verb,600,3,5,employment|business
+generate,"発生させる,生む",「generate」：TOEIC文書での用法を確認,verb,600,3,3,general
+revolutionize,…に革命を起こす,「revolutionize」：前後の語との組合せを覚える,verb,600,4,3,general
+deny,"否定する,否認する",「deny」：TOEIC文書での用法を確認,verb,600,3,3,general
+signify,"…の印である,を表す,意味する",「signify」：文中での品詞を意識する,verb,600,3,3,general
+standardize,"標準に合わせる,標準化する,規格化する",「standardize」：TOEIC文書での用法を確認,verb,600,3,3,general
+superb,"りっぱな,一流の",「superb」：TOEIC文書での用法を確認,adjective,600,3,3,general
+tremendous,"ものすごい,途方もない",「tremendous」：前後の語との組合せを覚える,adjective,600,3,3,general
+unpleasant,"不愉快な,不快感を与える,いやな",「unpleasant」：TOEIC文書での用法を確認,adjective,600,3,3,general
+worthwhile,"時間(費用,手間)をかけるだけの価値がある,やりがいのある",「worthwhile」：TOEIC文書での用法を確認,adjective,600,3,3,general
+ignore,"無視する,顧みない",「ignore」：文中での品詞を意識する,verb,600,3,3,general
+deploy,配置する,「deploy」：文中での品詞を意識する,verb,600,3,3,general
+destroy,"破壊する,打ち壊す",「destroy」：前後の語との組合せを覚える,verb,600,3,3,general
+locate,"…の位置(場所)を突きとめる,示す",「locate」：文中での品詞を意識する,verb,600,3,3,general
+remind,"に思い出させる,念を押す",「remind」：TOEIC文書での用法を確認,verb,600,3,3,general
+circulate,"循環する,巡る",「circulate」：前後の語との組合せを覚える,verb,600,3,3,general
+denote,"示す,表す",「denote」：TOEIC文書での用法を確認,verb,600,3,3,general
+embed,"埋める,はめ込む",「embed」：文中での品詞を意識する,verb,600,3,3,general
+evacuate,"明け渡す,から撤退する",「evacuate」：TOEIC文書での用法を確認,verb,600,3,3,general
+expedite,"の進行を早める,促進する",「expedite」：前後の語との組合せを覚える,"verb, adjective",600,3,3,general
+fluctuate,"動揺する,変動する,上下する",「fluctuate」：TOEIC文書での用法を確認,verb,600,3,3,general
+relax,"ゆるめる,和らげる(loosen)",「relax」：TOEIC文書での用法を確認,verb,600,3,3,general
+afford,の余裕がある,「afford」：文中での品詞を意識する,verb,600,3,3,general
+revive,"生き返らせる,を回復させる",「revive」：TOEIC文書での用法を確認,verb,600,3,3,general
+interfere,"干渉する,口出しをする(meddle)",「interfere」：TOEIC文書での用法を確認,verb,600,3,3,general
+assess,"(…の金額に)を評価する,査定する",「assess」：前後の語との組合せを覚える,verb,600,3,3,general
+explore,"探検する,実地調査する",「explore」：文中での品詞を意識する,verb,600,3,3,general
+overpay,に多く払い過ぎる,「overpay」：financial reportで用法を確認,verb,600,3,3,finance|business
+discourage,"落胆させる,がっかりさせる",「discourage」：文中での品詞を意識する,verb,600,3,3,general
+penalize,"(…に対して)…を罰する,に有罪の宣告をする",「penalize」：TOEIC文書での用法を確認,verb,600,3,3,general
+pollute,"汚す,汚染する,不潔にする",「pollute」：TOEIC文書での用法を確認,verb,600,3,3,general
+prescribe,"規定する,勧める,指示する",「prescribe」：文中での品詞を意識する,verb,600,3,3,general
+widen,広くする,「widen」：前後の語との組合せを覚える,verb,600,3,3,general
+threaten,"脅す,脅迫する",「threaten」：前後の語との組合せを覚える,verb,600,3,3,general
+secure,"安定した,確実性のある,保証されている",「secure」：文中での品詞を意識する,"verb, adjective",600,3,3,general
+oblige,"に義務を負わせる,強制する",「oblige」：文中での品詞を意識する,verb,600,3,3,general
+investigate,"調べる,研究する",「investigate」：文中での品詞を意識する,verb,600,3,3,general
+subsidize,…に補助金(奨励金)を与える,「subsidize」：TOEIC文書での用法を確認,verb,600,3,3,general
+insist,…と強く要求する,「insist」：TOEIC文書での用法を確認,verb,600,3,3,general
+predict,"予報する,予言する",「predict」：前後の語との組合せを覚える,verb,600,3,3,general
+assert,"断言する,力説する(affirm)",「assert」：前後の語との組合せを覚える,verb,600,3,3,general
+underwrite,…の費用負担を承諾する,「underwrite」：文中での品詞を意識する,verb,600,3,3,general
+wed,"…と結婚する,を妻(夫)にする",「wed」：文中での品詞を意識する,verb,600,3,3,general
+differentiate,"区別する,識別する",「differentiate」：TOEIC文書での用法を確認,verb,600,4,3,general
+compel,にしいる,「compel」：前後の語との組合せを覚える,verb,600,3,3,general
+demolish,"取り壊す,破壊する",「demolish」：文中での品詞を意識する,verb,600,3,3,general
+elect,"選ぶ,選挙する",「elect」：TOEIC文書での用法を確認,"verb, adjective",600,3,3,general
+devastate,"荒廃させる,荒らす",「devastate」：前後の語との組合せを覚える,verb,600,3,3,general
+license,"許可,免許,認可",「license」：文中での品詞を意識する,verb,600,3,3,general
+rely,"あてにする,たよる",「rely」：TOEIC文書での用法を確認,verb,600,3,3,general
+flee,逃げる,「flee」：前後の語との組合せを覚える,verb,600,3,3,general
+succeed,"成功する,うまくいく",「succeed」：TOEIC文書での用法を確認,verb,600,3,3,general
+disable,"役に立たなくする,無力にする,動けなくする",「disable」：前後の語との組合せを覚える,verb,600,3,3,general
+empty,"からの,中に何もない(だれも居ない)",「empty」：前後の語との組合せを覚える,"verb, adjective",600,3,3,general
+elevate,"上げる,の程度を高める",「elevate」：前後の語との組合せを覚える,verb,600,3,3,general
+forbid,"にを禁じる,禁止する",「forbid」：TOEIC文書での用法を確認,verb,600,3,3,general
+foster,フォスター(Stephen Collins~,「foster」：文中での品詞を意識する,"verb, adjective",600,3,3,general
+celebrate,祝う,「celebrate」：前後の語との組合せを覚える,verb,600,3,3,general
+obligate,に義務を負わせる,「obligate」：文中での品詞を意識する,"verb, adjective",600,3,3,general
+recover,再びおおう,「recover」：文中での品詞を意識する,verb,600,3,3,general
+overcrowd,…に詰め込み過ぎる,「overcrowd」：文中での品詞を意識する,verb,600,3,3,general
+declare,"宣言する,告示する,公表する",「declare」：TOEIC文書での用法を確認,verb,600,3,3,general
+retire,"引退する,退職する",「retire」：TOEIC文書での用法を確認,verb,600,3,3,general
+reconsider,"再考する,考え直す",「reconsider」：文中での品詞を意識する,verb,600,3,3,general
+rebuild,"再建する,改築する,作り直す・たてなおす",「rebuild」：文中での品詞を意識する,verb,600,3,3,general
+corrupt,"わいろの利く,不正行為をする",「corrupt」：TOEIC文書での用法を確認,"verb, adjective",600,3,3,general
+sew,"縫い物をする,ミシンをかける",「sew」：文中での品詞を意識する,verb,600,3,3,general
+disappear,"見えなくなる,消える,姿を消す,消滅する",「disappear」：前後の語との組合せを覚える,verb,600,3,3,general
+validate,法的に有効とする,「validate」：TOEIC文書での用法を確認,verb,600,3,3,general
+compete,"競う,競争する",「compete」：文中での品詞を意識する,verb,600,3,3,general
+depict,"描き表す,描写する",「depict」：TOEIC文書での用法を確認,verb,600,3,3,general
+broaden,"広くする,広げる",「broaden」：文中での品詞を意識する,verb,600,3,3,general
+depreciate,…の価値(価格)を下げる,「depreciate」：文中での品詞を意識する,verb,600,3,3,general
+erase,"ふいて消す,削除する,取り消す",「erase」：TOEIC文書での用法を確認,verb,600,3,3,general
+provoke,"怒らせる,不きげんにする",「provoke」：前後の語との組合せを覚える,verb,600,3,3,general
+impose,"課する,負わせる",「impose」：文中での品詞を意識する,verb,600,3,3,general
+withhold,"与えないでおく,差し控える",「withhold」：文中での品詞を意識する,verb,600,3,3,general
+thrive,"成功する,栄える,繁栄する",「thrive」：前後の語との組合せを覚える,verb,600,3,3,general
+advise,"…に通知する,知らせる",「advise」：メール・連絡表現で頻出,verb,600,3,5,communication|business
+acknowledge,"認める,承認する",「acknowledge」：前後の語との組合せを覚える,verb,600,3,3,general
+accuse,"告発する,告訴する",「accuse」：前後の語との組合せを覚える,verb,600,3,3,general
+deteriorate,悪化させる,「deteriorate」：TOEIC文書での用法を確認,verb,600,3,3,general
+resemble,"…に似ている,と共通点がある(受動態や進行形にできない)",「resemble」：TOEIC文書での用法を確認,verb,600,3,3,general
+unplug,のプラグを抜く,「unplug」：前後の語との組合せを覚える,verb,600,3,3,general
+unveil,"…のベールを取る,おおいをはずす",「unveil」：文中での品詞を意識する,verb,600,3,3,general
+expose,さらす,「expose」：TOEIC文書での用法を確認,verb,600,3,3,general
+pursue,"追う,追跡する",「pursue」：前後の語との組合せを覚える,verb,600,3,3,general
+appoint,決める(fix),「appoint」：文中での品詞を意識する,verb,600,3,3,general
+communicate,"伝える,伝達する",「communicate」：文中での品詞を意識する,verb,600,3,3,general
+interact,"相互に作用する,影響し合う",「interact」：TOEIC文書での用法を確認,verb,600,3,3,general
+accompany,"に同行する,随行する,ついて行く(go with)",「accompany」：前後の語との組合せを覚える,verb,600,3,3,general
+intervene,"間に起こる,間に入る",「intervene」：TOEIC文書での用法を確認,verb,600,3,3,general
+illustrate,"説明する,例証する",「illustrate」：文中での品詞を意識する,verb,600,3,3,general
+qualify,に資格を与える,「qualify」：前後の語との組合せを覚える,verb,600,3,3,general
+emphasize,"強調する,重要視する",「emphasize」：TOEIC文書での用法を確認,verb,600,3,3,general
+complicate,複雑にする,「complicate」：TOEIC文書での用法を確認,"verb, adjective",600,3,3,general
+punish,"罰する,こらしめる",「punish」：TOEIC文書での用法を確認,verb,600,3,3,general
+disappoint,"失望させる,がっかりさせる",「disappoint」：TOEIC文書での用法を確認,verb,600,3,3,general
+deserve,"に値する,を受ける価値がある(進行形にできない)",「deserve」：TOEIC文書での用法を確認,verb,600,3,3,general
+defend,"守る,保護する",「defend」：文中での品詞を意識する,verb,600,3,3,general
+confront,"に立ち向かう,ぶつかっていく",「confront」：TOEIC文書での用法を確認,verb,600,3,3,general
+enhance,…の程度(仮値など)を高める,「enhance」：文中での品詞を意識する,verb,600,3,3,general
+distinguish,"区別する,見分ける,識別する,(…と)…を区別する",「distinguish」：TOEIC文書での用法を確認,verb,600,3,3,general
+breathe,"呼吸する,息をする",「breathe」：文中での品詞を意識する,verb,600,3,3,general
+confuse,"混同する,取り違える",「confuse」：文中での品詞を意識する,verb,600,3,3,general
+occupy,"占める,ふさぐ",「occupy」：文中での品詞を意識する,verb,600,3,3,general
+prosecute,"起訴する,告訴する",「prosecute」：TOEIC文書での用法を確認,verb,600,3,3,general
+deter,ちゅうちょさせる,「deter」：前後の語との組合せを覚える,verb,600,3,3,general
+condemn,"非難する,とがめる(blame)",「condemn」：文中での品詞を意識する,verb,600,3,3,general
+integrate,"統合する,まとめる",「integrate」：文中での品詞を意識する,"verb, adjective",600,3,3,general
+endure,"…に耐える,を持ちこたえる",「endure」：前後の語との組合せを覚える,verb,600,3,3,general
+distort,"ゆがめる,ねじる",「distort」：TOEIC文書での用法を確認,verb,600,3,3,general
+manipulate,"巧みに扱う(動かす),をうまく使う",「manipulate」：TOEIC文書での用法を確認,verb,600,3,3,general
+premise,前提,「premise」：文中での品詞を意識する,verb,600,3,3,general
+differ,"違う,異なる",「differ」：TOEIC文書での用法を確認,verb,600,3,3,general
+refine,"精製する,精錬する",「refine」：TOEIC文書での用法を確認,verb,600,3,3,general
+distribute,"分配する,配る",「distribute」：TOEIC文書での用法を確認,verb,600,3,3,general
+appointment,予約、約束,make an appointment,noun,400,2,5,business|schedule
+applicant,応募者,job applicant,noun,400,2,5,employment|recruitment
+application,申込書、応募,application form,noun,400,2,5,employment|procedure
+attend,出席する,attend a meeting,verb,400,2,5,meeting|business
+branch,支店、支部,branch office,noun,400,2,4,company|office
+budget,予算,within budget,noun,400,2,5,finance|planning
+cancel,取り消す,cancel a reservation,verb,400,1,5,reservation|travel
+candidate,候補者,job candidate,noun,400,2,5,employment|recruitment
+client,顧客、依頼人,meet with a client,noun,400,2,5,customer|business
+company,会社,company policy,noun,400,1,5,company|business
+customer,顧客,customer service,noun,400,1,5,customer|sales
+deadline,締め切り,meet a deadline,noun,400,2,5,work|schedule
+discount,割引,get a discount,noun,400,2,5,sales|shopping
+document,書類、文書,sign a document,noun,400,2,5,document|office
+entrance,入口、入場,main entrance,noun,400,1,4,facility|location
+expense,費用、経費,travel expenses,noun,400,2,5,finance|travel
+factory,工場,factory workers,noun,400,1,4,manufacturing|business
+fare,運賃,bus fare,noun,400,2,4,travel|transportation
+flight,航空便,book a flight,noun,400,1,5,travel|reservation
+form,用紙、書式,application form,noun,400,1,5,document|procedure
+guest,客、宿泊客,hotel guest,noun,400,1,4,hotel|customer
+hotel,ホテル,hotel reservation,noun,400,1,5,hotel|travel
+interview,面接、面接する,job interview,"noun, verb",400,2,5,employment|recruitment
+invoice,請求書,issue an invoice,noun,400,3,5,finance|document
+manager,管理者、部長,sales manager,noun,400,1,5,company|employment
+meeting,会議,hold a meeting,noun,400,1,5,meeting|business
+office,事務所、オフィス,head office,noun,400,1,5,office|company
+order,注文、注文する,place an order,"noun, verb",400,1,5,sales|purchasing
+payment,支払い,make a payment,noun,400,2,5,finance|purchasing
+price,価格,at a reasonable price,noun,400,1,5,sales|finance
+product,製品,new product,noun,400,1,5,sales|business
+project,計画、事業,complete a project,noun,400,2,5,planning|work
+receipt,領収書,keep the receipt,noun,400,2,5,finance|shopping
+reservation,予約,make a reservation,noun,400,2,5,reservation|travel
+sales,販売、売上,sales figures,noun,400,1,5,sales|report
+service,サービス、業務,customer service,noun,400,1,5,customer|business
+shipment,発送品、出荷,track a shipment,noun,400,3,5,shipping|logistics
+staff,職員、スタッフ,staff meeting,noun,400,1,5,employment|office
+store,店、店舗,department store,noun,400,1,4,sales|shopping
+supervisor,上司、監督者,ask a supervisor,noun,400,2,4,employment|company
+survey,調査,customer survey,noun,400,2,5,research|customer
+ticket,切符、チケット,purchase a ticket,noun,400,1,5,travel|reservation
+training,研修、訓練,staff training,noun,400,2,5,employment|education
+trip,旅行、出張,business trip,noun,400,1,5,travel|business
+visitor,訪問者、来客,welcome visitors,noun,400,1,4,office|customer
+warehouse,倉庫,warehouse staff,noun,400,2,4,logistics|shipping
+advertise,広告する,advertise a product,verb,400,2,4,advertising|sales
+answer,答える、回答,answer a call,"noun, verb",400,1,4,communication|office
+arrive,到着する,arrive on time,verb,400,1,5,travel|schedule
+book,予約する,book a room,verb,400,1,5,reservation|travel
+call,電話する、電話,return a call,"noun, verb",400,1,5,communication|office
+check,確認する、点検,check the schedule,"noun, verb",400,1,5,office|general
+choose,選ぶ,choose a plan,verb,400,1,4,decision|general
+contact,連絡する、連絡先,contact a customer,"noun, verb",400,2,5,communication|customer
+copy,コピー、複写する,make a copy,"noun, verb",400,1,4,document|office
+cost,費用、費用がかかる,at no extra cost,"noun, verb",400,1,5,finance|sales
+decide,決める,decide to do,verb,400,1,5,decision|planning
+explain,説明する,explain the procedure,verb,400,2,5,communication|procedure
+fill out,記入する,fill out a form,phrase,400,2,5,procedure|document
+hire,雇う,hire new staff,verb,400,2,5,employment|recruitment
+leave,出発する、去る,leave for the airport,verb,400,1,4,travel|schedule
+meet,会う、満たす,meet a client,verb,400,1,5,meeting|business
+offer,提供する、申し出,limited-time offer,"noun, verb",400,2,5,sales|customer
+open,開く、営業中の,open an account,"verb, adjective",400,1,4,business|general
+pay,支払う,pay by credit card,verb,400,1,5,finance|shopping
+plan,計画、計画する,plan an event,"noun, verb",400,1,5,planning|business
+prepare,準備する,prepare a report,verb,400,2,5,document|work
+print,印刷する、印刷物,print a document,"noun, verb",400,1,4,document|office
+receive,受け取る,receive an email,verb,400,2,5,communication|shipping
+reserve,予約する,reserve a seat,verb,400,2,5,reservation|travel
+return,返す、戻る,return an item,"noun, verb",400,1,5,customer|shopping
+send,送る,send an email,verb,400,1,5,communication|office
+sign,署名する、標識,sign an agreement,"noun, verb",400,1,5,contract|document
+start,始める、開始,start a project,"noun, verb",400,1,4,work|planning
+stay,滞在する、滞在,stay at a hotel,"noun, verb",400,1,4,hotel|travel
+travel,旅行する、出張,travel on business,"noun, verb",400,1,5,travel|business
+visit,訪問する、訪問,visit a branch,"noun, verb",400,1,4,business|travel
+work,働く、仕事,work on a project,"noun, verb",400,1,5,employment|general
+annual,年1回の、年間の,annual report,adjective,400,2,5,report|business
+busy,忙しい、混雑した,busy schedule,adjective,400,1,4,schedule|general
+closed,閉まっている,closed for repairs,adjective,400,1,4,facility|notice
+free,無料の、空いている,free of charge,adjective,400,1,5,sales|schedule
+local,地元の、地域の,local business,adjective,400,1,4,business|general
+new,新しい,new employee,adjective,400,1,4,business|general
+ready,準備ができた,be ready for,adjective,400,1,5,work|general
+safe,安全な,safe working conditions,adjective,400,1,4,safety|work
+special,特別な,special offer,adjective,400,1,5,sales|advertising
+early,早い、早く,arrive early,"adjective, adverb",400,1,4,schedule|general
+late,遅い、遅れて,be late for a meeting,"adjective, adverb",400,1,4,schedule|meeting
+nearby,近くの、近くに,nearby restaurant,"adjective, adverb",400,1,4,location|travel
+online,オンラインの、オンラインで,online application,"adjective, adverb",400,1,5,technology|procedure
+before,〜より前に,before the deadline,"preposition, conjunction",400,1,5,grammar|schedule
+during,〜の間に,during the meeting,preposition,400,1,5,grammar|meeting
+after,〜の後で,after business hours,"preposition, conjunction",400,1,5,grammar|schedule
+because,なぜなら〜だから,because ofは名詞の前,conjunction,400,1,4,grammar|general
+if,もし〜なら,if necessary,conjunction,400,1,5,grammar|general
+until,〜まで,until further notice,"preposition, conjunction",400,2,5,grammar|notice
+according to,〜によると,according to the report,phrase,400,2,5,report|grammar
+in advance,前もって,book in advance,phrase,400,2,5,reservation|schedule
+on time,時間どおりに,deliver on time,phrase,400,1,5,schedule|shipping
+account,口座、勘定,open an account,noun,500,2,5,finance|business
+agenda,議題、予定表,meeting agenda,noun,500,3,5,meeting|document
+announcement,発表、お知らせ,make an announcement,noun,500,2,5,notice|communication
+approval,承認,get approval,noun,500,3,5,procedure|business
+assistant,助手、補佐,administrative assistant,noun,500,2,4,employment|office
+brochure,パンフレット,travel brochure,noun,500,3,4,advertising|travel
+cafeteria,社員食堂、食堂,company cafeteria,noun,500,2,3,facility|office
+conference,会議、大会,attend a conference,noun,500,2,5,meeting|business
+construction,建設、工事,under construction,noun,500,3,5,facility|property
+consumer,消費者,consumer demand,noun,500,3,4,sales|market
+contribution,貢献、寄付,make a contribution,noun,500,3,3,business|finance
+courier,宅配業者、配達人,courier service,noun,500,3,4,shipping|logistics
+director,部長、取締役,board of directors,noun,500,2,5,company|management
+exhibition,展示会、展覧会,trade exhibition,noun,500,3,4,event|advertising
+headquarters,本社、本部,company headquarters,noun,500,3,5,company|office
+instruction,指示、説明,follow instructions,noun,500,2,5,procedure|document
+inventory,在庫、棚卸し,check inventory,noun,500,3,5,logistics|sales
+location,場所、所在地,convenient location,noun,500,2,5,property|travel
+membership,会員資格、会員制度,membership fee,noun,500,3,4,service|customer
+notice,通知、掲示,until further notice,noun,500,2,5,notice|communication
+package,荷物、包装,track a package,noun,500,2,5,shipping|logistics
+passenger,乗客,airline passenger,noun,500,2,4,travel|transportation
+position,役職、位置,apply for a position,noun,500,2,5,employment|recruitment
+promotion,昇進、販売促進,sales promotion,noun,500,3,5,employment|sales
+proposal,提案、提案書,submit a proposal,noun,500,3,5,planning|document
+receptionist,受付係,hotel receptionist,noun,500,2,4,employment|customer
+refund,返金、返金する,request a refund,"noun, verb",500,2,5,customer|finance
+registration,登録、受付,registration form,noun,500,3,5,procedure|event
+representative,担当者、代表者,sales representative,noun,500,3,5,customer|sales
+request,依頼、依頼する,upon request,"noun, verb",500,2,5,communication|customer
+salary,給与,annual salary,noun,500,2,5,employment|finance
+seminar,セミナー、講習会,training seminar,noun,500,2,4,event|education
+supplier,供給業者、仕入先,contact a supplier,noun,500,3,5,purchasing|business
+vacancy,空室、欠員,job vacancy,noun,500,3,5,employment|property
+warranty,保証、保証書,under warranty,noun,500,3,5,customer|product
+balance,残高、均衡,account balance,noun,500,2,5,finance|banking
+charge,料金、請求する,additional charge,"noun, verb",500,2,5,finance|customer
+fee,料金、手数料,membership fee,noun,500,2,5,finance|service
+fund,資金、基金,raise funds,noun,500,3,4,finance|business
+profit,利益,make a profit,noun,500,2,5,finance|report
+tax,税金,sales tax,noun,500,2,5,finance|government
+advertisement,広告,place an advertisement,noun,500,2,5,advertising|sales
+audience,聴衆、視聴者,target audience,noun,500,3,4,advertising|event
+campaign,販売促進活動、運動,advertising campaign,noun,500,3,5,advertising|sales
+competitor,競合他社、競争相手,major competitor,noun,500,3,4,market|business
+market,市場、市場に出す,market research,"noun, verb",500,2,5,market|sales
+response,返答、反応,prompt response,noun,500,3,5,communication|customer
+result,結果,survey results,noun,500,2,5,report|research
+website,ウェブサイト,visit our website,noun,500,1,5,technology|advertising
+access,利用する権利、アクセスする,have access to,"noun, verb",500,2,5,technology|office
+attach,添付する,attach a file,verb,500,2,5,communication|document
+complete,完了する、完全な,complete a form,"verb, adjective",500,2,5,procedure|work
+cooperate,協力する,cooperate with,verb,500,3,4,teamwork|business
+create,作成する,create a report,verb,500,2,4,document|work
+discuss,話し合う,discuss a proposal,verb,500,2,5,meeting|communication
+enclose,同封する,enclosed document,verb,500,3,4,document|mail
+improve,改善する,improve customer service,verb,500,2,5,quality|customer
+include,含む,price includes tax,verb,500,2,5,finance|general
+install,設置する、インストールする,install equipment,verb,500,2,5,technology|facility
+introduce,紹介する、導入する,introduce a new system,verb,500,2,5,business|technology
+join,参加する,join a meeting,verb,500,1,4,meeting|employment
+mention,言及する,as mentioned above,verb,500,2,4,communication|document
+move,移動する、移転する,move to a new office,verb,500,1,4,office|property
+operate,操作する、運営する,operate equipment,verb,500,3,5,facility|business
+organize,企画する、整理する,organize an event,verb,500,2,5,event|planning
+provide,提供する,provide information,verb,500,2,5,customer|business
+replace,交換する、取り替える,replace a part,verb,500,2,5,maintenance|product
+reply,返答する、返答,reply to an email,"noun, verb",500,2,5,communication|office
+review,見直す、批評,review a document,"noun, verb",500,2,5,document|work
+ship,発送する,ship an order,verb,500,2,5,shipping|logistics
+update,更新する、最新情報,update a file,"noun, verb",500,2,5,technology|document
+approve,承認する,approve a request,verb,500,3,5,procedure|management
+assist,手伝う、支援する,assist a customer,verb,500,2,4,customer|service
+announce,発表する,announce a change,verb,500,2,4,notice|communication
+apply,申し込む、当てはまる,apply for a job,verb,500,2,5,employment|procedure
+board,搭乗する、取締役会,board a plane,"noun, verb",500,2,4,travel|company
+collect,集める、回収する,collect data,verb,500,2,4,research|finance
+compare,比較する,compare prices,verb,500,2,5,sales|decision
+complain,苦情を言う,complain about,verb,500,3,4,customer|communication
+connect,接続する、つなぐ,connect to the network,verb,500,2,4,technology|office
+continue,続ける,continue working,verb,500,2,4,work|general
+cover,覆う、扱う、費用を負担する,cover the cost,verb,500,2,4,finance|general
+design,設計する、デザイン,website design,"noun, verb",500,2,4,technology|advertising
+develop,開発する、発展させる,develop a product,verb,500,3,5,product|business
+enter,入る、入力する,enter data,verb,500,2,5,technology|procedure
+expect,予想する、期待する,expect to do,verb,500,2,5,planning|general
+finish,終える,finish a project,verb,500,1,4,work|schedule
+handle,処理する、扱う,handle a complaint,verb,500,3,5,customer|work
+hold,開催する、保有する,hold a conference,verb,500,2,5,meeting|business
+identify,特定する、確認する,identify a problem,verb,500,3,5,analysis|work
+manage,管理する、何とかする,manage a team,verb,500,2,5,management|employment
+prefer,好む,prefer A to B,verb,500,2,4,customer|general
+process,処理する、手続きする,process an application,"noun, verb",500,3,5,procedure|office
+recommend,推薦する、おすすめする,highly recommend,verb,500,3,5,customer|communication
+reduce,減らす,reduce costs,verb,500,2,5,finance|management
+rent,賃借する、家賃,rent office space,"noun, verb",500,2,4,property|finance
+repair,修理する、修理,repair equipment,"noun, verb",500,2,5,maintenance|facility
+sell,販売する,sell products,verb,500,1,5,sales|business
+serve,対応する、提供する,serve customers,verb,500,2,4,customer|service
+support,支援する、支援,support a project,"noun, verb",500,2,5,business|technology
+transfer,移す、転勤させる,transfer funds,"noun, verb",500,3,5,finance|employment
+accept,受け入れる、承認する,accept payment,verb,500,2,5,customer|finance
+accurate,正確な,accurate information,adjective,500,3,5,data|quality
+certain,確かな、ある特定の,certain conditions,adjective,500,2,4,general|grammar
+current,現在の、最新の,current price,adjective,500,2,5,report|general
+entire,全体の、すべての,entire building,adjective,500,2,4,general|facility
+likely,ありそうな,be likely to do,"adjective, adverb",500,3,5,planning|grammar
+necessary,必要な,if necessary,adjective,500,2,5,procedure|general
+recent,最近の,recent survey,adjective,500,2,5,report|research
+similar,似ている,similar to,adjective,500,2,4,comparison|general
+successful,成功した,successful campaign,adjective,500,2,5,business|advertising
+directly,直接に,contact us directly,adverb,500,2,4,communication|general
+immediately,直ちに,respond immediately,adverb,500,2,5,communication|procedure
+recently,最近,recently opened,adverb,500,2,4,report|general
+especially,特に,especially useful,adverb,500,2,4,general|grammar
+instead,代わりに,instead of,adverb,500,2,4,grammar|general
+within,〜以内に、〜の中で,within two days,preposition,500,2,5,grammar|schedule
+regarding,〜に関して,regarding your order,preposition,500,3,5,communication|business
+due to,〜が原因で,due to bad weather,phrase,500,2,5,grammar|travel
+as soon as,〜するとすぐに,as soon as possible,phrase,500,2,5,grammar|communication
+achievement,達成、業績,major achievement,noun,600,3,4,business|performance
+alternative,代替案、代わりの,alternative plan,"noun, adjective",600,3,4,decision|planning
+analysis,分析,market analysis,noun,600,3,5,analysis|report
+approach,方法、取り組み,new approach,noun,600,3,4,strategy|business
+authority,権限、当局,have authority to,noun,600,4,4,management|government
+circumstance,状況、事情,under the circumstances,noun,600,4,3,business|general
+complaint,苦情,customer complaint,noun,600,3,5,customer|service
+conclusion,結論,come to a conclusion,noun,600,3,4,analysis|report
+consequence,結果、影響,as a consequence,noun,600,4,3,analysis|general
+demand,需要、要求する,meet demand,"noun, verb",600,3,5,market|sales
+description,説明、記述,job description,noun,600,3,5,employment|document
+detail,詳細,in detail,noun,600,2,5,document|report
+distribution,流通、配布,distribution center,noun,600,4,4,logistics|sales
+efficiency,効率,improve efficiency,noun,600,3,5,management|performance
+environment,環境,work environment,noun,600,3,4,employment|business
+evidence,証拠、根拠,provide evidence,noun,600,3,4,analysis|document
+expansion,拡大、進出,business expansion,noun,600,3,5,business|strategy
+feedback,意見、反応,customer feedback,noun,600,3,5,customer|quality
+improvement,改善,performance improvement,noun,600,3,5,quality|performance
+issue,問題、発行する,resolve an issue,"noun, verb",600,2,5,business|customer
+opportunity,機会,business opportunity,noun,600,3,5,business|employment
+performance,業績、実績,job performance,noun,600,3,5,performance|employment
+procedure,手順、手続き,follow the procedure,noun,600,3,5,procedure|office
+productivity,生産性,increase productivity,noun,600,4,5,performance|management
+qualification,資格、能力,job qualifications,noun,600,4,5,employment|recruitment
+responsibility,責任、担当,job responsibilities,noun,600,3,5,employment|management
+strategy,戦略,marketing strategy,noun,600,3,5,strategy|business
+trend,傾向,market trend,noun,600,3,5,market|report
+authorization,許可、権限,prior authorization,noun,600,4,4,procedure|management
+commitment,約束、責任,make a commitment,noun,600,4,4,business|employment
+compensation,報酬、補償,compensation package,noun,600,4,4,employment|finance
+compliance,順守,in compliance with,noun,600,4,5,rules|business
+condition,状態、条件,working conditions,noun,600,2,5,employment|contract
+cooperation,協力,thank you for your cooperation,noun,600,3,5,communication|teamwork
+criterion,基準,selection criteria,noun,600,4,4,evaluation|decision
+decline,減少、断る,decline an offer,"noun, verb",600,3,5,finance|communication
+emphasis,強調、重点,place emphasis on,noun,600,4,3,strategy|communication
+evaluation,評価,performance evaluation,noun,600,4,5,performance|employment
+exception,例外,make an exception,noun,600,3,4,rules|customer
+expectation,期待、予想,meet expectations,noun,600,3,5,customer|performance
+growth,成長、増加,sales growth,noun,600,2,5,finance|report
+impact,影響、影響を与える,have an impact on,"noun, verb",600,3,5,analysis|business
+resource,資源、資料,human resources,noun,600,3,5,employment|management
+revenue,収益、売上高,annual revenue,noun,600,4,5,finance|report
+shortage,不足,staff shortage,noun,600,3,5,employment|logistics
+solution,解決策,find a solution,noun,600,3,5,problem-solving|business
+standard,基準、標準の,quality standards,"noun, adjective",600,3,5,quality|rules
+statement,声明、明細書,bank statement,noun,600,3,5,finance|document
+transaction,取引,complete a transaction,noun,600,4,5,finance|business
+achieve,達成する,achieve a goal,verb,600,3,5,performance|business
+adapt,適応させる、適応する,adapt to change,verb,600,3,4,business|change
+analyze,分析する,analyze data,verb,600,3,5,analysis|data
+assume,想定する、引き受ける,assume responsibility,verb,600,4,4,management|analysis
+authorize,許可する,authorize payment,verb,600,4,5,finance|management
+calculate,計算する,calculate the cost,verb,600,3,5,finance|data
+clarify,明確にする,clarify the details,verb,600,4,4,communication|document
+comply,従う,comply with regulations,verb,600,4,5,rules|business
+conclude,結論づける、終える,conclude a meeting,verb,600,3,4,meeting|analysis
+contribute,貢献する,contribute to growth,verb,600,3,4,business|performance
+demonstrate,実証する、説明する,demonstrate a product,verb,600,4,4,product|sales
+evaluate,評価する,evaluate performance,verb,600,4,5,performance|analysis
+expand,拡大する,expand operations,verb,600,3,5,business|strategy
+implement,実施する、導入する,implement a policy,verb,600,4,5,management|procedure
+imply,暗に示す,results imply that,verb,600,4,3,analysis|report
+monitor,監視する、確認する,monitor progress,verb,600,3,5,management|performance
+obtain,入手する、得る,obtain permission,verb,600,3,5,procedure|business
+prevent,防ぐ,prevent delays,verb,600,3,5,quality|safety
+promote,促進する、昇進させる,promote a product,verb,600,3,5,advertising|employment
+respond,返答する、対応する,respond to a request,verb,600,3,5,communication|customer
+retain,維持する、保持する,retain customers,verb,600,4,4,customer|business
+revise,修正する,revise a document,verb,600,3,5,document|work
+satisfy,満足させる、満たす,satisfy requirements,verb,600,3,4,customer|quality
+specify,明記する、指定する,as specified in,verb,600,4,5,document|contract
+suggest,提案する、示唆する,suggest a solution,verb,600,3,5,communication|analysis
+appropriate,適切な,appropriate action,adjective,600,4,5,decision|business
+competitive,競争力のある、競争の激しい,competitive price,adjective,600,3,5,market|sales
+considerable,かなりの,considerable increase,adjective,600,4,4,report|finance
+efficient,効率的な,efficient system,adjective,600,3,5,performance|technology
+essential,不可欠な,essential information,adjective,600,3,5,business|general
+financial,財務の、金融の,financial report,adjective,600,3,5,finance|report
