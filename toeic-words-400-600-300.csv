@@ -1,0 +1,301 @@
+﻿word,meaning,hint,partOfSpeech,scoreTier,difficulty,priority,tags
+appointment,予約、約束,make an appointment,noun,400,2,5,business|schedule
+applicant,応募者,job applicant,noun,400,2,5,employment|recruitment
+application,申込書、応募,application form,noun,400,2,5,employment|procedure
+attend,出席する,attend a meeting,verb,400,2,5,meeting|business
+branch,支店、支部,branch office,noun,400,2,4,company|office
+budget,予算,within budget,noun,400,2,5,finance|planning
+cancel,取り消す,cancel a reservation,verb,400,1,5,reservation|travel
+candidate,候補者,job candidate,noun,400,2,5,employment|recruitment
+client,顧客、依頼人,meet with a client,noun,400,2,5,customer|business
+company,会社,company policy,noun,400,1,5,company|business
+customer,顧客,customer service,noun,400,1,5,customer|sales
+deadline,締め切り,meet a deadline,noun,400,2,5,work|schedule
+discount,割引,get a discount,noun,400,2,5,sales|shopping
+document,書類、文書,sign a document,noun,400,2,5,document|office
+entrance,入口、入場,main entrance,noun,400,1,4,facility|location
+expense,費用、経費,travel expenses,noun,400,2,5,finance|travel
+factory,工場,factory workers,noun,400,1,4,manufacturing|business
+fare,運賃,bus fare,noun,400,2,4,travel|transportation
+flight,航空便,book a flight,noun,400,1,5,travel|reservation
+form,用紙、書式,application form,noun,400,1,5,document|procedure
+guest,客、宿泊客,hotel guest,noun,400,1,4,hotel|customer
+hotel,ホテル,hotel reservation,noun,400,1,5,hotel|travel
+interview,面接、面接する,job interview,"noun, verb",400,2,5,employment|recruitment
+invoice,請求書,issue an invoice,noun,400,3,5,finance|document
+manager,管理者、部長,sales manager,noun,400,1,5,company|employment
+meeting,会議,hold a meeting,noun,400,1,5,meeting|business
+office,事務所、オフィス,head office,noun,400,1,5,office|company
+order,注文、注文する,place an order,"noun, verb",400,1,5,sales|purchasing
+payment,支払い,make a payment,noun,400,2,5,finance|purchasing
+price,価格,at a reasonable price,noun,400,1,5,sales|finance
+product,製品,new product,noun,400,1,5,sales|business
+project,計画、事業,complete a project,noun,400,2,5,planning|work
+receipt,領収書,keep the receipt,noun,400,2,5,finance|shopping
+reservation,予約,make a reservation,noun,400,2,5,reservation|travel
+sales,販売、売上,sales figures,noun,400,1,5,sales|report
+service,サービス、業務,customer service,noun,400,1,5,customer|business
+shipment,発送品、出荷,track a shipment,noun,400,3,5,shipping|logistics
+staff,職員、スタッフ,staff meeting,noun,400,1,5,employment|office
+store,店、店舗,department store,noun,400,1,4,sales|shopping
+supervisor,上司、監督者,ask a supervisor,noun,400,2,4,employment|company
+survey,調査,customer survey,noun,400,2,5,research|customer
+ticket,切符、チケット,purchase a ticket,noun,400,1,5,travel|reservation
+training,研修、訓練,staff training,noun,400,2,5,employment|education
+trip,旅行、出張,business trip,noun,400,1,5,travel|business
+visitor,訪問者、来客,welcome visitors,noun,400,1,4,office|customer
+warehouse,倉庫,warehouse staff,noun,400,2,4,logistics|shipping
+advertise,広告する,advertise a product,verb,400,2,4,advertising|sales
+answer,答える、回答,answer a call,"noun, verb",400,1,4,communication|office
+arrive,到着する,arrive on time,verb,400,1,5,travel|schedule
+book,予約する,book a room,verb,400,1,5,reservation|travel
+call,電話する、電話,return a call,"noun, verb",400,1,5,communication|office
+check,確認する、点検,check the schedule,"noun, verb",400,1,5,office|general
+choose,選ぶ,choose a plan,verb,400,1,4,decision|general
+contact,連絡する、連絡先,contact a customer,"noun, verb",400,2,5,communication|customer
+copy,コピー、複写する,make a copy,"noun, verb",400,1,4,document|office
+cost,費用、費用がかかる,at no extra cost,"noun, verb",400,1,5,finance|sales
+decide,決める,decide to do,verb,400,1,5,decision|planning
+explain,説明する,explain the procedure,verb,400,2,5,communication|procedure
+fill out,記入する,fill out a form,phrase,400,2,5,procedure|document
+hire,雇う,hire new staff,verb,400,2,5,employment|recruitment
+leave,出発する、去る,leave for the airport,verb,400,1,4,travel|schedule
+meet,会う、満たす,meet a client,verb,400,1,5,meeting|business
+offer,提供する、申し出,limited-time offer,"noun, verb",400,2,5,sales|customer
+open,開く、営業中の,open an account,"verb, adjective",400,1,4,business|general
+pay,支払う,pay by credit card,verb,400,1,5,finance|shopping
+plan,計画、計画する,plan an event,"noun, verb",400,1,5,planning|business
+prepare,準備する,prepare a report,verb,400,2,5,document|work
+print,印刷する、印刷物,print a document,"noun, verb",400,1,4,document|office
+receive,受け取る,receive an email,verb,400,2,5,communication|shipping
+reserve,予約する,reserve a seat,verb,400,2,5,reservation|travel
+return,返す、戻る,return an item,"noun, verb",400,1,5,customer|shopping
+send,送る,send an email,verb,400,1,5,communication|office
+sign,署名する、標識,sign an agreement,"noun, verb",400,1,5,contract|document
+start,始める、開始,start a project,"noun, verb",400,1,4,work|planning
+stay,滞在する、滞在,stay at a hotel,"noun, verb",400,1,4,hotel|travel
+travel,旅行する、出張,travel on business,"noun, verb",400,1,5,travel|business
+visit,訪問する、訪問,visit a branch,"noun, verb",400,1,4,business|travel
+work,働く、仕事,work on a project,"noun, verb",400,1,5,employment|general
+annual,年1回の、年間の,annual report,adjective,400,2,5,report|business
+busy,忙しい、混雑した,busy schedule,adjective,400,1,4,schedule|general
+closed,閉まっている,closed for repairs,adjective,400,1,4,facility|notice
+free,無料の、空いている,free of charge,adjective,400,1,5,sales|schedule
+local,地元の、地域の,local business,adjective,400,1,4,business|general
+new,新しい,new employee,adjective,400,1,4,business|general
+ready,準備ができた,be ready for,adjective,400,1,5,work|general
+safe,安全な,safe working conditions,adjective,400,1,4,safety|work
+special,特別な,special offer,adjective,400,1,5,sales|advertising
+early,早い、早く,arrive early,"adjective, adverb",400,1,4,schedule|general
+late,遅い、遅れて,be late for a meeting,"adjective, adverb",400,1,4,schedule|meeting
+nearby,近くの、近くに,nearby restaurant,"adjective, adverb",400,1,4,location|travel
+online,オンラインの、オンラインで,online application,"adjective, adverb",400,1,5,technology|procedure
+before,〜より前に,before the deadline,"preposition, conjunction",400,1,5,grammar|schedule
+during,〜の間に,during the meeting,preposition,400,1,5,grammar|meeting
+after,〜の後で,after business hours,"preposition, conjunction",400,1,5,grammar|schedule
+because,なぜなら〜だから,because ofは名詞の前,conjunction,400,1,4,grammar|general
+if,もし〜なら,if necessary,conjunction,400,1,5,grammar|general
+until,〜まで,until further notice,"preposition, conjunction",400,2,5,grammar|notice
+according to,〜によると,according to the report,phrase,400,2,5,report|grammar
+in advance,前もって,book in advance,phrase,400,2,5,reservation|schedule
+on time,時間どおりに,deliver on time,phrase,400,1,5,schedule|shipping
+account,口座、勘定,open an account,noun,500,2,5,finance|business
+agenda,議題、予定表,meeting agenda,noun,500,3,5,meeting|document
+announcement,発表、お知らせ,make an announcement,noun,500,2,5,notice|communication
+approval,承認,get approval,noun,500,3,5,procedure|business
+assistant,助手、補佐,administrative assistant,noun,500,2,4,employment|office
+brochure,パンフレット,travel brochure,noun,500,3,4,advertising|travel
+cafeteria,社員食堂、食堂,company cafeteria,noun,500,2,3,facility|office
+conference,会議、大会,attend a conference,noun,500,2,5,meeting|business
+construction,建設、工事,under construction,noun,500,3,5,facility|property
+consumer,消費者,consumer demand,noun,500,3,4,sales|market
+contribution,貢献、寄付,make a contribution,noun,500,3,3,business|finance
+courier,宅配業者、配達人,courier service,noun,500,3,4,shipping|logistics
+director,部長、取締役,board of directors,noun,500,2,5,company|management
+exhibition,展示会、展覧会,trade exhibition,noun,500,3,4,event|advertising
+headquarters,本社、本部,company headquarters,noun,500,3,5,company|office
+instruction,指示、説明,follow instructions,noun,500,2,5,procedure|document
+inventory,在庫、棚卸し,check inventory,noun,500,3,5,logistics|sales
+location,場所、所在地,convenient location,noun,500,2,5,property|travel
+membership,会員資格、会員制度,membership fee,noun,500,3,4,service|customer
+notice,通知、掲示,until further notice,noun,500,2,5,notice|communication
+package,荷物、包装,track a package,noun,500,2,5,shipping|logistics
+passenger,乗客,airline passenger,noun,500,2,4,travel|transportation
+position,役職、位置,apply for a position,noun,500,2,5,employment|recruitment
+promotion,昇進、販売促進,sales promotion,noun,500,3,5,employment|sales
+proposal,提案、提案書,submit a proposal,noun,500,3,5,planning|document
+receptionist,受付係,hotel receptionist,noun,500,2,4,employment|customer
+refund,返金、返金する,request a refund,"noun, verb",500,2,5,customer|finance
+registration,登録、受付,registration form,noun,500,3,5,procedure|event
+representative,担当者、代表者,sales representative,noun,500,3,5,customer|sales
+request,依頼、依頼する,upon request,"noun, verb",500,2,5,communication|customer
+salary,給与,annual salary,noun,500,2,5,employment|finance
+seminar,セミナー、講習会,training seminar,noun,500,2,4,event|education
+supplier,供給業者、仕入先,contact a supplier,noun,500,3,5,purchasing|business
+vacancy,空室、欠員,job vacancy,noun,500,3,5,employment|property
+warranty,保証、保証書,under warranty,noun,500,3,5,customer|product
+balance,残高、均衡,account balance,noun,500,2,5,finance|banking
+charge,料金、請求する,additional charge,"noun, verb",500,2,5,finance|customer
+fee,料金、手数料,membership fee,noun,500,2,5,finance|service
+fund,資金、基金,raise funds,noun,500,3,4,finance|business
+profit,利益,make a profit,noun,500,2,5,finance|report
+tax,税金,sales tax,noun,500,2,5,finance|government
+advertisement,広告,place an advertisement,noun,500,2,5,advertising|sales
+audience,聴衆、視聴者,target audience,noun,500,3,4,advertising|event
+campaign,販売促進活動、運動,advertising campaign,noun,500,3,5,advertising|sales
+competitor,競合他社、競争相手,major competitor,noun,500,3,4,market|business
+market,市場、市場に出す,market research,"noun, verb",500,2,5,market|sales
+response,返答、反応,prompt response,noun,500,3,5,communication|customer
+result,結果,survey results,noun,500,2,5,report|research
+website,ウェブサイト,visit our website,noun,500,1,5,technology|advertising
+access,利用する権利、アクセスする,have access to,"noun, verb",500,2,5,technology|office
+attach,添付する,attach a file,verb,500,2,5,communication|document
+complete,完了する、完全な,complete a form,"verb, adjective",500,2,5,procedure|work
+cooperate,協力する,cooperate with,verb,500,3,4,teamwork|business
+create,作成する,create a report,verb,500,2,4,document|work
+discuss,話し合う,discuss a proposal,verb,500,2,5,meeting|communication
+enclose,同封する,enclosed document,verb,500,3,4,document|mail
+improve,改善する,improve customer service,verb,500,2,5,quality|customer
+include,含む,price includes tax,verb,500,2,5,finance|general
+install,設置する、インストールする,install equipment,verb,500,2,5,technology|facility
+introduce,紹介する、導入する,introduce a new system,verb,500,2,5,business|technology
+join,参加する,join a meeting,verb,500,1,4,meeting|employment
+mention,言及する,as mentioned above,verb,500,2,4,communication|document
+move,移動する、移転する,move to a new office,verb,500,1,4,office|property
+operate,操作する、運営する,operate equipment,verb,500,3,5,facility|business
+organize,企画する、整理する,organize an event,verb,500,2,5,event|planning
+provide,提供する,provide information,verb,500,2,5,customer|business
+replace,交換する、取り替える,replace a part,verb,500,2,5,maintenance|product
+reply,返答する、返答,reply to an email,"noun, verb",500,2,5,communication|office
+review,見直す、批評,review a document,"noun, verb",500,2,5,document|work
+ship,発送する,ship an order,verb,500,2,5,shipping|logistics
+update,更新する、最新情報,update a file,"noun, verb",500,2,5,technology|document
+approve,承認する,approve a request,verb,500,3,5,procedure|management
+assist,手伝う、支援する,assist a customer,verb,500,2,4,customer|service
+announce,発表する,announce a change,verb,500,2,4,notice|communication
+apply,申し込む、当てはまる,apply for a job,verb,500,2,5,employment|procedure
+board,搭乗する、取締役会,board a plane,"noun, verb",500,2,4,travel|company
+collect,集める、回収する,collect data,verb,500,2,4,research|finance
+compare,比較する,compare prices,verb,500,2,5,sales|decision
+complain,苦情を言う,complain about,verb,500,3,4,customer|communication
+connect,接続する、つなぐ,connect to the network,verb,500,2,4,technology|office
+continue,続ける,continue working,verb,500,2,4,work|general
+cover,覆う、扱う、費用を負担する,cover the cost,verb,500,2,4,finance|general
+design,設計する、デザイン,website design,"noun, verb",500,2,4,technology|advertising
+develop,開発する、発展させる,develop a product,verb,500,3,5,product|business
+enter,入る、入力する,enter data,verb,500,2,5,technology|procedure
+expect,予想する、期待する,expect to do,verb,500,2,5,planning|general
+finish,終える,finish a project,verb,500,1,4,work|schedule
+handle,処理する、扱う,handle a complaint,verb,500,3,5,customer|work
+hold,開催する、保有する,hold a conference,verb,500,2,5,meeting|business
+identify,特定する、確認する,identify a problem,verb,500,3,5,analysis|work
+manage,管理する、何とかする,manage a team,verb,500,2,5,management|employment
+prefer,好む,prefer A to B,verb,500,2,4,customer|general
+process,処理する、手続きする,process an application,"noun, verb",500,3,5,procedure|office
+recommend,推薦する、おすすめする,highly recommend,verb,500,3,5,customer|communication
+reduce,減らす,reduce costs,verb,500,2,5,finance|management
+rent,賃借する、家賃,rent office space,"noun, verb",500,2,4,property|finance
+repair,修理する、修理,repair equipment,"noun, verb",500,2,5,maintenance|facility
+sell,販売する,sell products,verb,500,1,5,sales|business
+serve,対応する、提供する,serve customers,verb,500,2,4,customer|service
+support,支援する、支援,support a project,"noun, verb",500,2,5,business|technology
+transfer,移す、転勤させる,transfer funds,"noun, verb",500,3,5,finance|employment
+accept,受け入れる、承認する,accept payment,verb,500,2,5,customer|finance
+accurate,正確な,accurate information,adjective,500,3,5,data|quality
+certain,確かな、ある特定の,certain conditions,adjective,500,2,4,general|grammar
+current,現在の、最新の,current price,adjective,500,2,5,report|general
+entire,全体の、すべての,entire building,adjective,500,2,4,general|facility
+likely,ありそうな,be likely to do,"adjective, adverb",500,3,5,planning|grammar
+necessary,必要な,if necessary,adjective,500,2,5,procedure|general
+recent,最近の,recent survey,adjective,500,2,5,report|research
+similar,似ている,similar to,adjective,500,2,4,comparison|general
+successful,成功した,successful campaign,adjective,500,2,5,business|advertising
+directly,直接に,contact us directly,adverb,500,2,4,communication|general
+immediately,直ちに,respond immediately,adverb,500,2,5,communication|procedure
+recently,最近,recently opened,adverb,500,2,4,report|general
+especially,特に,especially useful,adverb,500,2,4,general|grammar
+instead,代わりに,instead of,adverb,500,2,4,grammar|general
+within,〜以内に、〜の中で,within two days,preposition,500,2,5,grammar|schedule
+regarding,〜に関して,regarding your order,preposition,500,3,5,communication|business
+due to,〜が原因で,due to bad weather,phrase,500,2,5,grammar|travel
+as soon as,〜するとすぐに,as soon as possible,phrase,500,2,5,grammar|communication
+achievement,達成、業績,major achievement,noun,600,3,4,business|performance
+alternative,代替案、代わりの,alternative plan,"noun, adjective",600,3,4,decision|planning
+analysis,分析,market analysis,noun,600,3,5,analysis|report
+approach,方法、取り組み,new approach,noun,600,3,4,strategy|business
+authority,権限、当局,have authority to,noun,600,4,4,management|government
+circumstance,状況、事情,under the circumstances,noun,600,4,3,business|general
+complaint,苦情,customer complaint,noun,600,3,5,customer|service
+conclusion,結論,come to a conclusion,noun,600,3,4,analysis|report
+consequence,結果、影響,as a consequence,noun,600,4,3,analysis|general
+demand,需要、要求する,meet demand,"noun, verb",600,3,5,market|sales
+description,説明、記述,job description,noun,600,3,5,employment|document
+detail,詳細,in detail,noun,600,2,5,document|report
+distribution,流通、配布,distribution center,noun,600,4,4,logistics|sales
+efficiency,効率,improve efficiency,noun,600,3,5,management|performance
+environment,環境,work environment,noun,600,3,4,employment|business
+evidence,証拠、根拠,provide evidence,noun,600,3,4,analysis|document
+expansion,拡大、進出,business expansion,noun,600,3,5,business|strategy
+feedback,意見、反応,customer feedback,noun,600,3,5,customer|quality
+improvement,改善,performance improvement,noun,600,3,5,quality|performance
+issue,問題、発行する,resolve an issue,"noun, verb",600,2,5,business|customer
+opportunity,機会,business opportunity,noun,600,3,5,business|employment
+performance,業績、実績,job performance,noun,600,3,5,performance|employment
+procedure,手順、手続き,follow the procedure,noun,600,3,5,procedure|office
+productivity,生産性,increase productivity,noun,600,4,5,performance|management
+qualification,資格、能力,job qualifications,noun,600,4,5,employment|recruitment
+responsibility,責任、担当,job responsibilities,noun,600,3,5,employment|management
+strategy,戦略,marketing strategy,noun,600,3,5,strategy|business
+trend,傾向,market trend,noun,600,3,5,market|report
+authorization,許可、権限,prior authorization,noun,600,4,4,procedure|management
+commitment,約束、責任,make a commitment,noun,600,4,4,business|employment
+compensation,報酬、補償,compensation package,noun,600,4,4,employment|finance
+compliance,順守,in compliance with,noun,600,4,5,rules|business
+condition,状態、条件,working conditions,noun,600,2,5,employment|contract
+cooperation,協力,thank you for your cooperation,noun,600,3,5,communication|teamwork
+criterion,基準,selection criteria,noun,600,4,4,evaluation|decision
+decline,減少、断る,decline an offer,"noun, verb",600,3,5,finance|communication
+emphasis,強調、重点,place emphasis on,noun,600,4,3,strategy|communication
+evaluation,評価,performance evaluation,noun,600,4,5,performance|employment
+exception,例外,make an exception,noun,600,3,4,rules|customer
+expectation,期待、予想,meet expectations,noun,600,3,5,customer|performance
+growth,成長、増加,sales growth,noun,600,2,5,finance|report
+impact,影響、影響を与える,have an impact on,"noun, verb",600,3,5,analysis|business
+resource,資源、資料,human resources,noun,600,3,5,employment|management
+revenue,収益、売上高,annual revenue,noun,600,4,5,finance|report
+shortage,不足,staff shortage,noun,600,3,5,employment|logistics
+solution,解決策,find a solution,noun,600,3,5,problem-solving|business
+standard,基準、標準の,quality standards,"noun, adjective",600,3,5,quality|rules
+statement,声明、明細書,bank statement,noun,600,3,5,finance|document
+transaction,取引,complete a transaction,noun,600,4,5,finance|business
+achieve,達成する,achieve a goal,verb,600,3,5,performance|business
+adapt,適応させる、適応する,adapt to change,verb,600,3,4,business|change
+analyze,分析する,analyze data,verb,600,3,5,analysis|data
+assume,想定する、引き受ける,assume responsibility,verb,600,4,4,management|analysis
+authorize,許可する,authorize payment,verb,600,4,5,finance|management
+calculate,計算する,calculate the cost,verb,600,3,5,finance|data
+clarify,明確にする,clarify the details,verb,600,4,4,communication|document
+comply,従う,comply with regulations,verb,600,4,5,rules|business
+conclude,結論づける、終える,conclude a meeting,verb,600,3,4,meeting|analysis
+contribute,貢献する,contribute to growth,verb,600,3,4,business|performance
+demonstrate,実証する、説明する,demonstrate a product,verb,600,4,4,product|sales
+evaluate,評価する,evaluate performance,verb,600,4,5,performance|analysis
+expand,拡大する,expand operations,verb,600,3,5,business|strategy
+implement,実施する、導入する,implement a policy,verb,600,4,5,management|procedure
+imply,暗に示す,results imply that,verb,600,4,3,analysis|report
+monitor,監視する、確認する,monitor progress,verb,600,3,5,management|performance
+obtain,入手する、得る,obtain permission,verb,600,3,5,procedure|business
+prevent,防ぐ,prevent delays,verb,600,3,5,quality|safety
+promote,促進する、昇進させる,promote a product,verb,600,3,5,advertising|employment
+respond,返答する、対応する,respond to a request,verb,600,3,5,communication|customer
+retain,維持する、保持する,retain customers,verb,600,4,4,customer|business
+revise,修正する,revise a document,verb,600,3,5,document|work
+satisfy,満足させる、満たす,satisfy requirements,verb,600,3,4,customer|quality
+specify,明記する、指定する,as specified in,verb,600,4,5,document|contract
+suggest,提案する、示唆する,suggest a solution,verb,600,3,5,communication|analysis
+appropriate,適切な,appropriate action,adjective,600,4,5,decision|business
+competitive,競争力のある、競争の激しい,competitive price,adjective,600,3,5,market|sales
+considerable,かなりの,considerable increase,adjective,600,4,4,report|finance
+efficient,効率的な,efficient system,adjective,600,3,5,performance|technology
+essential,不可欠な,essential information,adjective,600,3,5,business|general
+financial,財務の、金融の,financial report,adjective,600,3,5,finance|report
