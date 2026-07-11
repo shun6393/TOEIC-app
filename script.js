@@ -1,5 +1,7 @@
 const LS_KEY = "toeic_cram_words_v1";
 const SETTINGS_KEY = "toeic_cram_settings_v1";
+const DAILY_KEY = "toeic_cram_daily_v1";
+const WORD_STATUS = Object.freeze({UNSEEN:"unseen",LEARNING:"learning",REVIEW:"review",MASTERED:"mastered"});
 const DEFAULT_TARGET_SCORE = 600;
 const VOCAB_TARGETS = Object.freeze({
   400: 700,
@@ -23,28 +25,72 @@ let current = null;
 let revealed = false;
 let wordListPage = 1;
 let pendingDeleteWordId = null;
+let studyMode = null;
+let dailyActivity = {date:"",newWords:0,reviewAnswers:0};
 
 function now(){ return Date.now(); }
-function todayKey(){ return new Date().toISOString().slice(0,10); }
+function todayKey(){
+  const date=new Date();
+  const year=date.getFullYear();
+  const month=String(date.getMonth()+1).padStart(2,"0");
+  const day=String(date.getDate()).padStart(2,"0");
+  return `${year}-${month}-${day}`;
+}
+
+function migrateWordStatus(entry){
+  if(Object.values(WORD_STATUS).includes(entry.status)) return false;
+  if((entry.seen||0)===0) entry.status=WORD_STATUS.UNSEEN;
+  else if((entry.level||0)>=4) entry.status=WORD_STATUS.MASTERED;
+  else if((entry.level||0)===0) entry.status=WORD_STATUS.LEARNING;
+  else entry.status=WORD_STATUS.REVIEW;
+  if((entry.seen||0)>0 && !entry.firstLearnedAt) entry.firstLearnedAt=entry.last||0;
+  return true;
+}
+
+function loadDailyActivity(){
+  const saved=JSON.parse(localStorage.getItem(DAILY_KEY)||"{}");
+  const date=todayKey();
+  const legacyReviews=words.reduce((sum,entry)=>
+    sum+(entry.today===date ? Number(entry.todayCount)||0 : 0),0
+  );
+  dailyActivity=saved.date===date
+    ? {date,newWords:Number(saved.newWords)||0,reviewAnswers:Number(saved.reviewAnswers)||0}
+    : {date,newWords:0,reviewAnswers:saved.date ? 0 : legacyReviews};
+  saveDailyActivity();
+}
+
+function saveDailyActivity(){
+  localStorage.setItem(DAILY_KEY,JSON.stringify(dailyActivity));
+}
+
+function ensureCurrentDailyActivity(){
+  if(dailyActivity.date!==todayKey()){
+    dailyActivity={date:todayKey(),newWords:0,reviewAnswers:0};
+    saveDailyActivity();
+  }
+}
 
 function load(){
   const raw = localStorage.getItem(LS_KEY);
+  let migrated=false;
   if(raw){
     words = JSON.parse(raw);
   } else {
     words = STARTER_WORDS.map((entry,i)=>({
       id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()+i),
       word:entry.word, meaning:entry.meaning, hint:entry.hint||"",
-      level:0, correct:0, wrong:0, next:0, seen:0, last:0
+      status:WORD_STATUS.UNSEEN, level:0, correct:0, wrong:0, next:0, seen:0, last:0
     }));
-    save();
   }
+  words.forEach(entry=>{if(migrateWordStatus(entry)) migrated=true;});
   const settings = JSON.parse(localStorage.getItem(SETTINGS_KEY)||"{}");
   examDate.value = settings.examDate || "2026-07-21";
   targetScore.value = VOCAB_TARGETS[settings.targetScore]
     ? settings.targetScore
     : DEFAULT_TARGET_SCORE;
   dailyGoal.value = settings.dailyGoal || 100;
+  loadDailyActivity();
+  if(!raw || migrated) save();
   refreshStats();
 }
 
@@ -59,16 +105,21 @@ function save(){
 
 function dueWords(){
   const t = now();
-  return words.filter(w => (w.next||0) <= t);
+  return words.filter(w => w.status!==WORD_STATUS.UNSEEN && (w.next||0) <= t);
 }
 
 function chooseNext(){
-  const due = dueWords();
-  if(!due.length){
+  modeBadge.textContent=studyMode==="new" ? "新規学習" : "復習";
+  const candidates=studyMode==="new"
+    ? words.filter(entry=>entry.status===WORD_STATUS.UNSEEN)
+    : dueWords();
+  if(!candidates.length){
     current = null;
-    word.textContent = "今すぐ復習する単語はなし";
+    word.textContent = studyMode==="new" ? "未学習の単語はなし" : "今すぐ復習する単語はなし";
     meaning.textContent = "";
-    hint.textContent = "少し時間を置くか、新しい単語を追加してね。";
+    hint.textContent = studyMode==="new"
+      ? "単語を追加するか、復習モードを選んでください。"
+      : "少し時間を置くか、新規学習を進めてください。";
     meaning.style.display = "none";
     hint.style.display = "block";
     tapText.textContent = "";
@@ -76,12 +127,17 @@ function chooseNext(){
     refreshStats();
     return;
   }
-  due.sort((a,b)=>{
-    if((a.level||0)!==(b.level||0)) return (a.level||0)-(b.level||0);
-    if((a.seen||0)!==(b.seen||0)) return (a.seen||0)-(b.seen||0);
-    return Math.random()-.5;
-  });
-  current = due[0];
+  if(studyMode==="new"){
+    candidates.sort((a,b)=>(b.priority||0)-(a.priority||0));
+  } else {
+    const order={[WORD_STATUS.LEARNING]:0,[WORD_STATUS.REVIEW]:1,[WORD_STATUS.MASTERED]:2};
+    candidates.sort((a,b)=>
+      (order[a.status]??3)-(order[b.status]??3) ||
+      (a.next||0)-(b.next||0) ||
+      (a.level||0)-(b.level||0)
+    );
+  }
+  current = candidates[0];
   revealed = false;
   word.textContent = current.word;
   meaning.textContent = current.meaning;
@@ -108,7 +164,15 @@ function setButtons(on){
 
 function answer(type){
   if(!current) return;
+  ensureCurrentDailyActivity();
   const t = now();
+  const isNew=current.status===WORD_STATUS.UNSEEN;
+  if(isNew){
+    dailyActivity.newWords++;
+    current.firstLearnedAt=t;
+  } else {
+    dailyActivity.reviewAnswers++;
+  }
   current.seen = (current.seen||0)+1;
   current.last = t;
   const td = todayKey();
@@ -119,26 +183,37 @@ function answer(type){
     current.wrong=(current.wrong||0)+1;
     current.level=Math.max(0,(current.level||0)-1);
     current.next=t+10*60*1000;
+    current.status=WORD_STATUS.LEARNING;
   } else if(type==="mid"){
     current.next=t+60*60*1000;
+    current.status=(isNew || current.status===WORD_STATUS.LEARNING)
+      ? WORD_STATUS.LEARNING
+      : WORD_STATUS.REVIEW;
   } else {
     current.correct=(current.correct||0)+1;
     current.level=Math.min(6,(current.level||0)+1);
     const intervals=[2,6,12,24,48,96,168]; // hours
     current.next=t+intervals[current.level]*60*60*1000;
+    current.status=current.level>=4 ? WORD_STATUS.MASTERED : WORD_STATUS.REVIEW;
   }
+  saveDailyActivity();
   save();
   chooseNext();
 }
 
 function refreshStats(){
-  const td=todayKey();
-  const today=words.reduce((s,w)=>s+(w.today===td?(w.todayCount||0):0),0);
+  ensureCurrentDailyActivity();
   const due=dueWords().length;
-  const mastered=words.filter(w=>(w.level||0)>=4).length;
+  const counts={unseen:0,learning:0,review:0,mastered:0};
+  words.forEach(entry=>{if(counts[entry.status]!==undefined) counts[entry.status]++;});
+  const today=dailyActivity.newWords+dailyActivity.reviewAnswers;
   dueCount.textContent=due;
-  todayCount.textContent=today;
-  masteredCount.textContent=mastered;
+  todayNewCount.textContent=dailyActivity.newWords;
+  todayReviewCount.textContent=dailyActivity.reviewAnswers;
+  unseenCount.textContent=counts.unseen;
+  learningCount.textContent=counts.learning;
+  reviewCount.textContent=counts.review;
+  masteredCount.textContent=counts.mastered;
   const exam = new Date(examDate.value+"T23:59:59");
   const days = Math.max(0, Math.ceil((exam-new Date())/86400000));
   daysLeft.textContent=days;
@@ -169,9 +244,10 @@ function refreshStudyPlan(days, due){
 }
 
 function getWordStatus(entry){
-  if((entry.seen||0)===0) return {label:"未学習", className:"status-unseen"};
-  if((entry.level||0)>=4) return {label:"ほぼ定着", className:"status-mastered"};
-  return {label:"学習中", className:"status-learning"};
+  if(entry.status===WORD_STATUS.UNSEEN) return {label:"未学習",className:"status-unseen"};
+  if(entry.status===WORD_STATUS.LEARNING) return {label:"学習中",className:"status-learning"};
+  if(entry.status===WORD_STATUS.MASTERED) return {label:"定着済み",className:"status-mastered"};
+  return {label:"復習対象",className:"status-review"};
 }
 
 function appendWordCell(row, text, label, className=""){
@@ -208,6 +284,7 @@ function openWordEditor(id){
   editMeaning.value=entry.meaning;
   editHint.value=entry.hint||"";
   editLevel.value=entry.level||0;
+  editStatus.value=entry.status;
   editSeen.value=entry.seen||0;
   editCorrect.value=entry.correct||0;
   editWrong.value=entry.wrong||0;
@@ -450,6 +527,7 @@ function importCsvText(text){
       targetScore:value.targetScore ? Number(value.targetScore) : undefined,
       priority:value.priority ? Number(value.priority) : undefined,
       partOfSpeech:value.partOfSpeech||undefined,
+      status:WORD_STATUS.UNSEEN,
       level:value.level ? Number(value.level) : 0,
       correct:0, wrong:0, next:0, seen:0, last:0
     });
@@ -461,7 +539,8 @@ function importCsvText(text){
 }
 
 card.addEventListener("click", reveal);
-startBtn.addEventListener("click", chooseNext);
+newStartBtn.addEventListener("click",()=>{studyMode="new";chooseNext();});
+startBtn.addEventListener("click",()=>{studyMode="review";chooseNext();});
 badBtn.addEventListener("click",()=>answer("bad"));
 midBtn.addEventListener("click",()=>answer("mid"));
 goodBtn.addEventListener("click",()=>answer("good"));
@@ -506,11 +585,20 @@ editWordForm.addEventListener("submit",event=>{
     editWordError.textContent="学習回数は、正解回数と不正解回数の合計以上にしてください。";
     return;
   }
+  if(editStatus.value===WORD_STATUS.UNSEEN && updatedSeen>0){
+    editWordError.textContent="未学習に戻す場合は、学習回数を0にしてください。";
+    return;
+  }
+  if(editStatus.value===WORD_STATUS.MASTERED && Number(editLevel.value)<4){
+    editWordError.textContent="定着済みにする場合は、習熟レベルを4以上にしてください。";
+    return;
+  }
 
   entry.word=updatedWord;
   entry.meaning=updatedMeaning;
   entry.hint=editHint.value.trim();
   entry.level=Math.min(6,Math.max(0,Number(editLevel.value)||0));
+  entry.status=editStatus.value;
   entry.seen=updatedSeen;
   entry.correct=updatedCorrect;
   entry.wrong=updatedWrong;
@@ -548,6 +636,8 @@ confirmDeleteBtn.addEventListener("click",()=>{
 resetTodayBtn.addEventListener("click",()=>{
   const td=todayKey();
   words.forEach(w=>{ if(w.today===td) w.todayCount=0; });
+  dailyActivity={date:td,newWords:0,reviewAnswers:0};
+  saveDailyActivity();
   save(); refreshStats();
 });
 
@@ -574,9 +664,11 @@ resetAllBtn.addEventListener("click",()=>{
   if(!confirm("単語と学習履歴を全部消す？")) return;
   localStorage.removeItem(LS_KEY);
   words=[];
+  dailyActivity={date:todayKey(),newWords:0,reviewAnswers:0};
+  saveDailyActivity();
   STARTER_WORDS.forEach((entry,i)=>words.push({
     id:String(Date.now()+i),word:entry.word,meaning:entry.meaning,hint:entry.hint||"",
-    level:0,correct:0,wrong:0,next:0,seen:0,last:0
+    status:WORD_STATUS.UNSEEN,level:0,correct:0,wrong:0,next:0,seen:0,last:0
   }));
   save(); chooseNext(); refreshStats();
 });

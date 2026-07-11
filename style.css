@@ -8,6 +8,10 @@
   h1{font-size:22px;margin:4px 0 14px}
   .top,.panel,.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 4px 18px rgba(0,0,0,.04)}
   .top{padding:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+  .status-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+  .status-stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
+  .status-stat b{display:block;font-size:20px}
+  .status-stat span{font-size:12px;color:var(--muted)}
   .stat{text-align:center}
   .stat b{display:block;font-size:22px}
   .stat span{font-size:12px;color:var(--muted)}
@@ -21,6 +25,7 @@
   .ghost{background:#eef2ff;color:#1e3a8a}
   .danger{background:#fee2e2;color:#991b1b}
   .card{min-height:330px;padding:26px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+  .mode-badge{background:#eef2ff;color:#1e3a8a;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700;margin-bottom:16px}
   .word{font-size:42px;font-weight:800;letter-spacing:.3px;word-break:break-word}
   .meaning{font-size:22px;margin-top:18px;display:none}
   .hint{font-size:14px;color:var(--muted);margin-top:12px;display:none;line-height:1.7}
@@ -54,6 +59,7 @@
   .status{display:inline-block;border-radius:999px;padding:3px 8px;font-size:11px;white-space:nowrap}
   .status-unseen{background:#e5e7eb;color:#4b5563}
   .status-learning{background:#fef3c7;color:#92400e}
+  .status-review{background:#dbeafe;color:#1e40af}
   .status-mastered{background:#dcfce7;color:#166534}
   .word-list-empty{display:none;text-align:center;padding:22px 8px}
   .pagination{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px}
@@ -86,6 +92,7 @@
   .empty{color:var(--muted);line-height:1.8}
   @media(max-width:600px){
     .top{grid-template-columns:repeat(2,1fr)}
+    .status-stats{grid-template-columns:repeat(2,1fr)}
     .plan-grid{grid-template-columns:repeat(2,1fr)}
     .word-list,.word-list tbody,.word-list tr,.word-list td{display:block}
     .word-list thead{display:none}

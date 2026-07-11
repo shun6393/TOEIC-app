@@ -12,9 +12,16 @@
 
   <div class="top">
     <div class="stat"><b id="dueCount">0</b><span>今すぐ復習</span></div>
-    <div class="stat"><b id="todayCount">0</b><span>今日回答</span></div>
-    <div class="stat"><b id="masteredCount">0</b><span>ほぼ定着</span></div>
+    <div class="stat"><b id="todayNewCount">0</b><span>今日の新規</span></div>
+    <div class="stat"><b id="todayReviewCount">0</b><span>今日の復習</span></div>
     <div class="stat"><b id="daysLeft">0</b><span>試験まで</span></div>
+  </div>
+
+  <div class="status-stats">
+    <div class="status-stat"><b id="unseenCount">0</b><span>未学習</span></div>
+    <div class="status-stat"><b id="learningCount">0</b><span>学習中</span></div>
+    <div class="status-stat"><b id="reviewCount">0</b><span>復習対象</span></div>
+    <div class="status-stat"><b id="masteredCount">0</b><span>定着済み</span></div>
   </div>
 
   <div class="panel">
@@ -31,7 +38,8 @@
         </select>
       </label>
       <label>1日の目標 <input type="number" id="dailyGoal" min="10" max="500" value="100" style="width:90px"></label>
-      <button class="primary" id="startBtn">学習スタート</button>
+      <button class="primary" id="newStartBtn">新規単語を学習</button>
+      <button class="ghost" id="startBtn">復習を開始</button>
       <button class="ghost" id="resetTodayBtn">今日の回数をリセット</button>
     </div>
     <div class="progress"><div class="bar" id="goalBar"></div></div>
@@ -50,6 +58,7 @@
   </div>
 
   <div class="card" id="card">
+    <div class="mode-badge" id="modeBadge">モード未選択</div>
     <div class="word" id="word">スタートを押してね</div>
     <div class="meaning" id="meaning"></div>
     <div class="hint" id="hint"></div>
@@ -135,6 +144,14 @@
       <label>日本語の意味 <input id="editMeaning" required></label>
       <label class="form-wide">ヒント <textarea id="editHint"></textarea></label>
       <label>習熟レベル <input type="number" id="editLevel" min="0" max="6" required></label>
+      <label>学習状態
+        <select id="editStatus">
+          <option value="unseen">未学習</option>
+          <option value="learning">学習中</option>
+          <option value="review">復習対象</option>
+          <option value="mastered">定着済み</option>
+        </select>
+      </label>
       <label>学習回数 <input type="number" id="editSeen" min="0" required></label>
       <label>正解回数 <input type="number" id="editCorrect" min="0" required></label>
       <label>不正解回数 <input type="number" id="editWrong" min="0" required></label>
