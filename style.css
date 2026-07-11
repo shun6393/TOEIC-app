@@ -32,12 +32,20 @@
   .progress{height:10px;background:#e5e7eb;border-radius:999px;overflow:hidden;margin-top:12px}
   .bar{height:100%;width:0;background:var(--accent)}
   .small{font-size:12px;color:var(--muted)}
+  .study-plan{border-top:1px solid var(--line);margin-top:14px;padding-top:14px}
+  .study-plan h2{font-size:16px;margin:0 0 10px}
+  .plan-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .plan-item{background:var(--bg);border-radius:12px;padding:12px;text-align:center}
+  .plan-item span{display:block;font-size:12px;color:var(--muted);line-height:1.5}
+  .plan-item b{display:block;font-size:19px;margin-top:4px}
+  .plan-note{margin:8px 0 0;min-height:1.5em}
   details{margin-top:14px}
   summary{cursor:pointer;font-weight:700}
   textarea{width:100%;min-height:120px;margin-top:10px}
   .empty{color:var(--muted);line-height:1.8}
   @media(max-width:600px){
     .top{grid-template-columns:repeat(2,1fr)}
+    .plan-grid{grid-template-columns:repeat(2,1fr)}
     .word{font-size:34px}
     .buttons{grid-template-columns:1fr}
   }

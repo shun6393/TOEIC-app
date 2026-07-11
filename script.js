@@ -43,6 +43,16 @@ const starterWords = [
 
 const LS_KEY = "toeic_cram_words_v1";
 const SETTINGS_KEY = "toeic_cram_settings_v1";
+const DEFAULT_TARGET_SCORE = 600;
+const VOCAB_TARGETS = Object.freeze({
+  400: 700,
+  500: 1100,
+  600: 1600,
+  700: 2300,
+  800: 3200,
+  900: 4500
+});
+const DAILY_REVIEW_MULTIPLIER = 3;
 
 let words = [];
 let current = null;
@@ -65,6 +75,9 @@ function load(){
   }
   const settings = JSON.parse(localStorage.getItem(SETTINGS_KEY)||"{}");
   examDate.value = settings.examDate || "2026-07-21";
+  targetScore.value = VOCAB_TARGETS[settings.targetScore]
+    ? settings.targetScore
+    : DEFAULT_TARGET_SCORE;
   dailyGoal.value = settings.dailyGoal || 100;
   refreshStats();
 }
@@ -73,6 +86,7 @@ function save(){
   localStorage.setItem(LS_KEY, JSON.stringify(words));
   localStorage.setItem(SETTINGS_KEY, JSON.stringify({
     examDate: examDate.value,
+    targetScore: Number(targetScore.value) || DEFAULT_TARGET_SCORE,
     dailyGoal: Number(dailyGoal.value)||100
   }));
 }
@@ -165,6 +179,26 @@ function refreshStats(){
   const goal=Number(dailyGoal.value)||100;
   goalBar.style.width=Math.min(100,today/goal*100)+"%";
   goalText.textContent=`今日 ${today} / ${goal} 回回答`;
+  refreshStudyPlan(days, due);
+}
+
+function refreshStudyPlan(days, due){
+  const score=Number(targetScore.value)||DEFAULT_TARGET_SCORE;
+  const target=VOCAB_TARGETS[score];
+  const studied=words.filter(w=>(w.seen||0)>0).length;
+  const remaining=Math.max(0,target-studied);
+  const dailyNew=days>0 ? Math.ceil(remaining/days) : 0;
+  const reviewEstimate=days>0
+    ? Math.max(due,dailyNew*DAILY_REVIEW_MULTIPLIER)
+    : 0;
+
+  vocabTarget.textContent=`約${target.toLocaleString("ja-JP")}語`;
+  remainingNew.textContent=`${remaining.toLocaleString("ja-JP")}語`;
+  dailyNew.textContent=`${dailyNew.toLocaleString("ja-JP")}語`;
+  dailyReview.textContent=`${reviewEstimate.toLocaleString("ja-JP")}回`;
+  planNotice.textContent=days>0
+    ? `学習済み ${studied.toLocaleString("ja-JP")}語を基準に計算しています。`
+    : "試験日を未来の日付に設定すると学習計画を計算します。";
 }
 
 card.addEventListener("click", reveal);
@@ -174,6 +208,7 @@ midBtn.addEventListener("click",()=>answer("mid"));
 goodBtn.addEventListener("click",()=>answer("good"));
 
 examDate.addEventListener("change",()=>{save();refreshStats();});
+targetScore.addEventListener("change",()=>{save();refreshStats();});
 dailyGoal.addEventListener("change",()=>{save();refreshStats();});
 
 resetTodayBtn.addEventListener("click",()=>{

@@ -20,12 +20,33 @@
   <div class="panel">
     <div class="row">
       <label>試験日 <input type="date" id="examDate" value="2026-07-21"></label>
+      <label>目標点数
+        <select id="targetScore">
+          <option value="400">400点</option>
+          <option value="500">500点</option>
+          <option value="600" selected>600点</option>
+          <option value="700">700点</option>
+          <option value="800">800点</option>
+          <option value="900">900点</option>
+        </select>
+      </label>
       <label>1日の目標 <input type="number" id="dailyGoal" min="10" max="500" value="100" style="width:90px"></label>
       <button class="primary" id="startBtn">学習スタート</button>
       <button class="ghost" id="resetTodayBtn">今日の回数をリセット</button>
     </div>
     <div class="progress"><div class="bar" id="goalBar"></div></div>
     <div class="small" id="goalText" style="margin-top:6px"></div>
+
+    <section class="study-plan" aria-labelledby="studyPlanTitle">
+      <h2 id="studyPlanTitle">目標達成までの学習計画</h2>
+      <div class="plan-grid">
+        <div class="plan-item"><span>必要語彙数の目安</span><b id="vocabTarget">0語</b></div>
+        <div class="plan-item"><span>残り新規単語数</span><b id="remainingNew">0語</b></div>
+        <div class="plan-item"><span>1日に覚える新規単語</span><b id="dailyNew">0語</b></div>
+        <div class="plan-item"><span>1日の復習回数目安</span><b id="dailyReview">0回</b></div>
+      </div>
+      <p class="small plan-note" id="planNotice"></p>
+    </section>
   </div>
 
   <div class="card" id="card">
