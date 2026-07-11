@@ -18,6 +18,10 @@ v1.0.0
 - GitHub Pages
 - Fetch API
 
+## 公開URL
+
+https://shun6393.github.io/TOEIC-app/
+
 ## 実装済み
 
 - Git導入
@@ -81,3 +85,7 @@ GitHub Pagesで公開
 - 動作確認後にGitHubへPushする
 - 実装完了後はCHANGELOGを更新する
 - アイデアはIDEASへ追加する
+
+## 開発方針
+
+「まず動くものを作る」ことを優先し、大規模な設計変更は必要になるまで行わない。
