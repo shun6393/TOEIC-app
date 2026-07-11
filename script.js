@@ -365,7 +365,7 @@ function createCatalogOverride(entry,base){
 
 function migrateLegacyStorage(){
   const raw=localStorage.getItem(LS_KEY);
-  const legacy=raw ? JSON.parse(raw) : [];
+  const legacy=parseStoredJson(raw,LS_KEY,[]);
   const unmatched=new Map(legacy.map(entry=>[normalizeWord(entry.word),entry]));
   const progressById={};
   const overrides={};
@@ -403,10 +403,11 @@ function migrateLegacyStorage(){
 
 function loadSeparatedWords(){
   if(localStorage.getItem(STORAGE_MIGRATED_KEY)!=="1") migrateLegacyStorage();
-  const progress=readStoredJsonSafely(PROGRESS_KEY,{});
-  const custom=readStoredJsonSafely(CUSTOM_WORDS_KEY,[]);
-  const overrides=readStoredJsonSafely(CATALOG_OVERRIDES_KEY,{});
-  const hidden=new Set(readStoredJsonSafely(HIDDEN_CATALOG_KEY,[]));
+  // 主要データの破損を空データとして上書きしないよう、解析失敗は初期化エラーとして安全停止する。
+  const progress=parseStoredJson(localStorage.getItem(PROGRESS_KEY),PROGRESS_KEY,{});
+  const custom=parseStoredJson(localStorage.getItem(CUSTOM_WORDS_KEY),CUSTOM_WORDS_KEY,[]);
+  const overrides=parseStoredJson(localStorage.getItem(CATALOG_OVERRIDES_KEY),CATALOG_OVERRIDES_KEY,{});
+  const hidden=new Set(parseStoredJson(localStorage.getItem(HIDDEN_CATALOG_KEY),HIDDEN_CATALOG_KEY,[]));
   const builtIn=standardCatalog
     .filter(entry=>!hidden.has(entry.id))
     .map(entry=>runtimeWord(mergeCatalogContent(entry,overrides[entry.id]),progress[entry.id]));
@@ -1262,7 +1263,8 @@ async function initializeApp(){
     standardCatalog=result.catalog;
     catalogLoadStatus.textContent=`標準単語 ${standardCatalog.length.toLocaleString("ja-JP")}語を読み込みました。`;
     rebuildCatalogIndex();
-    migrateCustomWordsToStandardCatalog();
+    const migrationReport=migrateCustomWordsToStandardCatalog();
+    if(migrationReport.errors) throw new Error("LocalStorageの移行に失敗しました。元データを保護するため初期化を停止します。");
     load();
     setAppLoading(false);
     document.documentElement.dataset.catalogSource="csv";
@@ -1276,7 +1278,7 @@ async function initializeApp(){
     retryCatalogBtn.hidden=false;
     retryCatalogBtn.disabled=false;
     catalogLoadStatus.className="small catalog-load-error";
-    catalogLoadStatus.textContent="単語データを読み込めませんでした。通信を確認して、再読み込みしてください。";
+    catalogLoadStatus.textContent="単語データまたは保存データを読み込めませんでした。内容を確認して、再読み込みしてください。";
     document.documentElement.dataset.catalogSource="error";
     console.error("標準単語CSVの読み込みまたはアプリ初期化に失敗しました。",error);
   }
