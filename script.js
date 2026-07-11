@@ -1,5 +1,10 @@
 const LS_KEY = "toeic_cram_words_v1";
 const SETTINGS_KEY = "toeic_cram_settings_v1";
+const PROGRESS_KEY = "toeic_cram_progress_v2";
+const CUSTOM_WORDS_KEY = "toeic_cram_custom_words_v2";
+const CATALOG_OVERRIDES_KEY = "toeic_cram_catalog_overrides_v2";
+const HIDDEN_CATALOG_KEY = "toeic_cram_hidden_catalog_v2";
+const STORAGE_MIGRATED_KEY = "toeic_cram_storage_migrated_v2";
 const DAILY_KEY = "toeic_cram_daily_v1";
 const WORD_STATUS = Object.freeze({UNSEEN:"unseen",LEARNING:"learning",REVIEW:"review",MASTERED:"mastered"});
 const DEFAULT_TARGET_SCORE = 600;
@@ -66,6 +71,158 @@ function saveDailyActivity(){
   localStorage.setItem(DAILY_KEY,JSON.stringify(dailyActivity));
 }
 
+const catalogById=new Map(WORD_CATALOG.map(entry=>[entry.id,entry]));
+
+function normalizeWord(value){
+  return String(value||"").trim().toLocaleLowerCase("en-US");
+}
+
+function scoreTierToUi(scoreTier){
+  if(scoreTier===730) return 700;
+  if(scoreTier===860) return 800;
+  return scoreTier;
+}
+
+function uiScoreToTier(score){
+  const value=Number(score)||600;
+  if(value===700) return 730;
+  if(value===800 || value===900) return 860;
+  return value;
+}
+
+function extractProgress(entry){
+  return {
+    status:entry.status||WORD_STATUS.UNSEEN,
+    level:Number(entry.level)||0,
+    correct:Number(entry.correct)||0,
+    wrong:Number(entry.wrong)||0,
+    next:Number(entry.next)||0,
+    seen:Number(entry.seen)||0,
+    last:Number(entry.last)||0,
+    firstLearnedAt:Number(entry.firstLearnedAt)||0,
+    today:entry.today||"",
+    todayCount:Number(entry.todayCount)||0,
+    memo:entry.memo||""
+  };
+}
+
+function runtimeWord(content,progress={}){
+  const profile=content.learningProfile||{};
+  return {
+    id:content.id,
+    word:content.word,
+    meaning:content.meaning,
+    hint:content.hint||"",
+    partOfSpeech:content.partOfSpeech||"",
+    targetScore:scoreTierToUi(Number(profile.scoreTier))||undefined,
+    difficulty:Number(profile.difficulty)||3,
+    priority:Number(profile.priority)||3,
+    tags:Array.isArray(content.tags) ? [...content.tags] : [],
+    status:progress.status||WORD_STATUS.UNSEEN,
+    level:Number(progress.level)||0,
+    correct:Number(progress.correct)||0,
+    wrong:Number(progress.wrong)||0,
+    next:Number(progress.next)||0,
+    seen:Number(progress.seen)||0,
+    last:Number(progress.last)||0,
+    firstLearnedAt:Number(progress.firstLearnedAt)||0,
+    today:progress.today||"",
+    todayCount:Number(progress.todayCount)||0,
+    memo:progress.memo||""
+  };
+}
+
+function runtimeContent(entry){
+  return {
+    id:entry.id,
+    word:entry.word,
+    meaning:entry.meaning,
+    hint:entry.hint||"",
+    partOfSpeech:entry.partOfSpeech||"",
+    learningProfile:{
+      scoreTier:uiScoreToTier(entry.targetScore),
+      difficulty:Number(entry.difficulty)||3,
+      priority:Number(entry.priority)||3
+    },
+    tags:Array.isArray(entry.tags) ? [...entry.tags] : []
+  };
+}
+
+function mergeCatalogContent(base,override={}){
+  return {
+    ...base,
+    ...override,
+    learningProfile:{...base.learningProfile,...(override.learningProfile||{})},
+    tags:Array.isArray(override.tags) ? override.tags : base.tags
+  };
+}
+
+function createCatalogOverride(entry,base){
+  const content=runtimeContent(entry);
+  const override={};
+  for(const field of ["word","meaning","hint","partOfSpeech"]){
+    if(content[field]!==base[field]) override[field]=content[field];
+  }
+  const profile={};
+  for(const field of ["scoreTier","difficulty","priority"]){
+    if(content.learningProfile[field]!==base.learningProfile[field]) profile[field]=content.learningProfile[field];
+  }
+  if(Object.keys(profile).length) override.learningProfile=profile;
+  if(JSON.stringify(content.tags)!==JSON.stringify(base.tags)) override.tags=content.tags;
+  return Object.keys(override).length ? override : null;
+}
+
+function migrateLegacyStorage(){
+  const raw=localStorage.getItem(LS_KEY);
+  const legacy=raw ? JSON.parse(raw) : [];
+  const unmatched=new Map(legacy.map(entry=>[normalizeWord(entry.word),entry]));
+  const progressById={};
+  const overrides={};
+  const hiddenIds=[];
+
+  for(const catalogEntry of WORD_CATALOG){
+    const old=legacy.find(entry=>entry.id===catalogEntry.id) || unmatched.get(normalizeWord(catalogEntry.word));
+    if(!old){
+      if(raw) hiddenIds.push(catalogEntry.id);
+      continue;
+    }
+    unmatched.delete(normalizeWord(old.word));
+    progressById[catalogEntry.id]=extractProgress(old);
+    const migratedRuntime=runtimeWord(catalogEntry,extractProgress(old));
+    for(const field of ["word","meaning","hint","partOfSpeech","targetScore","difficulty","priority","tags"]){
+      if(old[field]!==undefined) migratedRuntime[field]=old[field];
+    }
+    const override=createCatalogOverride(migratedRuntime,catalogEntry);
+    if(override) overrides[catalogEntry.id]=override;
+  }
+
+  const customWords=[];
+  for(const old of unmatched.values()){
+    const id=catalogById.has(old.id) ? `custom_${crypto.randomUUID()}` : old.id;
+    const runtime={...old,id};
+    customWords.push(runtimeContent(runtime));
+    progressById[id]=extractProgress(old);
+  }
+  localStorage.setItem(PROGRESS_KEY,JSON.stringify(progressById));
+  localStorage.setItem(CUSTOM_WORDS_KEY,JSON.stringify(customWords));
+  localStorage.setItem(CATALOG_OVERRIDES_KEY,JSON.stringify(overrides));
+  localStorage.setItem(HIDDEN_CATALOG_KEY,JSON.stringify(hiddenIds));
+  localStorage.setItem(STORAGE_MIGRATED_KEY,"1");
+}
+
+function loadSeparatedWords(){
+  if(localStorage.getItem(STORAGE_MIGRATED_KEY)!=="1") migrateLegacyStorage();
+  const progress=JSON.parse(localStorage.getItem(PROGRESS_KEY)||"{}");
+  const custom=JSON.parse(localStorage.getItem(CUSTOM_WORDS_KEY)||"[]");
+  const overrides=JSON.parse(localStorage.getItem(CATALOG_OVERRIDES_KEY)||"{}");
+  const hidden=new Set(JSON.parse(localStorage.getItem(HIDDEN_CATALOG_KEY)||"[]"));
+  const builtIn=WORD_CATALOG
+    .filter(entry=>!hidden.has(entry.id))
+    .map(entry=>runtimeWord(mergeCatalogContent(entry,overrides[entry.id]),progress[entry.id]));
+  const customRuntime=custom.map(entry=>runtimeWord(entry,progress[entry.id]));
+  return [...builtIn,...customRuntime];
+}
+
 function ensureCurrentDailyActivity(){
   if(dailyActivity.date!==todayKey()){
     dailyActivity={date:todayKey(),newWords:0,reviewAnswers:0};
@@ -74,17 +231,8 @@ function ensureCurrentDailyActivity(){
 }
 
 function load(){
-  const raw = localStorage.getItem(LS_KEY);
+  words=loadSeparatedWords();
   let migrated=false;
-  if(raw){
-    words = JSON.parse(raw);
-  } else {
-    words = STARTER_WORDS.map((entry,i)=>({
-      id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()+i),
-      word:entry.word, meaning:entry.meaning, hint:entry.hint||"",
-      status:WORD_STATUS.UNSEEN, level:0, correct:0, wrong:0, next:0, seen:0, last:0
-    }));
-  }
   words.forEach(entry=>{if(migrateWordStatus(entry)) migrated=true;});
   const settings = JSON.parse(localStorage.getItem(SETTINGS_KEY)||"{}");
   examDate.value = settings.examDate || "2026-07-21";
@@ -93,12 +241,31 @@ function load(){
     : DEFAULT_TARGET_SCORE;
   dailyGoal.value = settings.dailyGoal || 100;
   loadDailyActivity();
-  if(!raw || migrated) save();
+  if(migrated) save();
   refreshStats();
 }
 
 function save(){
-  localStorage.setItem(LS_KEY, JSON.stringify(words));
+  const progress={};
+  const custom=[];
+  const overrides={};
+  const activeIds=new Set(words.map(entry=>entry.id));
+  for(const entry of words){
+    progress[entry.id]=extractProgress(entry);
+    const base=catalogById.get(entry.id);
+    if(base){
+      const override=createCatalogOverride(entry,base);
+      if(override) overrides[entry.id]=override;
+    } else {
+      custom.push(runtimeContent(entry));
+    }
+  }
+  const hidden=WORD_CATALOG.filter(entry=>!activeIds.has(entry.id)).map(entry=>entry.id);
+  localStorage.setItem(PROGRESS_KEY,JSON.stringify(progress));
+  localStorage.setItem(CUSTOM_WORDS_KEY,JSON.stringify(custom));
+  localStorage.setItem(CATALOG_OVERRIDES_KEY,JSON.stringify(overrides));
+  localStorage.setItem(HIDDEN_CATALOG_KEY,JSON.stringify(hidden));
+  localStorage.setItem(STORAGE_MIGRATED_KEY,"1");
   localStorage.setItem(SETTINGS_KEY, JSON.stringify({
     examDate: examDate.value,
     targetScore: Number(targetScore.value) || DEFAULT_TARGET_SCORE,
@@ -722,13 +889,13 @@ exportBtn.addEventListener("click",()=>{
 resetAllBtn.addEventListener("click",()=>{
   if(!confirm("単語と学習履歴を全部消す？")) return;
   localStorage.removeItem(LS_KEY);
-  words=[];
+  localStorage.removeItem(PROGRESS_KEY);
+  localStorage.removeItem(CUSTOM_WORDS_KEY);
+  localStorage.removeItem(CATALOG_OVERRIDES_KEY);
+  localStorage.removeItem(HIDDEN_CATALOG_KEY);
   dailyActivity={date:todayKey(),newWords:0,reviewAnswers:0};
   saveDailyActivity();
-  STARTER_WORDS.forEach((entry,i)=>words.push({
-    id:String(Date.now()+i),word:entry.word,meaning:entry.meaning,hint:entry.hint||"",
-    status:WORD_STATUS.UNSEEN,level:0,correct:0,wrong:0,next:0,seen:0,last:0
-  }));
+  words=WORD_CATALOG.map(entry=>runtimeWord(entry));
   save(); chooseNext(); refreshStats();
 });
 
