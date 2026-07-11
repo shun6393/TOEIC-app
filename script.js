@@ -6,6 +6,8 @@ const CATALOG_OVERRIDES_KEY = "toeic_cram_catalog_overrides_v2";
 const HIDDEN_CATALOG_KEY = "toeic_cram_hidden_catalog_v2";
 const STORAGE_MIGRATED_KEY = "toeic_cram_storage_migrated_v2";
 const DAILY_KEY = "toeic_cram_daily_v1";
+const CATALOG_CSV_MIGRATED_KEY = "toeic_cram_catalog_csv_migrated_v1";
+const CATALOG_CSV_BACKUP_KEY = "toeic_cram_catalog_csv_backup_v1";
 const WORD_STATUS = Object.freeze({UNSEEN:"unseen",LEARNING:"learning",REVIEW:"review",MASTERED:"mastered"});
 const DEFAULT_TARGET_SCORE = 600;
 const VOCAB_TARGETS = Object.freeze({
@@ -61,7 +63,7 @@ function migrateWordStatus(entry){
 }
 
 function loadDailyActivity(){
-  const saved=JSON.parse(localStorage.getItem(DAILY_KEY)||"{}");
+  const saved=readStoredJsonSafely(DAILY_KEY,{});
   const date=todayKey();
   const legacyReviews=words.reduce((sum,entry)=>
     sum+(entry.today===date ? Number(entry.todayCount)||0 : 0),0
@@ -93,6 +95,187 @@ function createStandardCatalogId(wordValue){
 
 function rebuildCatalogIndex(){
   catalogById=new Map(standardCatalog.map(entry=>[entry.id,entry]));
+}
+
+function parseStoredJson(raw,key,fallback){
+  if(raw===null) return fallback;
+  try{
+    return JSON.parse(raw);
+  } catch(error){
+    throw new Error(`${key}の保存データを解析できません。`,{cause:error});
+  }
+}
+
+function readStoredJsonSafely(key,fallback){
+  try{
+    return parseStoredJson(localStorage.getItem(key),key,fallback);
+  } catch(error){
+    console.error(error);
+    return fallback;
+  }
+}
+
+function mergeProgressRecords(standardProgress={},customProgress={}){
+  const statusOrder={
+    [WORD_STATUS.UNSEEN]:0,
+    [WORD_STATUS.LEARNING]:1,
+    [WORD_STATUS.REVIEW]:2,
+    [WORD_STATUS.MASTERED]:3
+  };
+  const standardStatus=standardProgress.status||WORD_STATUS.UNSEEN;
+  const customStatus=customProgress.status||WORD_STATUS.UNSEEN;
+  const status=(statusOrder[customStatus]||0)>(statusOrder[standardStatus]||0) ? customStatus : standardStatus;
+  const positiveFirstLearned=[Number(standardProgress.firstLearnedAt)||0,Number(customProgress.firstLearnedAt)||0].filter(Boolean);
+  const positiveNext=[Number(standardProgress.next)||0,Number(customProgress.next)||0].filter(Boolean);
+  const standardToday=standardProgress.today||"";
+  const customToday=customProgress.today||"";
+  const today=standardToday>=customToday ? standardToday : customToday;
+  const todayCount=standardToday===customToday
+    ? (Number(standardProgress.todayCount)||0)+(Number(customProgress.todayCount)||0)
+    : today===customToday ? Number(customProgress.todayCount)||0 : Number(standardProgress.todayCount)||0;
+  const memos=[standardProgress.memo,customProgress.memo].map(value=>String(value||"").trim()).filter(Boolean);
+  return {
+    ...standardProgress,
+    ...customProgress,
+    status,
+    level:Math.max(Number(standardProgress.level)||0,Number(customProgress.level)||0),
+    correct:(Number(standardProgress.correct)||0)+(Number(customProgress.correct)||0),
+    wrong:(Number(standardProgress.wrong)||0)+(Number(customProgress.wrong)||0),
+    next:status===WORD_STATUS.UNSEEN ? 0 : positiveNext.length ? Math.min(...positiveNext) : 0,
+    seen:(Number(standardProgress.seen)||0)+(Number(customProgress.seen)||0),
+    last:Math.max(Number(standardProgress.last)||0,Number(customProgress.last)||0),
+    firstLearnedAt:positiveFirstLearned.length ? Math.min(...positiveFirstLearned) : 0,
+    today,
+    todayCount,
+    memo:[...new Set(memos)].join("\n---\n")
+  };
+}
+
+function mergeCatalogOverrides(migratedOverride,existingOverride){
+  if(!migratedOverride) return existingOverride||null;
+  if(!existingOverride) return migratedOverride;
+  return {
+    ...migratedOverride,
+    ...existingOverride,
+    learningProfile:{...(migratedOverride.learningProfile||{}),...(existingOverride.learningProfile||{})},
+    tags:Array.isArray(existingOverride.tags) ? existingOverride.tags : migratedOverride.tags
+  };
+}
+
+function customContentForMigration(entry,storedOverride){
+  const base=entry.learningProfile ? entry : runtimeContent(entry);
+  return storedOverride ? mergeCatalogContent(base,storedOverride) : base;
+}
+
+function restoreStorageSnapshot(snapshot){
+  for(const [key,value] of Object.entries(snapshot)){
+    if(value===null) localStorage.removeItem(key);
+    else localStorage.setItem(key,value);
+  }
+}
+
+function migrateCustomWordsToStandardCatalog(){
+  if(localStorage.getItem(CATALOG_CSV_MIGRATED_KEY)==="1") return {alreadyMigrated:true};
+  const protectedKeys=[PROGRESS_KEY,CUSTOM_WORDS_KEY,CATALOG_OVERRIDES_KEY,HIDDEN_CATALOG_KEY,LS_KEY];
+  const snapshot=Object.fromEntries(protectedKeys.map(key=>[key,localStorage.getItem(key)]));
+  try{
+    if(localStorage.getItem(CATALOG_CSV_BACKUP_KEY)===null){
+      localStorage.setItem(CATALOG_CSV_BACKUP_KEY,JSON.stringify({version:1,createdAt:new Date().toISOString(),values:snapshot}));
+    }
+    const progress=parseStoredJson(snapshot[PROGRESS_KEY],PROGRESS_KEY,{});
+    const custom=parseStoredJson(snapshot[CUSTOM_WORDS_KEY],CUSTOM_WORDS_KEY,[]);
+    const overrides=parseStoredJson(snapshot[CATALOG_OVERRIDES_KEY],CATALOG_OVERRIDES_KEY,{});
+    const hidden=parseStoredJson(snapshot[HIDDEN_CATALOG_KEY],HIDDEN_CATALOG_KEY,[]);
+    if(!progress || Array.isArray(progress) || typeof progress!=="object") throw new Error(`${PROGRESS_KEY}の形式が不正です。`);
+    if(!Array.isArray(custom)) throw new Error(`${CUSTOM_WORDS_KEY}の形式が不正です。`);
+    if(!overrides || Array.isArray(overrides) || typeof overrides!=="object") throw new Error(`${CATALOG_OVERRIDES_KEY}の形式が不正です。`);
+    if(!Array.isArray(hidden)) throw new Error(`${HIDDEN_CATALOG_KEY}の形式が不正です。`);
+
+    const standardByWord=new Map();
+    for(const entry of standardCatalog){
+      const key=normalizeWord(entry.word);
+      if(!standardByWord.has(key)) standardByWord.set(key,[]);
+      standardByWord.get(key).push(entry);
+    }
+    const customByWord=new Map();
+    for(const entry of custom){
+      const key=normalizeWord(entry.word);
+      if(!customByWord.has(key)) customByWord.set(key,[]);
+      customByWord.get(key).push(entry);
+    }
+
+    const nextProgress={...progress};
+    const nextOverrides={...overrides};
+    const nextHidden=new Set(hidden);
+    const migratedIds=new Set();
+    const warnings=[];
+    const report={migratedWords:0,migratedProgress:0,migratedOverrides:0,remainingCustom:0,skippedAmbiguous:0,errors:0};
+
+    for(const [wordKey,customEntries] of customByWord){
+      const standardEntries=standardByWord.get(wordKey)||[];
+      if(!standardEntries.length) continue;
+      if(customEntries.length!==1 || standardEntries.length!==1){
+        report.skippedAmbiguous+=customEntries.length;
+        warnings.push({word:wordKey,customCount:customEntries.length,standardCount:standardEntries.length,reason:"同じ正規化wordが複数あるため自動移行しませんでした。"});
+        continue;
+      }
+      const customEntry=customEntries[0];
+      const standardEntry=standardEntries[0];
+      if(!customEntry.id) {
+        report.skippedAmbiguous++;
+        warnings.push({word:wordKey,reason:"カスタム単語にIDがないため自動移行しませんでした。"});
+        continue;
+      }
+      const oldId=customEntry.id;
+      const newId=standardEntry.id;
+      if(nextProgress[oldId]){
+        nextProgress[newId]=mergeProgressRecords(nextProgress[newId],nextProgress[oldId]);
+        delete nextProgress[oldId];
+        report.migratedProgress++;
+      }
+      const customContent=customContentForMigration(customEntry,nextOverrides[oldId]);
+      const migratedOverride=createCatalogOverride(runtimeWord(customContent),standardEntry);
+      const combinedOverride=mergeCatalogOverrides(migratedOverride,nextOverrides[newId]);
+      if(combinedOverride) nextOverrides[newId]=combinedOverride;
+      else delete nextOverrides[newId];
+      if(migratedOverride) report.migratedOverrides++;
+      delete nextOverrides[oldId];
+      if(nextHidden.has(oldId)){
+        nextHidden.delete(oldId);
+        nextHidden.add(newId);
+      }
+      migratedIds.add(oldId);
+      report.migratedWords++;
+    }
+
+    const nextCustom=custom.filter(entry=>!migratedIds.has(entry.id));
+    report.remainingCustom=nextCustom.length;
+    if(nextCustom.length+report.migratedWords!==custom.length) throw new Error("移行後のカスタム単語件数が一致しません。");
+    for(const id of migratedIds){
+      if(nextCustom.some(entry=>entry.id===id)) throw new Error(`移行済みID ${id} がカスタム単語に残っています。`);
+    }
+    const nextValues={
+      [PROGRESS_KEY]:JSON.stringify(nextProgress),
+      [CUSTOM_WORDS_KEY]:JSON.stringify(nextCustom),
+      [CATALOG_OVERRIDES_KEY]:JSON.stringify(nextOverrides),
+      [HIDDEN_CATALOG_KEY]:JSON.stringify([...nextHidden])
+    };
+    Object.values(nextValues).forEach(value=>JSON.parse(value));
+    for(const [key,value] of Object.entries(nextValues)) localStorage.setItem(key,value);
+    localStorage.setItem(CATALOG_CSV_MIGRATED_KEY,"1");
+    if(warnings.length) console.warn("標準CSVへの自動移行をスキップした単語があります。",warnings);
+    console.info("標準CSVカタログへのLocalStorage移行が完了しました。",report);
+    return report;
+  } catch(error){
+    try{
+      restoreStorageSnapshot(snapshot);
+      localStorage.removeItem(CATALOG_CSV_MIGRATED_KEY);
+    } catch(restoreError){
+      console.error("LocalStorage移行失敗後の復元にも失敗しました。バックアップを確認してください。",restoreError);
+    }
+    console.error("標準CSVカタログへのLocalStorage移行に失敗しました。元データを維持して起動します。",error);
+    return {migratedWords:0,migratedProgress:0,migratedOverrides:0,remainingCustom:0,skippedAmbiguous:0,errors:1,error};
+  }
 }
 
 function scoreTierToUi(scoreTier){
@@ -230,10 +413,10 @@ function migrateLegacyStorage(){
 
 function loadSeparatedWords(){
   if(localStorage.getItem(STORAGE_MIGRATED_KEY)!=="1") migrateLegacyStorage();
-  const progress=JSON.parse(localStorage.getItem(PROGRESS_KEY)||"{}");
-  const custom=JSON.parse(localStorage.getItem(CUSTOM_WORDS_KEY)||"[]");
-  const overrides=JSON.parse(localStorage.getItem(CATALOG_OVERRIDES_KEY)||"{}");
-  const hidden=new Set(JSON.parse(localStorage.getItem(HIDDEN_CATALOG_KEY)||"[]"));
+  const progress=readStoredJsonSafely(PROGRESS_KEY,{});
+  const custom=readStoredJsonSafely(CUSTOM_WORDS_KEY,[]);
+  const overrides=readStoredJsonSafely(CATALOG_OVERRIDES_KEY,{});
+  const hidden=new Set(readStoredJsonSafely(HIDDEN_CATALOG_KEY,[]));
   const builtIn=standardCatalog
     .filter(entry=>!hidden.has(entry.id))
     .map(entry=>runtimeWord(mergeCatalogContent(entry,overrides[entry.id]),progress[entry.id]));
@@ -252,7 +435,7 @@ function load(){
   words=loadSeparatedWords();
   let migrated=false;
   words.forEach(entry=>{if(migrateWordStatus(entry)) migrated=true;});
-  const settings = JSON.parse(localStorage.getItem(SETTINGS_KEY)||"{}");
+  const settings = readStoredJsonSafely(SETTINGS_KEY,{});
   examDate.value = settings.examDate || "2026-07-21";
   targetScore.value = VOCAB_TARGETS[settings.targetScore]
     ? settings.targetScore
@@ -1052,6 +1235,8 @@ resetAllBtn.addEventListener("click",()=>{
   localStorage.removeItem(CUSTOM_WORDS_KEY);
   localStorage.removeItem(CATALOG_OVERRIDES_KEY);
   localStorage.removeItem(HIDDEN_CATALOG_KEY);
+  localStorage.removeItem(CATALOG_CSV_MIGRATED_KEY);
+  localStorage.removeItem(CATALOG_CSV_BACKUP_KEY);
   dailyActivity={date:todayKey(),newWords:0,reviewAnswers:0};
   saveDailyActivity();
   words=standardCatalog.map(entry=>runtimeWord(entry));
@@ -1082,6 +1267,7 @@ async function initializeApp(){
     console.warn("標準CSVの読み込みに失敗し、WORD_CATALOGへフォールバックしました。",error);
   }
   rebuildCatalogIndex();
+  if(!usedFallback) migrateCustomWordsToStandardCatalog();
   load();
   setAppLoading(false);
   document.documentElement.dataset.catalogSource=usedFallback ? "fallback" : "csv";
