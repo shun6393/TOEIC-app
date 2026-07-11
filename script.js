@@ -28,6 +28,8 @@ const CSV_HEADER_FIELDS = new Map([
   ["difficulty","difficulty"], ["priority","priority"],
   ["partofspeech","partOfSpeech"], ["tags","tags"], ["level","level"]
 ]);
+const STANDARD_CATALOG_URL = "./toeic-words.csv";
+const STANDARD_CATALOG_FIELDS = ["word","meaning","hint","partOfSpeech","scoreTier","difficulty","priority","tags"];
 
 let words = [];
 let current = null;
@@ -36,6 +38,8 @@ let wordListPage = 1;
 let pendingDeleteWordId = null;
 let studyMode = null;
 let dailyActivity = {date:"",newWords:0,reviewAnswers:0};
+let standardCatalog = WORD_CATALOG;
+let catalogById = new Map();
 
 function now(){ return Date.now(); }
 function todayKey(){
@@ -72,10 +76,23 @@ function saveDailyActivity(){
   localStorage.setItem(DAILY_KEY,JSON.stringify(dailyActivity));
 }
 
-const catalogById=new Map(WORD_CATALOG.map(entry=>[entry.id,entry]));
-
 function normalizeWord(value){
-  return String(value||"").trim().toLocaleLowerCase("en-US");
+  return String(value||"").normalize("NFKC").trim().toLocaleLowerCase("en-US");
+}
+
+const fallbackCatalogIdsByWord=new Map(WORD_CATALOG.map(entry=>[normalizeWord(entry.word),entry.id]));
+
+function createStandardCatalogId(wordValue){
+  const normalized=normalizeWord(wordValue);
+  const fallbackId=fallbackCatalogIdsByWord.get(normalized);
+  if(fallbackId) return fallbackId;
+  // 正規化wordのUTF-8バイト列を16進化する。行順に依存せず、空白・記号・Unicodeを区別できる可逆な固定ID。
+  const encoded=Array.from(new TextEncoder().encode(normalized),byte=>byte.toString(16).padStart(2,"0")).join("");
+  return `catalog_${encoded}`;
+}
+
+function rebuildCatalogIndex(){
+  catalogById=new Map(standardCatalog.map(entry=>[entry.id,entry]));
 }
 
 function scoreTierToUi(scoreTier){
@@ -181,7 +198,7 @@ function migrateLegacyStorage(){
   const overrides={};
   const hiddenIds=[];
 
-  for(const catalogEntry of WORD_CATALOG){
+  for(const catalogEntry of standardCatalog){
     const old=legacy.find(entry=>entry.id===catalogEntry.id) || unmatched.get(normalizeWord(catalogEntry.word));
     if(!old){
       if(raw) hiddenIds.push(catalogEntry.id);
@@ -217,7 +234,7 @@ function loadSeparatedWords(){
   const custom=JSON.parse(localStorage.getItem(CUSTOM_WORDS_KEY)||"[]");
   const overrides=JSON.parse(localStorage.getItem(CATALOG_OVERRIDES_KEY)||"{}");
   const hidden=new Set(JSON.parse(localStorage.getItem(HIDDEN_CATALOG_KEY)||"[]"));
-  const builtIn=WORD_CATALOG
+  const builtIn=standardCatalog
     .filter(entry=>!hidden.has(entry.id))
     .map(entry=>runtimeWord(mergeCatalogContent(entry,overrides[entry.id]),progress[entry.id]));
   const customRuntime=custom.map(entry=>runtimeWord(entry,progress[entry.id]));
@@ -261,7 +278,7 @@ function save(){
       custom.push(runtimeContent(entry));
     }
   }
-  const hidden=WORD_CATALOG.filter(entry=>!activeIds.has(entry.id)).map(entry=>entry.id);
+  const hidden=standardCatalog.filter(entry=>!activeIds.has(entry.id)).map(entry=>entry.id);
   localStorage.setItem(PROGRESS_KEY,JSON.stringify(progress));
   localStorage.setItem(CUSTOM_WORDS_KEY,JSON.stringify(custom));
   localStorage.setItem(CATALOG_OVERRIDES_KEY,JSON.stringify(overrides));
@@ -654,6 +671,16 @@ function normalizeHeader(value){
   return value.trim().toLocaleLowerCase("en-US").replace(/[\s_-]/g,"");
 }
 
+function mapCsvHeader(record){
+  const map={};
+  if(!record) return map;
+  record.cells.map(normalizeHeader).forEach((name,index)=>{
+    const fieldName=CSV_HEADER_FIELDS.get(name);
+    if(fieldName && map[fieldName]===undefined) map[fieldName]=index;
+  });
+  return map;
+}
+
 function getCsvColumnMap(records){
   const first=records[0];
   const normalized=first ? first.cells.map(normalizeHeader) : [];
@@ -671,13 +698,9 @@ function getCsvColumnMap(records){
       errors:[]
     };
   }
-  const map={};
+  const map=mapCsvHeader(first);
   const errors=[];
   const headerLine=first ? first.line : 1;
-  normalized.forEach((name,index)=>{
-    const fieldName=CSV_HEADER_FIELDS.get(name);
-    if(fieldName && map[fieldName]===undefined) map[fieldName]=index;
-  });
   if(map.word===undefined) errors.push({line:headerLine,reason:"ヘッダーにword列がありません。"});
   if(map.meaning===undefined) errors.push({line:headerLine,reason:"ヘッダーにmeaning列がありません。"});
   return {hasHeader:true,map,errors};
@@ -705,6 +728,65 @@ function parseCsvTags(rawValue){
     tags.push(tag);
   }
   return tags;
+}
+
+function parseStandardCatalogCsv(text){
+  const parsed=parseCsv(text);
+  const header=parsed.records[0];
+  if(!header) throw new Error("標準CSVにヘッダーがありません。");
+  const map=mapCsvHeader(header);
+  const missing=STANDARD_CATALOG_FIELDS.filter(field=>map[field]===undefined);
+  if(missing.length) throw new Error(`標準CSVに必要な列がありません: ${missing.join(", ")}`);
+
+  const catalog=[];
+  const errors=[...parsed.errors];
+  const knownWords=new Set();
+  for(const record of parsed.records.slice(1)){
+    const wordValue=csvValue(record.cells,map,"word");
+    const meaningValue=csvValue(record.cells,map,"meaning");
+    const scoreTierValue=csvValue(record.cells,map,"scoreTier");
+    const difficultyValue=csvValue(record.cells,map,"difficulty");
+    const priorityValue=csvValue(record.cells,map,"priority");
+    let reason="";
+    if(record.invalidLine) reason="値の途中に不正なダブルクォートがあります。";
+    else if(!wordValue) reason="wordが空です。";
+    else if(!meaningValue) reason="meaningが空です。";
+    else if(!/^\d+$/.test(scoreTierValue) || !VALID_SCORE_TIERS.has(uiScoreToTier(Number(scoreTierValue)))) reason="scoreTierが不正です。";
+    else if(!/^[1-5]$/.test(difficultyValue)) reason="difficultyが1〜5ではありません。";
+    else if(!/^[1-5]$/.test(priorityValue)) reason="priorityが1〜5ではありません。";
+    const normalized=normalizeWord(wordValue);
+    if(!reason && knownWords.has(normalized)) reason="同じwordが標準CSV内で重複しています。";
+    if(reason){
+      errors.push({line:record.line,reason});
+      continue;
+    }
+    knownWords.add(normalized);
+    catalog.push({
+      id:createStandardCatalogId(wordValue),
+      word:wordValue,
+      meaning:meaningValue,
+      hint:csvValue(record.cells,map,"hint"),
+      partOfSpeech:csvValue(record.cells,map,"partOfSpeech"),
+      learningProfile:{
+        scoreTier:uiScoreToTier(Number(scoreTierValue)),
+        difficulty:Number(difficultyValue),
+        priority:Number(priorityValue)
+      },
+      tags:parseCsvTags(csvValue(record.cells,map,"tags"))
+    });
+  }
+  if(!catalog.length) throw new Error("標準CSVから有効な単語を読み込めませんでした。");
+  return {catalog,errors};
+}
+
+async function loadStandardCatalog(){
+  const response=await fetch(STANDARD_CATALOG_URL,{cache:"no-cache"});
+  if(!response.ok) throw new Error(`標準CSVの取得に失敗しました（HTTP ${response.status}）。`);
+  const result=parseStandardCatalogCsv(await response.text());
+  if(result.errors.length){
+    console.warn(`標準CSVの不正な${result.errors.length}件を除外しました。`,result.errors);
+  }
+  return result;
 }
 
 function validateCsvRow(record,map){
@@ -972,8 +1054,40 @@ resetAllBtn.addEventListener("click",()=>{
   localStorage.removeItem(HIDDEN_CATALOG_KEY);
   dailyActivity={date:todayKey(),newWords:0,reviewAnswers:0};
   saveDailyActivity();
-  words=WORD_CATALOG.map(entry=>runtimeWord(entry));
+  words=standardCatalog.map(entry=>runtimeWord(entry));
   save(); chooseNext(); refreshStats();
 });
 
-load();
+const initializationControls=[
+  newStartBtn,startBtn,resetTodayBtn,examDate,targetScore,dailyGoal,wordSearch,
+  csvFile,headerMode,fourthColumnType,addBtn,exportBtn,saveCsvBtn,resetAllBtn
+];
+
+function setAppLoading(isLoading){
+  initializationControls.forEach(control=>{control.disabled=isLoading;});
+  if(isLoading) catalogLoadStatus.textContent="標準単語データを読み込んでいます…";
+}
+
+async function initializeApp(){
+  setAppLoading(true);
+  let usedFallback=false;
+  try{
+    const result=await loadStandardCatalog();
+    standardCatalog=result.catalog;
+    catalogLoadStatus.textContent=`標準単語 ${standardCatalog.length.toLocaleString("ja-JP")}語を読み込みました。`;
+  } catch(error){
+    usedFallback=true;
+    standardCatalog=WORD_CATALOG;
+    catalogLoadStatus.textContent=`標準CSVを読み込めなかったため、内蔵の${standardCatalog.length}語で起動しました。`;
+    console.warn("標準CSVの読み込みに失敗し、WORD_CATALOGへフォールバックしました。",error);
+  }
+  rebuildCatalogIndex();
+  load();
+  setAppLoading(false);
+  document.documentElement.dataset.catalogSource=usedFallback ? "fallback" : "csv";
+}
+
+initializeApp().catch(error=>{
+  catalogLoadStatus.textContent="アプリの初期化に失敗しました。保存データは変更していません。";
+  console.error("アプリの初期化に失敗しました。",error);
+});
