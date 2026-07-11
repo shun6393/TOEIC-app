@@ -1,46 +1,3 @@
-const starterWords = [
-["abandon","放棄する","abandon a plan"],
-["acquire","獲得する","会社や技能を手に入れる"],
-["additional","追加の","addの仲間"],
-["adequate","十分な","必要量を満たす"],
-["approximately","およそ","aboutと同じ感覚"],
-["arrange","手配する、整える","予定や物を整える"],
-["available","利用できる、空いている","人・物・時間に使う"],
-["benefit","利益、恩恵","beneficialもセット"],
-["confirm","確認する","予約確認で頻出"],
-["conduct","実施する","conduct a survey"],
-["consider","検討する","consider doing"],
-["contract","契約","sign a contract"],
-["convenient","便利な","場所や時間にも使う"],
-["delay","遅らせる、遅延","flight delay"],
-["deliver","配達する、届ける","deliveryの動詞"],
-["department","部門、部署","sales department"],
-["despite","〜にもかかわらず","後ろは名詞"],
-["determine","決定する","determine whether"],
-["effective","効果的な","effectは名詞"],
-["employee","従業員","employerは雇用主"],
-["ensure","確実にする","make sureに近い"],
-["equipment","設備、機器","不可算名詞"],
-["estimate","見積もる、見積もり","price estimate"],
-["facility","施設、設備","複数形facilitiesも頻出"],
-["frequently","頻繁に","oftenより硬め"],
-["increase","増加する、増加","名詞と動詞"],
-["indicate","示す","グラフ説明で頻出"],
-["maintain","維持する","maintenanceもセット"],
-["negotiate","交渉する","negotiate with"],
-["notify","知らせる","notify A of B"],
-["participate","参加する","participate in"],
-["policy","方針、規定","company policy"],
-["postpone","延期する","put offと同じ"],
-["purchase","購入する、購入","buyより硬い"],
-["require","必要とする","require A to do"],
-["schedule","予定、予定を組む","発音はスケジュール"],
-["submit","提出する","submit a report"],
-["temporary","一時的な","temporary staff"],
-["vacant","空いている","部屋・役職に使う"],
-["verify","確認する、検証する","情報が正しいか確かめる"]
-];
-
 const LS_KEY = "toeic_cram_words_v1";
 const SETTINGS_KEY = "toeic_cram_settings_v1";
 const DEFAULT_TARGET_SCORE = 600;
@@ -66,9 +23,9 @@ function load(){
   if(raw){
     words = JSON.parse(raw);
   } else {
-    words = starterWords.map((w,i)=>({
+    words = STARTER_WORDS.map((entry,i)=>({
       id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()+i),
-      word:w[0], meaning:w[1], hint:w[2]||"",
+      word:entry.word, meaning:entry.meaning, hint:entry.hint||"",
       level:0, correct:0, wrong:0, next:0, seen:0, last:0
     }));
     save();
@@ -244,8 +201,8 @@ resetAllBtn.addEventListener("click",()=>{
   if(!confirm("単語と学習履歴を全部消す？")) return;
   localStorage.removeItem(LS_KEY);
   words=[];
-  starterWords.forEach((w,i)=>words.push({
-    id:String(Date.now()+i),word:w[0],meaning:w[1],hint:w[2]||"",
+  STARTER_WORDS.forEach((entry,i)=>words.push({
+    id:String(Date.now()+i),word:entry.word,meaning:entry.meaning,hint:entry.hint||"",
     level:0,correct:0,wrong:0,next:0,seen:0,last:0
   }));
   save(); chooseNext(); refreshStats();
