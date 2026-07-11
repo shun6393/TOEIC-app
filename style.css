@@ -44,6 +44,15 @@
   .plan-item span{display:block;font-size:12px;color:var(--muted);line-height:1.5}
   .plan-item b{display:block;font-size:19px;margin-top:4px}
   .plan-note{margin:8px 0 0;min-height:1.5em}
+  .today-plan{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+  .today-plan-item{border:1px solid var(--line);border-radius:12px;padding:12px}
+  .overall-plan{grid-column:1/-1}
+  .plan-progress-label{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13px}
+  .today-plan .progress{margin-top:8px}
+  .review-bar{background:var(--mid)}
+  .overall-bar{background:var(--good)}
+  .plan-warnings{display:none;margin:12px 0 0;padding:10px 10px 10px 30px;border-radius:12px;background:#fff7ed;color:#9a3412;font-size:13px;line-height:1.6}
+  .plan-disclaimer{margin:8px 0 0}
   details{margin-top:14px}
   summary{cursor:pointer;font-weight:700}
   .word-list-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:14px}
@@ -94,6 +103,8 @@
     .top{grid-template-columns:repeat(2,1fr)}
     .status-stats{grid-template-columns:repeat(2,1fr)}
     .plan-grid{grid-template-columns:repeat(2,1fr)}
+    .today-plan{grid-template-columns:1fr}
+    .overall-plan{grid-column:auto}
     .word-list,.word-list tbody,.word-list tr,.word-list td{display:block}
     .word-list thead{display:none}
     .word-list tr{border:1px solid var(--line);border-radius:12px;padding:8px 10px;margin-bottom:8px}

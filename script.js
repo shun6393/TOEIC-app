@@ -12,6 +12,9 @@ const VOCAB_TARGETS = Object.freeze({
   900: 4500
 });
 const DAILY_REVIEW_MULTIPLIER = 3;
+const HIGH_DAILY_NEW_THRESHOLD = 100;
+const HIGH_DAILY_REVIEW_THRESHOLD = 300;
+const HIGH_TOTAL_ANSWERS_THRESHOLD = 500;
 const WORDS_PER_PAGE = 50;
 const VALID_WORD_TARGET_SCORES = new Set([400,500,600,700,800,900]);
 const CSV_HEADER_FIELDS = new Map([
@@ -214,33 +217,89 @@ function refreshStats(){
   learningCount.textContent=counts.learning;
   reviewCount.textContent=counts.review;
   masteredCount.textContent=counts.mastered;
-  const exam = new Date(examDate.value+"T23:59:59");
-  const days = Math.max(0, Math.ceil((exam-new Date())/86400000));
-  daysLeft.textContent=days;
+  const dateInfo=getStudyDateInfo();
+  daysLeft.textContent=dateInfo.days;
   const goal=Number(dailyGoal.value)||100;
   goalBar.style.width=Math.min(100,today/goal*100)+"%";
   goalText.textContent=`今日 ${today} / ${goal} 回回答`;
-  refreshStudyPlan(days, due);
+  refreshStudyPlan(dateInfo,due,counts);
   renderWordList();
 }
 
-function refreshStudyPlan(days, due){
+function getStudyDateInfo(){
+  if(!examDate.value) return {days:0,isToday:false,isPast:false,valid:false};
+  const [year,month,day]=examDate.value.split("-").map(Number);
+  const today=new Date();
+  const todayUtc=Date.UTC(today.getFullYear(),today.getMonth(),today.getDate());
+  const examUtc=Date.UTC(year,month-1,day);
+  const difference=Math.round((examUtc-todayUtc)/86400000);
+  const valid=Number.isFinite(difference);
+  return {
+    days:valid ? Math.max(0,difference) : 0,
+    isToday:valid && difference===0,
+    isPast:valid && difference<0,
+    valid
+  };
+}
+
+function setProgressBar(element,value,target){
+  element.style.width=(target>0 ? Math.min(100,value/target*100) : 0)+"%";
+}
+
+function refreshStudyPlan(dateInfo,due,counts){
   const score=Number(targetScore.value)||DEFAULT_TARGET_SCORE;
   const target=VOCAB_TARGETS[score];
-  const studied=words.filter(w=>(w.seen||0)>0).length;
+  const studied=counts.learning+counts.review+counts.mastered;
   const remaining=Math.max(0,target-studied);
-  const dailyNew=days>0 ? Math.ceil(remaining/days) : 0;
-  const reviewEstimate=days>0
-    ? Math.max(due,dailyNew*DAILY_REVIEW_MULTIPLIER)
+  const dailyNewEstimate=dateInfo.days>0 ? Math.ceil(remaining/dateInfo.days) : 0;
+  const reviewEstimate=dateInfo.days>0
+    ? Math.max(due,dailyNewEstimate*DAILY_REVIEW_MULTIPLIER)
     : 0;
+  const todayNewGoal=dateInfo.days>0 ? Math.min(dailyNewEstimate,counts.unseen) : 0;
+  const todayReviewGoal=dateInfo.days>0
+    ? Math.max(due,todayNewGoal*DAILY_REVIEW_MULTIPLIER)
+    : 0;
+  const overallPercent=target>0 ? Math.min(100,studied/target*100) : 0;
 
   vocabTarget.textContent=`約${target.toLocaleString("ja-JP")}語`;
+  registeredPlanCount.textContent=`${words.length.toLocaleString("ja-JP")}語`;
+  studiedPlanCount.textContent=`${studied.toLocaleString("ja-JP")}語`;
   remainingNew.textContent=`${remaining.toLocaleString("ja-JP")}語`;
-  dailyNew.textContent=`${dailyNew.toLocaleString("ja-JP")}語`;
+  planDaysLeft.textContent=`${dateInfo.days.toLocaleString("ja-JP")}日`;
+  dailyNew.textContent=`${dailyNewEstimate.toLocaleString("ja-JP")}語`;
   dailyReview.textContent=`${reviewEstimate.toLocaleString("ja-JP")}回`;
-  planNotice.textContent=days>0
-    ? `学習済み ${studied.toLocaleString("ja-JP")}語を基準に計算しています。`
-    : "試験日を未来の日付に設定すると学習計画を計算します。";
+  todayNewPlanText.textContent=`${dailyActivity.newWords.toLocaleString("ja-JP")}語 / ${todayNewGoal.toLocaleString("ja-JP")}語`;
+  todayReviewPlanText.textContent=`${dailyActivity.reviewAnswers.toLocaleString("ja-JP")}回 / ${todayReviewGoal.toLocaleString("ja-JP")}回`;
+  overallPlanText.textContent=`${studied.toLocaleString("ja-JP")}語 / ${target.toLocaleString("ja-JP")}語（${Math.round(overallPercent)}%）`;
+  setProgressBar(todayNewBar,dailyActivity.newWords,todayNewGoal);
+  setProgressBar(todayReviewBar,dailyActivity.reviewAnswers,todayReviewGoal);
+  overallPlanBar.style.width=overallPercent+"%";
+
+  const warnings=[];
+  if(!dateInfo.valid){
+    warnings.push("試験日を設定してください。");
+  } else if(dateInfo.isPast){
+    warnings.push("試験日を過ぎています。新しい試験日を設定してください。");
+  } else if(dateInfo.isToday){
+    warnings.push("試験日は今日です。新しい長期計画は作成できないため、復習時刻が来ている単語を優先してください。");
+  }
+  if(words.length<target){
+    warnings.push(`目標${score}点の語彙数目安まで、約${(target-words.length).toLocaleString("ja-JP")}語の追加登録が必要です。`);
+  }
+  if(dateInfo.days>0 && counts.unseen<dailyNewEstimate){
+    warnings.push(`今日の必要新規数は${dailyNewEstimate.toLocaleString("ja-JP")}語ですが、登録済みの未学習単語は${counts.unseen.toLocaleString("ja-JP")}語です。`);
+  }
+  if(dailyNewEstimate>HIGH_DAILY_NEW_THRESHOLD || reviewEstimate>HIGH_DAILY_REVIEW_THRESHOLD || dailyNewEstimate+reviewEstimate>HIGH_TOTAL_ANSWERS_THRESHOLD){
+    warnings.push(`1日あたり新規${dailyNewEstimate.toLocaleString("ja-JP")}語・復習${reviewEstimate.toLocaleString("ja-JP")}回の計画です。継続が難しい可能性があるため、試験日や目標点数を見直してください。`);
+  }
+  planWarnings.replaceChildren();
+  for(const warning of warnings){
+    const item=document.createElement("li");
+    item.textContent=warning;
+    planWarnings.appendChild(item);
+  }
+  planWarnings.style.display=warnings.length ? "block" : "none";
+  planNotice.textContent=`学習開始済み${studied.toLocaleString("ja-JP")}語、定着済み${counts.mastered.toLocaleString("ja-JP")}語を基準に計算しています。`;
 }
 
 function getWordStatus(entry){

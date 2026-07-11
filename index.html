@@ -49,11 +49,30 @@
       <h2 id="studyPlanTitle">目標達成までの学習計画</h2>
       <div class="plan-grid">
         <div class="plan-item"><span>必要語彙数の目安</span><b id="vocabTarget">0語</b></div>
+        <div class="plan-item"><span>登録単語数</span><b id="registeredPlanCount">0語</b></div>
+        <div class="plan-item"><span>学習済み語数</span><b id="studiedPlanCount">0語</b></div>
         <div class="plan-item"><span>残り新規単語数</span><b id="remainingNew">0語</b></div>
+        <div class="plan-item"><span>学習できる残り日数</span><b id="planDaysLeft">0日</b></div>
         <div class="plan-item"><span>1日に覚える新規単語</span><b id="dailyNew">0語</b></div>
         <div class="plan-item"><span>1日の復習回数目安</span><b id="dailyReview">0回</b></div>
       </div>
+      <div class="today-plan">
+        <div class="today-plan-item">
+          <div class="plan-progress-label"><b>今日の新規</b><span id="todayNewPlanText">0語 / 0語</span></div>
+          <div class="progress"><div class="bar" id="todayNewBar"></div></div>
+        </div>
+        <div class="today-plan-item">
+          <div class="plan-progress-label"><b>今日の復習</b><span id="todayReviewPlanText">0回 / 0回</span></div>
+          <div class="progress"><div class="bar review-bar" id="todayReviewBar"></div></div>
+        </div>
+        <div class="today-plan-item overall-plan">
+          <div class="plan-progress-label"><b>全体進捗</b><span id="overallPlanText">0語 / 0語（0%）</span></div>
+          <div class="progress"><div class="bar overall-bar" id="overallPlanBar"></div></div>
+        </div>
+      </div>
+      <ul class="plan-warnings" id="planWarnings" aria-live="polite"></ul>
       <p class="small plan-note" id="planNotice"></p>
+      <p class="small plan-disclaimer">必要語彙数と学習量は目安であり、TOEICスコアを保証するものではありません。</p>
     </section>
   </div>
 
