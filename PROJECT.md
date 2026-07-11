@@ -3,7 +3,11 @@
 ## 概要
 
 短期間で目標TOEICスコアを達成するための単語学習アプリ
-chatgpt,codexを活用して作成
+
+## バージョン
+
+v1.0.0
+
 ## 技術
 
 - HTML
@@ -11,28 +15,54 @@ chatgpt,codexを活用して作成
 - JavaScript
 - Local Storage
 - Git
-
-## ローカル起動
-
-標準単語は `toeic-words.csv` から `fetch` で読み込むため、`index.html` を直接ダブルクリックせず、ローカルHTTPサーバー経由で開いてください。
-
-例：
-
-```powershell
-python -m http.server 8000
-```
-
-起動後、ブラウザで `http://localhost:8000/` を開きます。VS CodeのLive Serverも利用できます。外部ライブラリの追加は不要です。
+- GitHub Pages
+- Fetch API
 
 ## 実装済み
 
 - Git導入
+- GitHub Pages公開
+- 標準単語CSV管理
+- 起動時CSV自動読み込み
 - CSVインポート
 - CSVエクスポート
 - 学習履歴
 - 目標点数設定
 - 単語検索
 - 約1540語登録済み
+
+## データ構成
+
+### 標準単語
+- `toeic-words.csv`で管理
+- 起動時に自動読み込み
+- 全ユーザー共通
+
+### ユーザーデータ（Local Storage）
+- 学習履歴
+- アプリ設定
+- ユーザー追加単語
+
+## 公開
+
+GitHub Pagesで公開
+
+新規ユーザーはURLを開くだけで約1540語を利用可能。
+
+## 開発環境
+
+### 公開環境
+- GitHub Pages
+
+### ローカル実行
+
+開発時はローカルHTTPサーバーを使用する。
+
+例
+- VS Code Live Server
+- `python -m http.server`
+
+※ `index.html` を `file://` で直接開くと、Fetch APIによる標準単語CSVの自動読み込みが動作しない。
 
 ## 今後の予定
 
@@ -44,7 +74,10 @@ python -m http.server 8000
 
 ## 開発ルール
 
-- ChatGPTは設計、仕様検討、レビュー、優先順位の提案を担当する。
-- 実装は原則としてCodexで行う。
-- ChatGPTは基本的にコードを直接生成せず、Codexへ送るためのプロンプト作成を優先する。
-- コードレビューや設計レビューが必要な場合のみコードを扱う。
+- 設計はChatGPTで行う
+- 実装はCodexで行う
+- 実装前に設計を確定する
+- 機能ごとにコミットする
+- 動作確認後にGitHubへPushする
+- 実装完了後はCHANGELOGを更新する
+- アイデアはIDEASへ追加する
