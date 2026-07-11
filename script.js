@@ -10,10 +10,12 @@ const VOCAB_TARGETS = Object.freeze({
   900: 4500
 });
 const DAILY_REVIEW_MULTIPLIER = 3;
+const WORDS_PER_PAGE = 50;
 
 let words = [];
 let current = null;
 let revealed = false;
+let wordListPage = 1;
 
 function now(){ return Date.now(); }
 function todayKey(){ return new Date().toISOString().slice(0,10); }
@@ -137,6 +139,7 @@ function refreshStats(){
   goalBar.style.width=Math.min(100,today/goal*100)+"%";
   goalText.textContent=`今日 ${today} / ${goal} 回回答`;
   refreshStudyPlan(days, due);
+  renderWordList();
 }
 
 function refreshStudyPlan(days, due){
@@ -158,6 +161,58 @@ function refreshStudyPlan(days, due){
     : "試験日を未来の日付に設定すると学習計画を計算します。";
 }
 
+function getWordStatus(entry){
+  if((entry.seen||0)===0) return {label:"未学習", className:"status-unseen"};
+  if((entry.level||0)>=4) return {label:"ほぼ定着", className:"status-mastered"};
+  return {label:"学習中", className:"status-learning"};
+}
+
+function appendWordCell(row, text, label, className=""){
+  const cell=document.createElement("td");
+  cell.textContent=text;
+  cell.dataset.label=label;
+  if(className) cell.className=className;
+  row.appendChild(cell);
+  return cell;
+}
+
+function renderWordList(){
+  const query=wordSearch.value.trim().toLocaleLowerCase("ja-JP");
+  const filtered=words.filter(entry=>
+    entry.word.toLocaleLowerCase("ja-JP").includes(query) ||
+    entry.meaning.toLocaleLowerCase("ja-JP").includes(query)
+  );
+  const totalPages=Math.max(1,Math.ceil(filtered.length/WORDS_PER_PAGE));
+  wordListPage=Math.min(Math.max(1,wordListPage),totalPages);
+  const start=(wordListPage-1)*WORDS_PER_PAGE;
+  const visible=filtered.slice(start,start+WORDS_PER_PAGE);
+
+  registeredCount.textContent=words.length.toLocaleString("ja-JP");
+  searchResultCount.textContent=query
+    ? `検索結果 ${filtered.length.toLocaleString("ja-JP")} / ${words.length.toLocaleString("ja-JP")}語`
+    : `全${words.length.toLocaleString("ja-JP")}語`;
+  wordListBody.replaceChildren();
+
+  for(const entry of visible){
+    const row=document.createElement("tr");
+    appendWordCell(row,entry.word,"英単語");
+    appendWordCell(row,entry.meaning,"意味");
+    appendWordCell(row,entry.hint||"—","ヒント");
+    const status=getWordStatus(entry);
+    const statusCell=appendWordCell(row,"","学習状況");
+    const badge=document.createElement("span");
+    badge.className=`status ${status.className}`;
+    badge.textContent=status.label;
+    statusCell.appendChild(badge);
+    wordListBody.appendChild(row);
+  }
+
+  wordListEmpty.style.display=filtered.length ? "none" : "block";
+  pageInfo.textContent=`${wordListPage} / ${totalPages}ページ`;
+  prevPageBtn.disabled=wordListPage===1;
+  nextPageBtn.disabled=wordListPage===totalPages;
+}
+
 card.addEventListener("click", reveal);
 startBtn.addEventListener("click", chooseNext);
 badBtn.addEventListener("click",()=>answer("bad"));
@@ -167,6 +222,9 @@ goodBtn.addEventListener("click",()=>answer("good"));
 examDate.addEventListener("change",()=>{save();refreshStats();});
 targetScore.addEventListener("change",()=>{save();refreshStats();});
 dailyGoal.addEventListener("change",()=>{save();refreshStats();});
+wordSearch.addEventListener("input",()=>{wordListPage=1;renderWordList();});
+prevPageBtn.addEventListener("click",()=>{wordListPage--;renderWordList();});
+nextPageBtn.addEventListener("click",()=>{wordListPage++;renderWordList();});
 
 resetTodayBtn.addEventListener("click",()=>{
   const td=todayKey();
