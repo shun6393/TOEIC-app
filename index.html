@@ -113,7 +113,7 @@
     </div>
     <div class="word-import">
     <h2>CSV一括登録</h2>
-    <p class="small">必須：word、meaning／任意：hint、targetScore、level、priority、partOfSpeech</p>
+    <p class="small">必須：word、meaning／任意：hint、partOfSpeech、scoreTier、difficulty、priority、tags</p>
     <div class="csv-options">
       <label>CSVファイル <input type="file" id="csvFile" accept=".csv,text/csv"></label>
       <label>ヘッダー
@@ -123,17 +123,19 @@
           <option value="no">なし</option>
         </select>
       </label>
-      <label id="fourthColumnLabel">ヘッダーなしの4列目
+      <label id="fourthColumnLabel">ヘッダーなし形式
         <select id="fourthColumnType">
-          <option value="level">level</option>
-          <option value="targetScore">targetScore</option>
+          <option value="catalog">新8列形式</option>
+          <option value="legacyLevel">旧形式（4列目 level）</option>
+          <option value="legacyTargetScore">旧形式（4列目 targetScore）</option>
         </select>
       </label>
     </div>
-    <textarea id="importBox" placeholder="abandon,放棄する,abandon shipで覚える&#10;purchase,購入する,名詞と動詞の両方"></textarea>
+    <textarea id="importBox" placeholder="word,meaning,hint,partOfSpeech,scoreTier,difficulty,priority,tags&#10;available,利用できる,人・物・時間に使う,adjective,400,2,5,scheduling|general"></textarea>
     <div class="row" style="margin-top:10px">
       <button class="primary" id="addBtn">CSVを登録する</button>
       <button class="ghost" id="exportBtn">一覧を表示</button>
+      <button class="ghost" id="saveCsvBtn">CSV保存</button>
       <button class="danger" id="resetAllBtn">学習データを全削除</button>
     </div>
     <section class="import-result" id="importResult" aria-live="polite">

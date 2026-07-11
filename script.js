@@ -21,11 +21,12 @@ const HIGH_DAILY_NEW_THRESHOLD = 100;
 const HIGH_DAILY_REVIEW_THRESHOLD = 300;
 const HIGH_TOTAL_ANSWERS_THRESHOLD = 500;
 const WORDS_PER_PAGE = 50;
-const VALID_WORD_TARGET_SCORES = new Set([400,500,600,700,800,900]);
+const VALID_SCORE_TIERS = new Set([400,500,600,730,860]);
 const CSV_HEADER_FIELDS = new Map([
   ["word","word"], ["meaning","meaning"], ["hint","hint"],
-  ["targetscore","targetScore"], ["level","level"],
-  ["priority","priority"], ["partofspeech","partOfSpeech"]
+  ["scoretier","scoreTier"], ["targetscore","scoreTier"],
+  ["difficulty","difficulty"], ["priority","priority"],
+  ["partofspeech","partOfSpeech"], ["tags","tags"], ["level","level"]
 ]);
 
 let words = [];
@@ -659,9 +660,14 @@ function getCsvColumnMap(records){
   const autoHeader=normalized.includes("word") && normalized.includes("meaning");
   const hasHeader=headerMode.value==="yes" || (headerMode.value==="auto" && autoHeader);
   if(!hasHeader){
+    const legacyMap=fourthColumnType.value==="legacyLevel"
+      ? {word:0,meaning:1,hint:2,level:3,priority:4,partOfSpeech:5}
+      : {word:0,meaning:1,hint:2,scoreTier:3,priority:4,partOfSpeech:5};
     return {
       hasHeader:false,
-      map:{word:0,meaning:1,hint:2,[fourthColumnType.value]:3,priority:4,partOfSpeech:5},
+      map:fourthColumnType.value==="catalog"
+        ? {word:0,meaning:1,hint:2,partOfSpeech:3,scoreTier:4,difficulty:5,priority:6,tags:7}
+        : legacyMap,
       errors:[]
     };
   }
@@ -681,21 +687,47 @@ function csvValue(cells,map,name){
   return map[name]===undefined ? "" : (cells[map[name]]||"").trim();
 }
 
+function normalizeCsvScoreTier(rawValue){
+  if(rawValue==="") return 600;
+  if(!/^\d+$/.test(rawValue)) return null;
+  const converted=uiScoreToTier(Number(rawValue));
+  return VALID_SCORE_TIERS.has(converted) ? converted : null;
+}
+
+function parseCsvTags(rawValue){
+  const tags=[];
+  const known=new Set();
+  for(const value of rawValue.split("|")){
+    const tag=value.trim();
+    const normalized=tag.toLocaleLowerCase("en-US");
+    if(!tag || known.has(normalized)) continue;
+    known.add(normalized);
+    tags.push(tag);
+  }
+  return tags;
+}
+
 function validateCsvRow(record,map){
   const value={
     word:csvValue(record.cells,map,"word"),
     meaning:csvValue(record.cells,map,"meaning"),
     hint:csvValue(record.cells,map,"hint"),
-    targetScore:csvValue(record.cells,map,"targetScore"),
+    scoreTier:csvValue(record.cells,map,"scoreTier"),
+    difficulty:csvValue(record.cells,map,"difficulty"),
     level:csvValue(record.cells,map,"level"),
     priority:csvValue(record.cells,map,"priority"),
-    partOfSpeech:csvValue(record.cells,map,"partOfSpeech")
+    partOfSpeech:csvValue(record.cells,map,"partOfSpeech"),
+    tags:csvValue(record.cells,map,"tags")
   };
   if(record.invalidLine) return {error:"値の途中に不正なダブルクォートがあります。"};
   if(!value.word) return {error:"wordが空です。"};
   if(!value.meaning) return {error:"meaningが空です。"};
-  if(value.targetScore && (!/^\d+$/.test(value.targetScore) || !VALID_WORD_TARGET_SCORES.has(Number(value.targetScore)))){
-    return {error:"targetScoreは400〜900の100点刻みで指定してください。"};
+  const normalizedScoreTier=normalizeCsvScoreTier(value.scoreTier);
+  if(normalizedScoreTier===null){
+    return {error:"scoreTierは400、500、600、730、860で指定してください（700、800、900も変換できます）。"};
+  }
+  if(value.difficulty && (!/^\d+$/.test(value.difficulty) || Number(value.difficulty)<1 || Number(value.difficulty)>5)){
+    return {error:"difficultyは1〜5の整数で指定してください。"};
   }
   if(value.level && (!/^\d+$/.test(value.level) || Number(value.level)>6)){
     return {error:"levelは0〜6の整数で指定してください。"};
@@ -703,7 +735,13 @@ function validateCsvRow(record,map){
   if(value.priority && (!/^\d+$/.test(value.priority) || Number(value.priority)<1 || Number(value.priority)>5)){
     return {error:"priorityは1〜5の整数で指定してください。"};
   }
-  return {value};
+  return {value:{
+    ...value,
+    scoreTier:normalizedScoreTier,
+    difficulty:value.difficulty ? Number(value.difficulty) : 3,
+    priority:value.priority ? Number(value.priority) : 3,
+    tags:parseCsvTags(value.tags)
+  }};
 }
 
 function showImportResult(success,duplicates,errors){
@@ -750,9 +788,11 @@ function importCsvText(text){
     words.push({
       id:crypto.randomUUID ? crypto.randomUUID() : String(Date.now()+Math.random()),
       word:value.word, meaning:value.meaning, hint:value.hint,
-      targetScore:value.targetScore ? Number(value.targetScore) : undefined,
-      priority:value.priority ? Number(value.priority) : undefined,
-      partOfSpeech:value.partOfSpeech||undefined,
+      targetScore:scoreTierToUi(value.scoreTier),
+      difficulty:value.difficulty,
+      priority:value.priority,
+      partOfSpeech:value.partOfSpeech,
+      tags:value.tags,
       status:WORD_STATUS.UNSEEN,
       level:value.level ? Number(value.level) : 0,
       correct:0, wrong:0, next:0, seen:0, last:0
@@ -762,6 +802,42 @@ function importCsvText(text){
   if(added) save();
   refreshStats();
   showImportResult(added,duplicates,errors);
+}
+
+function escapeCsvCell(value){
+  const text=String(value??"");
+  return /[",\r\n]/.test(text) ? `"${text.replace(/"/g,'""')}"` : text;
+}
+
+function buildCatalogCsv(){
+  const header=["word","meaning","hint","partOfSpeech","scoreTier","difficulty","priority","tags"];
+  const rows=words.map(entry=>{
+    const content=runtimeContent(entry);
+    return [
+      content.word,
+      content.meaning,
+      content.hint,
+      content.partOfSpeech,
+      content.learningProfile.scoreTier,
+      content.learningProfile.difficulty,
+      content.learningProfile.priority,
+      content.tags.join("|")
+    ];
+  });
+  return [header,...rows].map(row=>row.map(escapeCsvCell).join(",")).join("\r\n");
+}
+
+function saveCatalogCsvFile(){
+  const csv=`\uFEFF${buildCatalogCsv()}`;
+  const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const link=document.createElement("a");
+  link.href=url;
+  link.download=`toeic-words-${todayKey().replace(/-/g,"")}.csv`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
 }
 
 card.addEventListener("click", reveal);
@@ -883,8 +959,9 @@ headerMode.addEventListener("change",()=>{
 });
 
 exportBtn.addEventListener("click",()=>{
-  importBox.value=words.map(w=>[w.word,w.meaning,w.hint||""].join(",")).join("\n");
+  importBox.value=buildCatalogCsv();
 });
+saveCsvBtn.addEventListener("click",saveCatalogCsvFile);
 
 resetAllBtn.addEventListener("click",()=>{
   if(!confirm("単語と学習履歴を全部消す？")) return;
