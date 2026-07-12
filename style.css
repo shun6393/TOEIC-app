@@ -30,6 +30,7 @@
   .meaning{font-size:22px;margin-top:18px;display:none}
   .hint{font-size:14px;color:var(--muted);margin-top:12px;display:none;line-height:1.7}
   .tap{margin-top:28px;color:var(--muted);font-size:14px}
+  .next-review{min-height:1.5em;margin:12px 0 0;color:var(--accent);font-size:14px;font-weight:700}
   .buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
   .bad{background:#fee2e2;color:#991b1b}
   .mid{background:#fef3c7;color:#92400e}
@@ -91,11 +92,14 @@
   .modal-close{background:transparent;color:var(--muted);font-size:24px;line-height:1;padding:4px 8px}
   .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
   .form-grid label{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:700}
+  .field-note{font-size:12px;color:var(--muted);font-weight:400}
   .form-grid input,.form-grid textarea{width:100%}
+  .form-grid input[readonly]{background:var(--bg);color:var(--muted)}
   .form-grid textarea{min-height:76px;margin:0}
   .form-wide{grid-column:1/-1}
   .form-error{color:var(--bad);font-size:13px;min-height:1.5em;margin:8px 0 0}
   .modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+  .modal-actions .history-reset{margin-right:auto}
   .delete-history{background:var(--bg);border-radius:12px;padding:12px;line-height:1.7;font-size:14px}
   .danger-text{color:var(--bad);font-weight:700}
   textarea{width:100%;min-height:120px;margin-top:10px}
@@ -113,6 +117,8 @@
     .word-list td::before{content:attr(data-label);position:absolute;left:0;width:80px;color:var(--muted);font-size:12px;font-weight:400}
     .form-grid{grid-template-columns:1fr}
     .form-wide{grid-column:auto}
+    .modal-actions{flex-wrap:wrap}
+    .modal-actions .history-reset{width:100%;margin-right:0}
     .word{font-size:34px}
     .buttons{grid-template-columns:1fr}
   }

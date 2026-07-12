@@ -18,12 +18,31 @@ const VOCAB_TARGETS = Object.freeze({
   800: 3200,
   900: 4500
 });
-const DAILY_REVIEW_MULTIPLIER = 3;
 const HIGH_DAILY_NEW_THRESHOLD = 100;
 const HIGH_DAILY_REVIEW_THRESHOLD = 300;
 const HIGH_TOTAL_ANSWERS_THRESHOLD = 500;
 const WORDS_PER_PAGE = 50;
 const VALID_SCORE_TIERS = new Set([400,500,600,730,860]);
+const REVIEW_CONFIG = Object.freeze({
+  scheduleVersion:1,
+  learningAgainMinutes:10,
+  learningHardMinutes:60,
+  learningGoodMinutes:360,
+  learningStepOneHardMinutes:180,
+  initialReviewStrengthHours:24,
+  goodEarlyMultiplier:1.5,
+  goodOnTimeMultiplier:1.8,
+  goodLateMultiplier:2.2,
+  hardStrengthMultiplier:1.1,
+  hardIntervalMultiplier:0.5,
+  lapseStrengthMultiplier:0.3,
+  relearningStrengthMultiplier:1.2,
+  relearningMaxStrengthHours:72,
+  masteredThresholdHours:24*30,
+  maxStrengthHours:24*90,
+  targetRetention:0.9
+});
+const LEGACY_STRENGTH_HOURS = Object.freeze([1,6,12,24,48,96,168]);
 const CSV_HEADER_FIELDS = new Map([
   ["id","id"],
   ["word","word"], ["meaning","meaning"], ["hint","hint"],
@@ -45,6 +64,170 @@ let standardCatalog = [];
 let catalogById = new Map();
 
 function now(){ return Date.now(); }
+
+function calculateRetention(elapsedHours,memoryStrengthHours){
+  const elapsed=Number(elapsedHours);
+  const strength=Number(memoryStrengthHours);
+  // 不正入力は正常な計算結果と区別できないが、安全な中立値として目標保持率を返す。
+  if(!Number.isFinite(elapsed) || !Number.isFinite(strength) || strength<=0){
+    return REVIEW_CONFIG.targetRetention;
+  }
+  return Math.pow(REVIEW_CONFIG.targetRetention,Math.max(0,elapsed)/strength);
+}
+
+function deriveLevel(memoryStrengthHours,learningStep){
+  if(learningStep!==null) return 0;
+  if(memoryStrengthHours===null || memoryStrengthHours===undefined) return 0;
+  const strength=Number(memoryStrengthHours);
+  if(!Number.isFinite(strength) || strength<=0) return 0;
+  if(strength<24) return 1;
+  if(strength<72) return 2;
+  if(strength<168) return 3;
+  if(strength<336) return 4;
+  if(strength<720) return 5;
+  return 6;
+}
+
+function calculateTimingRatio(elapsedHours,lastIntervalHours){
+  const elapsed=Number(elapsedHours);
+  const interval=Number(lastIntervalHours);
+  if(!Number.isFinite(elapsed) || elapsed<0 || !Number.isFinite(interval) || interval<=0) return 1;
+  return elapsed/interval;
+}
+
+function calculateElapsedHours(currentTimestamp,previousTimestamp){
+  const current=Number(currentTimestamp);
+  const previous=Number(previousTimestamp);
+  // 回答前のlastが不正ならNaNを返し、calculateTimingRatio()で予定時刻付近として扱う。
+  if(!Number.isFinite(current) || !Number.isFinite(previous) || previous<=0) return Number.NaN;
+  return Math.max(0,(current-previous)/(60*60*1000));
+}
+
+function calculateGoodGrowthFactor(timingRatio){
+  const ratio=Number(timingRatio);
+  if(!Number.isFinite(ratio)) return REVIEW_CONFIG.goodOnTimeMultiplier;
+  if(ratio<0.75) return REVIEW_CONFIG.goodEarlyMultiplier;
+  if(ratio<=1.25) return REVIEW_CONFIG.goodOnTimeMultiplier;
+  return REVIEW_CONFIG.goodLateMultiplier;
+}
+
+function calculateReviewSchedule({rating,memoryStrengthHours,elapsedHours,lastIntervalHours}){
+  const parsedStrength=Number(memoryStrengthHours);
+  const currentStrength=Number.isFinite(parsedStrength) && parsedStrength>0
+    ? parsedStrength
+    : REVIEW_CONFIG.initialReviewStrengthHours;
+
+  if(rating==="again"){
+    const strength=Math.max(1,currentStrength*REVIEW_CONFIG.lapseStrengthMultiplier);
+    return {
+      memoryStrengthHours:strength,
+      nextIntervalHours:REVIEW_CONFIG.learningAgainMinutes/60,
+      status:WORD_STATUS.LEARNING,
+      learningStep:0
+    };
+  }
+
+  if(rating==="hard"){
+    const strength=Math.min(
+      currentStrength*REVIEW_CONFIG.hardStrengthMultiplier,
+      REVIEW_CONFIG.maxStrengthHours
+    );
+    return {
+      memoryStrengthHours:strength,
+      nextIntervalHours:Math.max(strength*REVIEW_CONFIG.hardIntervalMultiplier,1),
+      status:WORD_STATUS.REVIEW,
+      learningStep:null
+    };
+  }
+
+  if(rating==="good"){
+    const timingRatio=calculateTimingRatio(elapsedHours,lastIntervalHours);
+    const growthFactor=calculateGoodGrowthFactor(timingRatio);
+    const strength=Math.min(currentStrength*growthFactor,REVIEW_CONFIG.maxStrengthHours);
+    return {
+      memoryStrengthHours:strength,
+      nextIntervalHours:strength,
+      status:strength>=REVIEW_CONFIG.masteredThresholdHours
+        ? WORD_STATUS.MASTERED
+        : WORD_STATUS.REVIEW,
+      learningStep:null,
+      timingRatio,
+      growthFactor
+    };
+  }
+
+  return null;
+}
+
+function calculateLearningSchedule({status,learningStep,rating,memoryStrengthHours,lapses}){
+  const parsedStrength=Number(memoryStrengthHours);
+  const currentStrength=Number.isFinite(parsedStrength) && parsedStrength>0
+    ? parsedStrength
+    : null;
+  const isUnseen=status===WORD_STATUS.UNSEEN;
+  if(!isUnseen && status!==WORD_STATUS.LEARNING) return null;
+
+  if(isUnseen || learningStep===0){
+    if(rating==="again"){
+      return {
+        memoryStrengthHours:Math.max(currentStrength??1,1),
+        learningStep:0,
+        status:WORD_STATUS.LEARNING,
+        nextIntervalHours:REVIEW_CONFIG.learningAgainMinutes/60
+      };
+    }
+    if(rating==="hard" || rating==="good"){
+      return {
+        memoryStrengthHours:Math.max(currentStrength??1,6),
+        learningStep:1,
+        status:WORD_STATUS.LEARNING,
+        nextIntervalHours:(rating==="hard"
+          ? REVIEW_CONFIG.learningHardMinutes
+          : REVIEW_CONFIG.learningGoodMinutes)/60
+      };
+    }
+    return null;
+  }
+
+  if(learningStep===1){
+    if(rating==="again"){
+      return {
+        memoryStrengthHours:Math.max(currentStrength??1,1),
+        learningStep:0,
+        status:WORD_STATUS.LEARNING,
+        nextIntervalHours:REVIEW_CONFIG.learningAgainMinutes/60
+      };
+    }
+    if(rating==="hard"){
+      return {
+        memoryStrengthHours:currentStrength??6,
+        learningStep:1,
+        status:WORD_STATUS.LEARNING,
+        nextIntervalHours:REVIEW_CONFIG.learningStepOneHardMinutes/60
+      };
+    }
+    if(rating==="good"){
+      const strength=(Number(lapses)||0)>0
+        ? Math.min(
+          REVIEW_CONFIG.relearningMaxStrengthHours,
+          Math.max(
+            REVIEW_CONFIG.initialReviewStrengthHours,
+            (currentStrength??REVIEW_CONFIG.initialReviewStrengthHours)*REVIEW_CONFIG.relearningStrengthMultiplier
+          )
+        )
+        : Math.max(currentStrength??0,REVIEW_CONFIG.initialReviewStrengthHours);
+      return {
+        memoryStrengthHours:strength,
+        learningStep:null,
+        status:WORD_STATUS.REVIEW,
+        nextIntervalHours:strength
+      };
+    }
+  }
+
+  return null;
+}
+
 function todayKey(){
   const date=new Date();
   const year=date.getFullYear();
@@ -61,6 +244,55 @@ function migrateWordStatus(entry){
   else entry.status=WORD_STATUS.REVIEW;
   if((entry.seen||0)>0 && !entry.firstLearnedAt) entry.firstLearnedAt=entry.last||0;
   return true;
+}
+
+function migrateReviewSchedule(entry){
+  let migrated=false;
+  const hasOwn=key=>Object.prototype.hasOwnProperty.call(entry,key);
+  const last=Number(entry.last);
+  const next=Number(entry.next);
+  const storedIntervalHours=Number.isFinite(last) && Number.isFinite(next) && next>last
+    ? (next-last)/(60*60*1000)
+    : null;
+
+  if(!hasOwn("memoryStrengthHours")){
+    const legacyLevel=Number(entry.level);
+    const legacyStrength=Number.isInteger(legacyLevel) && LEGACY_STRENGTH_HOURS[legacyLevel]!==undefined
+      ? LEGACY_STRENGTH_HOURS[legacyLevel]
+      : null;
+    const statusStrength=entry.status===WORD_STATUS.UNSEEN
+      ? null
+      : entry.status===WORD_STATUS.LEARNING
+        ? 6
+        : REVIEW_CONFIG.initialReviewStrengthHours;
+    entry.memoryStrengthHours=entry.status===WORD_STATUS.UNSEEN
+      ? null
+      : storedIntervalHours??legacyStrength??statusStrength;
+    migrated=true;
+  }
+  if(!hasOwn("learningStep")){
+    entry.learningStep=entry.status===WORD_STATUS.LEARNING
+      ? (storedIntervalHours===null || storedIntervalHours<=0.5 ? 0 : 1)
+      : null;
+    migrated=true;
+  }
+  if(!hasOwn("lapses")){
+    entry.lapses=0;
+    migrated=true;
+  }
+  if(!hasOwn("lastRating")){
+    entry.lastRating=null;
+    migrated=true;
+  }
+  if(!hasOwn("lastIntervalHours")){
+    entry.lastIntervalHours=storedIntervalHours;
+    migrated=true;
+  }
+  if(!hasOwn("scheduleVersion")){
+    entry.scheduleVersion=REVIEW_CONFIG.scheduleVersion;
+    migrated=true;
+  }
+  return migrated;
 }
 
 function loadDailyActivity(){
@@ -124,6 +356,9 @@ function mergeProgressRecords(standardProgress={},customProgress={}){
     ? (Number(standardProgress.todayCount)||0)+(Number(customProgress.todayCount)||0)
     : today===customToday ? Number(customProgress.todayCount)||0 : Number(standardProgress.todayCount)||0;
   const memos=[standardProgress.memo,customProgress.memo].map(value=>String(value||"").trim()).filter(Boolean);
+  const scheduleSource=(Number(customProgress.last)||0)>(Number(standardProgress.last)||0)
+    ? customProgress
+    : standardProgress;
   return {
     ...standardProgress,
     ...customProgress,
@@ -137,7 +372,13 @@ function mergeProgressRecords(standardProgress={},customProgress={}){
     firstLearnedAt:positiveFirstLearned.length ? Math.min(...positiveFirstLearned) : 0,
     today,
     todayCount,
-    memo:[...new Set(memos)].join("\n---\n")
+    memo:[...new Set(memos)].join("\n---\n"),
+    memoryStrengthHours:scheduleSource.memoryStrengthHours,
+    learningStep:scheduleSource.learningStep,
+    lapses:(Number(standardProgress.lapses)||0)+(Number(customProgress.lapses)||0),
+    lastRating:scheduleSource.lastRating,
+    lastIntervalHours:scheduleSource.lastIntervalHours,
+    scheduleVersion:scheduleSource.scheduleVersion
   };
 }
 
@@ -293,7 +534,15 @@ function extractProgress(entry){
     firstLearnedAt:Number(entry.firstLearnedAt)||0,
     today:entry.today||"",
     todayCount:Number(entry.todayCount)||0,
-    memo:entry.memo||""
+    memo:entry.memo||"",
+    memoryStrengthHours:entry.memoryStrengthHours??null,
+    learningStep:entry.status!==WORD_STATUS.UNSEEN && (entry.learningStep===0 || entry.learningStep===1)
+      ? entry.learningStep
+      : null,
+    lapses:Number(entry.lapses)||0,
+    lastRating:entry.lastRating??null,
+    lastIntervalHours:entry.lastIntervalHours??null,
+    scheduleVersion:entry.scheduleVersion??REVIEW_CONFIG.scheduleVersion
   };
 }
 
@@ -319,7 +568,13 @@ function runtimeWord(content,progress={}){
     firstLearnedAt:Number(progress.firstLearnedAt)||0,
     today:progress.today||"",
     todayCount:Number(progress.todayCount)||0,
-    memo:progress.memo||""
+    memo:progress.memo||"",
+    memoryStrengthHours:progress.memoryStrengthHours,
+    learningStep:progress.learningStep,
+    lapses:progress.lapses,
+    lastRating:progress.lastRating,
+    lastIntervalHours:progress.lastIntervalHours,
+    scheduleVersion:progress.scheduleVersion
   };
 }
 
@@ -425,7 +680,10 @@ function ensureCurrentDailyActivity(){
 function load(){
   words=loadSeparatedWords();
   let migrated=false;
-  words.forEach(entry=>{if(migrateWordStatus(entry)) migrated=true;});
+  words.forEach(entry=>{
+    if(migrateWordStatus(entry)) migrated=true;
+    if(migrateReviewSchedule(entry)) migrated=true;
+  });
   const settings = readStoredJsonSafely(SETTINGS_KEY,{});
   examDate.value = settings.examDate || "2026-07-21";
   targetScore.value = VOCAB_TARGETS[settings.targetScore]
@@ -470,6 +728,98 @@ function dueWords(){
   return words.filter(w => w.status!==WORD_STATUS.UNSEEN && (w.next||0) <= t);
 }
 
+function calculateOverdueRatio(entry,currentTimestamp=now()){
+  const next=Number(entry.next);
+  const interval=Number(entry.lastIntervalHours);
+  const current=Number(currentTimestamp);
+  if(entry.next===null || entry.next===undefined || entry.next==="" || !Number.isFinite(next) ||
+    !Number.isFinite(interval) || interval<=0 || !Number.isFinite(current)) return null;
+  const overdueHours=Math.max(0,(current-next)/(60*60*1000));
+  return overdueHours/interval;
+}
+
+function compareDueWords(a,b,currentTimestamp=now()){
+  const order={[WORD_STATUS.LEARNING]:0,[WORD_STATUS.REVIEW]:1,[WORD_STATUS.MASTERED]:2};
+  const statusDifference=(order[a.status]??3)-(order[b.status]??3);
+  if(statusDifference) return statusDifference;
+
+  const aRatio=calculateOverdueRatio(a,currentTimestamp);
+  const bRatio=calculateOverdueRatio(b,currentTimestamp);
+  // 両方の期限超過率を計算できる場合のみ比率を比較する。どちらかが不正ならnextが古い順、
+  // nextでも比較できない場合は0を返し、sortDueWords()で元の配列順を維持する。
+  if(aRatio!==null && bRatio!==null && aRatio!==bRatio) return bRatio-aRatio;
+
+  const aNext=Number(a.next);
+  const bNext=Number(b.next);
+  const aNextIsValid=a.next!==null && a.next!==undefined && a.next!=="" && Number.isFinite(aNext);
+  const bNextIsValid=b.next!==null && b.next!==undefined && b.next!=="" && Number.isFinite(bNext);
+  if(aNextIsValid && bNextIsValid && aNext!==bNext) return aNext-bNext;
+  return 0;
+}
+
+function sortDueWords(entries,currentTimestamp=now()){
+  return entries
+    .map((entry,index)=>({entry,index}))
+    .sort((a,b)=>compareDueWords(a.entry,b.entry,currentTimestamp) || a.index-b.index)
+    .map(item=>item.entry);
+}
+
+function getReviewScheduleCounts(entries,currentTimestamp=now()){
+  const current=Number(currentTimestamp);
+  if(!Number.isFinite(current)) return {dueNow:0,laterToday:0,tomorrow:0,withinSevenDays:0};
+
+  const currentDate=new Date(current);
+  const year=currentDate.getFullYear();
+  const month=currentDate.getMonth();
+  const date=currentDate.getDate();
+  const todayStart=new Date(year,month,date).getTime();
+  const tomorrowStart=new Date(year,month,date+1).getTime();
+  const dayAfterTomorrowStart=new Date(year,month,date+2).getTime();
+  const sevenDaysEnd=new Date(year,month,date+7).getTime()-1;
+  const todayEnd=tomorrowStart-1;
+  const tomorrowEnd=dayAfterTomorrowStart-1;
+  const result={dueNow:0,laterToday:0,tomorrow:0,withinSevenDays:0};
+
+  for(const entry of entries){
+    if(entry.status===WORD_STATUS.UNSEEN) continue;
+    // nextが0または欠損した学習済み単語は、壊れた復習予定を次回回答で修復できるよう、
+    // 既存互換として即時復習対象に含める。ただし将来予定の集計には含めない。
+    if((entry.next||0)<=current) result.dueNow++;
+
+    const next=Number(entry.next);
+    if(!Number.isFinite(next) || next<=0) continue;
+    if(next>current && next<=todayEnd) result.laterToday++;
+    if(next>=tomorrowStart && next<=tomorrowEnd) result.tomorrow++;
+    if(next>=todayStart && next<=sevenDaysEnd) result.withinSevenDays++;
+  }
+  return result;
+}
+
+function formatNextReview(timestamp,currentTimestamp=now()){
+  const target=Number(timestamp);
+  const current=Number(currentTimestamp);
+  if(!Number.isFinite(target) || target<=0 || !Number.isFinite(current)) return "";
+
+  const difference=target-current;
+  if(difference>0 && difference<60*60*1000){
+    return `${Math.max(1,Math.ceil(difference/(60*1000)))}分後`;
+  }
+
+  const targetDate=new Date(target);
+  const currentDate=new Date(current);
+  const tomorrow=new Date(currentDate.getFullYear(),currentDate.getMonth(),currentDate.getDate()+1);
+  const dayAfterTomorrow=new Date(currentDate.getFullYear(),currentDate.getMonth(),currentDate.getDate()+2);
+  const isSameDay=targetDate.getFullYear()===currentDate.getFullYear() &&
+    targetDate.getMonth()===currentDate.getMonth() && targetDate.getDate()===currentDate.getDate();
+  const time=`${targetDate.getHours()}:${String(targetDate.getMinutes()).padStart(2,"0")}`;
+  if(difference>=0 && difference<24*60*60*1000 && isSameDay) return `今日 ${time}`;
+  if(target>=tomorrow.getTime() && target<dayAfterTomorrow.getTime()) return `明日 ${time}`;
+  if(targetDate.getFullYear()!==currentDate.getFullYear()){
+    return `${targetDate.getFullYear()}年${targetDate.getMonth()+1}月${targetDate.getDate()}日`;
+  }
+  return `${targetDate.getMonth()+1}月${targetDate.getDate()}日`;
+}
+
 function chooseNext(){
   modeBadge.textContent=studyMode==="new" ? "新規学習" : "復習";
   const candidates=studyMode==="new"
@@ -492,12 +842,7 @@ function chooseNext(){
   if(studyMode==="new"){
     candidates.sort((a,b)=>(b.priority||0)-(a.priority||0));
   } else {
-    const order={[WORD_STATUS.LEARNING]:0,[WORD_STATUS.REVIEW]:1,[WORD_STATUS.MASTERED]:2};
-    candidates.sort((a,b)=>
-      (order[a.status]??3)-(order[b.status]??3) ||
-      (a.next||0)-(b.next||0) ||
-      (a.level||0)-(b.level||0)
-    );
+    candidates.splice(0,candidates.length,...sortDueWords(candidates));
   }
   current = candidates[0];
   revealed = false;
@@ -528,21 +873,62 @@ function answer(type){
   if(!current) return;
   ensureCurrentDailyActivity();
   const t = now();
+  const answeredWord=current.word;
+  const previousLast=Number(current.last);
+  const elapsedHours=calculateElapsedHours(t,previousLast);
   const isNew=current.status===WORD_STATUS.UNSEEN;
+  const isReviewPhase=current.status===WORD_STATUS.REVIEW || current.status===WORD_STATUS.MASTERED;
+  const rating=type==="bad" ? "again" : type==="mid" ? "hard" : "good";
+  const learningSchedule=(isNew || (current.status===WORD_STATUS.LEARNING && (current.learningStep===0 || current.learningStep===1)))
+    ? calculateLearningSchedule({
+      status:current.status,
+      learningStep:current.learningStep,
+      rating,
+      memoryStrengthHours:current.memoryStrengthHours,
+      lapses:current.lapses
+    })
+    : null;
+  const reviewSchedule=isReviewPhase
+    ? calculateReviewSchedule({
+      rating,
+      memoryStrengthHours:current.memoryStrengthHours,
+      elapsedHours,
+      lastIntervalHours:current.lastIntervalHours
+    })
+    : null;
   if(isNew){
     dailyActivity.newWords++;
-    current.firstLearnedAt=t;
+    if(!current.firstLearnedAt) current.firstLearnedAt=t;
   } else {
     dailyActivity.reviewAnswers++;
   }
   current.seen = (current.seen||0)+1;
-  current.last = t;
   const td = todayKey();
   current.today = current.today===td ? td : td;
   current.todayCount = (current.todayCount||0)+1;
+  if(rating==="again") current.wrong=(current.wrong||0)+1;
+  if(rating==="good") current.correct=(current.correct||0)+1;
 
-  if(type==="bad"){
-    current.wrong=(current.wrong||0)+1;
+  if(learningSchedule){
+    current.memoryStrengthHours=learningSchedule.memoryStrengthHours;
+    current.learningStep=learningSchedule.learningStep;
+    current.status=learningSchedule.status;
+    current.lastIntervalHours=learningSchedule.nextIntervalHours;
+    current.lastRating=rating;
+    current.scheduleVersion=REVIEW_CONFIG.scheduleVersion;
+    current.level=deriveLevel(current.memoryStrengthHours,current.learningStep);
+    current.next=t+learningSchedule.nextIntervalHours*60*60*1000;
+  } else if(reviewSchedule){
+    current.memoryStrengthHours=reviewSchedule.memoryStrengthHours;
+    current.learningStep=reviewSchedule.learningStep;
+    current.status=reviewSchedule.status;
+    if(rating==="again") current.lapses=(current.lapses||0)+1;
+    current.lastIntervalHours=reviewSchedule.nextIntervalHours;
+    current.lastRating=rating;
+    current.scheduleVersion=REVIEW_CONFIG.scheduleVersion;
+    current.level=deriveLevel(current.memoryStrengthHours,current.learningStep);
+    current.next=t+reviewSchedule.nextIntervalHours*60*60*1000;
+  } else if(type==="bad"){
     current.level=Math.max(0,(current.level||0)-1);
     current.next=t+10*60*1000;
     current.status=WORD_STATUS.LEARNING;
@@ -552,12 +938,13 @@ function answer(type){
       ? WORD_STATUS.LEARNING
       : WORD_STATUS.REVIEW;
   } else {
-    current.correct=(current.correct||0)+1;
     current.level=Math.min(6,(current.level||0)+1);
     const intervals=[2,6,12,24,48,96,168]; // hours
     current.next=t+intervals[current.level]*60*60*1000;
     current.status=current.level>=4 ? WORD_STATUS.MASTERED : WORD_STATUS.REVIEW;
   }
+  nextReviewNotice.textContent=`${answeredWord} の次回復習：${formatNextReview(current.next,t)}`;
+  current.last=t;
   saveDailyActivity();
   save();
   chooseNext();
@@ -565,7 +952,8 @@ function answer(type){
 
 function refreshStats(){
   ensureCurrentDailyActivity();
-  const due=dueWords().length;
+  const reviewScheduleCounts=getReviewScheduleCounts(words);
+  const due=reviewScheduleCounts.dueNow;
   const counts={unseen:0,learning:0,review:0,mastered:0};
   words.forEach(entry=>{if(counts[entry.status]!==undefined) counts[entry.status]++;});
   const today=dailyActivity.newWords+dailyActivity.reviewAnswers;
@@ -581,7 +969,7 @@ function refreshStats(){
   const goal=Number(dailyGoal.value)||100;
   goalBar.style.width=Math.min(100,today/goal*100)+"%";
   goalText.textContent=`今日 ${today} / ${goal} 回回答`;
-  refreshStudyPlan(dateInfo,due,counts);
+  refreshStudyPlan(dateInfo,due,counts,reviewScheduleCounts);
   renderWordList();
 }
 
@@ -605,19 +993,15 @@ function setProgressBar(element,value,target){
   element.style.width=(target>0 ? Math.min(100,value/target*100) : 0)+"%";
 }
 
-function refreshStudyPlan(dateInfo,due,counts){
+function refreshStudyPlan(dateInfo,due,counts,reviewScheduleCounts){
   const score=Number(targetScore.value)||DEFAULT_TARGET_SCORE;
   const target=VOCAB_TARGETS[score];
   const studied=counts.learning+counts.review+counts.mastered;
   const remaining=Math.max(0,target-studied);
   const dailyNewEstimate=dateInfo.days>0 ? Math.ceil(remaining/dateInfo.days) : 0;
-  const reviewEstimate=dateInfo.days>0
-    ? Math.max(due,dailyNewEstimate*DAILY_REVIEW_MULTIPLIER)
-    : 0;
+  const reviewEstimate=reviewScheduleCounts.dueNow+reviewScheduleCounts.laterToday;
   const todayNewGoal=dateInfo.days>0 ? Math.min(dailyNewEstimate,counts.unseen) : 0;
-  const todayReviewGoal=dateInfo.days>0
-    ? Math.max(due,todayNewGoal*DAILY_REVIEW_MULTIPLIER)
-    : 0;
+  const todayReviewGoal=reviewEstimate;
   const overallPercent=target>0 ? Math.min(100,studied/target*100) : 0;
 
   vocabTarget.textContent=`約${target.toLocaleString("ja-JP")}語`;
@@ -626,12 +1010,11 @@ function refreshStudyPlan(dateInfo,due,counts){
   remainingNew.textContent=`${remaining.toLocaleString("ja-JP")}語`;
   planDaysLeft.textContent=`${dateInfo.days.toLocaleString("ja-JP")}日`;
   dailyNew.textContent=`${dailyNewEstimate.toLocaleString("ja-JP")}語`;
-  dailyReview.textContent=`${reviewEstimate.toLocaleString("ja-JP")}回`;
+  dailyReview.textContent=`${reviewEstimate.toLocaleString("ja-JP")}語`;
   todayNewPlanText.textContent=`${dailyActivity.newWords.toLocaleString("ja-JP")}語 / ${todayNewGoal.toLocaleString("ja-JP")}語`;
-  todayReviewPlanText.textContent=`${dailyActivity.reviewAnswers.toLocaleString("ja-JP")}回 / ${todayReviewGoal.toLocaleString("ja-JP")}回`;
+  todayReviewPlanText.textContent=`${dailyActivity.reviewAnswers.toLocaleString("ja-JP")}回 / 予定${todayReviewGoal.toLocaleString("ja-JP")}語`;
   overallPlanText.textContent=`${studied.toLocaleString("ja-JP")}語 / ${target.toLocaleString("ja-JP")}語（${Math.round(overallPercent)}%）`;
   setProgressBar(todayNewBar,dailyActivity.newWords,todayNewGoal);
-  setProgressBar(todayReviewBar,dailyActivity.reviewAnswers,todayReviewGoal);
   overallPlanBar.style.width=overallPercent+"%";
 
   const warnings=[];
@@ -649,7 +1032,7 @@ function refreshStudyPlan(dateInfo,due,counts){
     warnings.push(`今日の必要新規数は${dailyNewEstimate.toLocaleString("ja-JP")}語ですが、登録済みの未学習単語は${counts.unseen.toLocaleString("ja-JP")}語です。`);
   }
   if(dailyNewEstimate>HIGH_DAILY_NEW_THRESHOLD || reviewEstimate>HIGH_DAILY_REVIEW_THRESHOLD || dailyNewEstimate+reviewEstimate>HIGH_TOTAL_ANSWERS_THRESHOLD){
-    warnings.push(`1日あたり新規${dailyNewEstimate.toLocaleString("ja-JP")}語・復習${reviewEstimate.toLocaleString("ja-JP")}回の計画です。継続が難しい可能性があるため、試験日や目標点数を見直してください。`);
+    warnings.push(`1日あたり新規${dailyNewEstimate.toLocaleString("ja-JP")}語・復習予定${reviewEstimate.toLocaleString("ja-JP")}語の計画です。継続が難しい可能性があるため、試験日や目標点数を見直してください。`);
   }
   planWarnings.replaceChildren();
   for(const warning of warnings){
@@ -688,10 +1071,41 @@ function closeModal(dialog){
 }
 
 function toDateTimeLocal(timestamp){
-  if(!timestamp) return "";
-  const date=new Date(timestamp);
+  const value=Number(timestamp);
+  if(!Number.isFinite(value) || value<=0) return "";
+  const date=new Date(value);
+  if(!Number.isFinite(date.getTime())) return "";
   const local=new Date(date.getTime()-date.getTimezoneOffset()*60000);
-  return local.toISOString().slice(0,16);
+  if(!Number.isFinite(local.getTime())) return "";
+  try{
+    return local.toISOString().slice(0,16);
+  } catch(error){
+    console.warn("次回復習日時を編集画面用に変換できませんでした。",error);
+    return "";
+  }
+}
+
+function resetWordProgress(entry){
+  Object.assign(entry,{
+    status:WORD_STATUS.UNSEEN,
+    level:0,
+    next:0,
+    last:0,
+    firstLearnedAt:0,
+    seen:0,
+    correct:0,
+    wrong:0,
+    memoryStrengthHours:null,
+    learningStep:null,
+    lapses:0,
+    lastRating:null,
+    lastIntervalHours:null,
+    scheduleVersion:REVIEW_CONFIG.scheduleVersion
+  });
+}
+
+function setManualNextReview(entry,timestamp){
+  entry.next=timestamp;
 }
 
 function openWordEditor(id){
@@ -701,8 +1115,8 @@ function openWordEditor(id){
   editWord.value=entry.word;
   editMeaning.value=entry.meaning;
   editHint.value=entry.hint||"";
-  editLevel.value=entry.level||0;
-  editStatus.value=entry.status;
+  editLevel.value=deriveLevel(entry.memoryStrengthHours,entry.learningStep);
+  editStatus.value=getWordStatus(entry).label.replace("復習対象","復習中");
   editSeen.value=entry.seen||0;
   editCorrect.value=entry.correct||0;
   editWrong.value=entry.wrong||0;
@@ -1103,8 +1517,8 @@ function saveCatalogCsvFile(){
 }
 
 card.addEventListener("click", reveal);
-newStartBtn.addEventListener("click",()=>{studyMode="new";chooseNext();});
-startBtn.addEventListener("click",()=>{studyMode="review";chooseNext();});
+newStartBtn.addEventListener("click",()=>{nextReviewNotice.textContent="";studyMode="new";chooseNext();});
+startBtn.addEventListener("click",()=>{nextReviewNotice.textContent="";studyMode="review";chooseNext();});
 badBtn.addEventListener("click",()=>answer("bad"));
 midBtn.addEventListener("click",()=>answer("mid"));
 goodBtn.addEventListener("click",()=>answer("good"));
@@ -1117,6 +1531,18 @@ prevPageBtn.addEventListener("click",()=>{wordListPage--;renderWordList();});
 nextPageBtn.addEventListener("click",()=>{wordListPage++;renderWordList();});
 editCancelBtn.addEventListener("click",()=>closeModal(editWordDialog));
 editCancelTopBtn.addEventListener("click",()=>closeModal(editWordDialog));
+resetWordProgressBtn.addEventListener("click",()=>{
+  const entry=words.find(word=>word.id===editWordId.value);
+  if(!entry) return;
+  const confirmed=confirm("この単語の学習履歴をリセットして未学習に戻しますか？\n単語データやメモは削除されません。");
+  if(!confirmed) return;
+  const resettingCurrent=Boolean(current && current.id===entry.id);
+  resetWordProgress(entry);
+  save();
+  closeModal(editWordDialog);
+  if(resettingCurrent && studyMode) chooseNext();
+  else refreshStats();
+});
 deleteCancelBtn.addEventListener("click",()=>{pendingDeleteWordId=null;closeModal(deleteWordDialog);});
 deleteCancelTopBtn.addEventListener("click",()=>{pendingDeleteWordId=null;closeModal(deleteWordDialog);});
 
@@ -1137,36 +1563,21 @@ editWordForm.addEventListener("submit",event=>{
     editWordError.textContent="同じ英単語がすでに登録されています。";
     return;
   }
-  const updatedSeen=Math.max(0,Number(editSeen.value)||0);
-  const updatedCorrect=Math.max(0,Number(editCorrect.value)||0);
-  const updatedWrong=Math.max(0,Number(editWrong.value)||0);
   const updatedPriority=editPriority.value==="" ? undefined : Number(editPriority.value);
   if(updatedPriority!==undefined && (!Number.isInteger(updatedPriority) || updatedPriority<1 || updatedPriority>5)){
     editWordError.textContent="優先度は1〜5の整数で指定してください。";
     return;
   }
-  if(updatedCorrect+updatedWrong>updatedSeen){
-    editWordError.textContent="学習回数は、正解回数と不正解回数の合計以上にしてください。";
-    return;
-  }
-  if(editStatus.value===WORD_STATUS.UNSEEN && updatedSeen>0){
-    editWordError.textContent="未学習に戻す場合は、学習回数を0にしてください。";
-    return;
-  }
-  if(editStatus.value===WORD_STATUS.MASTERED && Number(editLevel.value)<4){
-    editWordError.textContent="定着済みにする場合は、習熟レベルを4以上にしてください。";
+  const updatedNext=editNext.value ? new Date(editNext.value).getTime() : 0;
+  if(!Number.isFinite(updatedNext)){
+    editWordError.textContent="次回復習日時が不正です。";
     return;
   }
 
   entry.word=updatedWord;
   entry.meaning=updatedMeaning;
   entry.hint=editHint.value.trim();
-  entry.level=Math.min(6,Math.max(0,Number(editLevel.value)||0));
-  entry.status=editStatus.value;
-  entry.seen=updatedSeen;
-  entry.correct=updatedCorrect;
-  entry.wrong=updatedWrong;
-  entry.next=editNext.value ? new Date(editNext.value).getTime() : 0;
+  setManualNextReview(entry,updatedNext);
   entry.targetScore=editTargetScore.value ? Number(editTargetScore.value) : undefined;
   entry.priority=updatedPriority;
   entry.partOfSpeech=editPartOfSpeech.value.trim()||undefined;
