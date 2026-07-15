@@ -24,8 +24,20 @@
     </div>
   </section>
 
+  <section class="exam-practice" aria-labelledby="examPracticeTitle">
+    <h2 id="examPracticeTitle">試験対策</h2>
+    <p class="small practice-description">復習予定や学習履歴を変更せず、単語を何周でも練習できます。</p>
+    <fieldset class="practice-options">
+      <legend>対象範囲</legend>
+      <label><input type="radio" name="practiceTargetType" id="practiceTargetScore" value="targetScore" checked> <span id="practiceTargetScoreLabel">目標点数まで（おすすめ）</span></label>
+      <label><input type="radio" name="practiceTargetType" id="practiceTargetAll" value="all"> 全単語</label>
+    </fieldset>
+    <button class="ghost practice-start" id="practiceStartBtn" type="button">詰め込み学習を始める</button>
+  </section>
+
   <div class="card" id="card">
     <div class="mode-badge" id="modeBadge">学習を選択</div>
+    <p class="practice-progress" id="practiceProgress" role="status" aria-live="polite" hidden></p>
     <div class="word" id="word"><span class="initial-message">上のボタンから学習を始めましょう</span></div>
     <div class="meaning" id="meaning"></div>
     <div class="hint" id="hint"></div>
@@ -33,10 +45,15 @@
     <p class="next-review" id="nextReviewNotice" role="status" aria-live="polite"></p>
   </div>
 
-  <div class="buttons">
+  <div class="buttons" id="standardAnswerButtons">
     <button class="bad" id="badBtn" disabled>知らない<br><span class="small">10分後に再登場</span></button>
     <button class="mid" id="midBtn" disabled>微妙<br><span class="small">1時間後に再登場</span></button>
     <button class="good" id="goodBtn" disabled>知ってる<br><span class="small">間隔を伸ばす</span></button>
+  </div>
+
+  <div class="practice-buttons" id="practiceAnswerButtons" hidden>
+    <button class="bad" id="practiceUnknownBtn" type="button" disabled>知らない<br><span class="small">次の周回へ残す</span></button>
+    <button class="good" id="practiceKnownBtn" type="button" disabled>知ってる<br><span class="small">このセッションから除外</span></button>
   </div>
 
   <div class="status-stats">

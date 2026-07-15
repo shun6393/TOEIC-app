@@ -3,15 +3,25 @@
     --line:#e5e7eb; --accent:#2563eb; --bad:#dc2626; --mid:#d97706; --good:#16a34a;
   }
   *{box-sizing:border-box}
+  [hidden]{display:none!important}
   body{margin:0;font-family:system-ui,-apple-system,"Segoe UI","Noto Sans JP",sans-serif;background:var(--bg);color:var(--text)}
   .wrap{max-width:760px;margin:auto;padding:18px}
   h1{font-size:22px;margin:4px 0 14px}
-  .today-study,.panel,.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 4px 18px rgba(0,0,0,.04)}
+  .today-study,.exam-practice,.panel,.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 4px 18px rgba(0,0,0,.04)}
   .today-study{padding:14px;margin-bottom:14px}
   .today-study h2{font-size:18px;margin:0 0 12px}
   .today-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
   .study-start-actions{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
   .study-start-actions button{width:100%}
+  .exam-practice{padding:14px;margin-bottom:14px;background:#f8fafc;box-shadow:none}
+  .exam-practice h2{font-size:17px;margin:0 0 4px}
+  .practice-description{margin:0}
+  .practice-options{display:flex;gap:16px;align-items:center;flex-wrap:wrap;border:0;padding:0;margin:12px 0}
+  .practice-options legend{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px}
+  .practice-options label{display:flex;gap:6px;align-items:center;font-size:14px}
+  .practice-options input{width:auto;margin:0;padding:0;accent-color:var(--accent)}
+  .practice-options label span{min-width:0;overflow-wrap:anywhere}
+  .practice-start{width:100%}
   .status-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
   .status-stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
   .status-stat b{display:block;font-size:20px}
@@ -30,6 +40,7 @@
   .danger{background:#fee2e2;color:#991b1b}
   .card{min-height:330px;padding:26px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
   .mode-badge{background:#eef2ff;color:#1e3a8a;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700;margin-bottom:16px}
+  .practice-progress{margin:0 0 14px;color:#7c3aed;font-size:14px;font-weight:700}
   .word{font-size:42px;font-weight:800;letter-spacing:.3px;word-break:break-word}
   .initial-message{display:block;max-width:100%;font-size:24px;font-weight:700;line-height:1.5;text-wrap:balance;overflow-wrap:anywhere}
   .meaning{font-size:22px;margin-top:18px;display:none}
@@ -37,6 +48,7 @@
   .tap{margin-top:28px;color:var(--muted);font-size:14px}
   .next-review{min-height:1.5em;margin:12px 0 0;color:var(--accent);font-size:14px;font-weight:700}
   .buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+  .practice-buttons{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
   .bad{background:#fee2e2;color:#991b1b}
   .mid{background:#fef3c7;color:#92400e}
   .good{background:#dcfce7;color:#166534}
@@ -111,6 +123,7 @@
   .empty{color:var(--muted);line-height:1.8}
   @media(max-width:600px){
     .today-stats{grid-template-columns:repeat(2,1fr)}
+    .practice-options{display:grid;grid-template-columns:1fr;gap:8px}
     .status-stats{grid-template-columns:repeat(2,1fr)}
     .plan-grid{grid-template-columns:repeat(2,1fr)}
     .today-plan{grid-template-columns:1fr}

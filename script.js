@@ -9,6 +9,8 @@ const DAILY_KEY = "toeic_cram_daily_v1";
 const CATALOG_CSV_MIGRATED_KEY = "toeic_cram_catalog_csv_migrated_v1";
 const CATALOG_CSV_BACKUP_KEY = "toeic_cram_catalog_csv_backup_v1";
 const WORD_STATUS = Object.freeze({UNSEEN:"unseen",LEARNING:"learning",REVIEW:"review",MASTERED:"mastered"});
+const STUDY_MODE = Object.freeze({NEW:"new",REVIEW:"review",PRACTICE:"practice"});
+const PRACTICE_TARGET = Object.freeze({TARGET_SCORE:"targetScore",ALL:"all"});
 const DEFAULT_TARGET_SCORE = 600;
 const VOCAB_TARGETS = Object.freeze({
   400: 700,
@@ -59,6 +61,7 @@ let revealed = false;
 let wordListPage = 1;
 let pendingDeleteWordId = null;
 let studyMode = null;
+let practiceSession = null;
 let dailyActivity = {date:"",newWords:0,reviewAnswers:0};
 let standardCatalog = [];
 let catalogById = new Map();
@@ -820,7 +823,171 @@ function formatNextReview(timestamp,currentTimestamp=now()){
   return `${targetDate.getMonth()+1}月${targetDate.getDate()}日`;
 }
 
+function isPracticeMode(){
+  return studyMode===STUDY_MODE.PRACTICE;
+}
+
+function getPracticeCandidateIds(targetType){
+  if(targetType===PRACTICE_TARGET.ALL) return words.map(entry=>entry.id);
+  const selectedTier=uiScoreToTier(Number(targetScore.value));
+  return words
+    .filter(entry=>uiScoreToTier(Number(entry.targetScore))<=selectedTier)
+    .map(entry=>entry.id);
+}
+
+function shufflePracticeIds(ids,avoidFirstId=null){
+  const queue=[...new Set(ids)];
+  for(let index=queue.length-1;index>0;index--){
+    const swapIndex=Math.floor(Math.random()*(index+1));
+    [queue[index],queue[swapIndex]]=[queue[swapIndex],queue[index]];
+  }
+  if(queue.length>1 && queue[0]===avoidFirstId){
+    const swapIndex=queue.findIndex(id=>id!==avoidFirstId);
+    [queue[0],queue[swapIndex]]=[queue[swapIndex],queue[0]];
+  }
+  return queue;
+}
+
+function setPracticeButtons(on){
+  practiceUnknownBtn.disabled=!on;
+  practiceKnownBtn.disabled=!on;
+}
+
+function setPracticeUi(active){
+  standardAnswerButtons.hidden=active;
+  practiceAnswerButtons.hidden=!active;
+  practiceProgress.hidden=!active;
+  setButtons(false);
+  setPracticeButtons(false);
+  if(!active) practiceProgress.textContent="";
+}
+
+function startRegularStudy(mode){
+  practiceSession=null;
+  setPracticeUi(false);
+  nextReviewNotice.textContent="";
+  studyMode=mode;
+  chooseNext();
+}
+
+function startPracticeSession(){
+  const targetType=practiceTargetAll.checked ? PRACTICE_TARGET.ALL : PRACTICE_TARGET.TARGET_SCORE;
+  const candidateIds=getPracticeCandidateIds(targetType);
+  practiceSession={
+    mode:"cram",
+    targetType,
+    queue:shufflePracticeIds(candidateIds),
+    currentIndex:0,
+    remainingIds:[...candidateIds],
+    nextRoundIds:[],
+    currentId:null,
+    lastPresentedId:null,
+    round:1,
+    totalCount:candidateIds.length
+  };
+  studyMode=STUDY_MODE.PRACTICE;
+  nextReviewNotice.textContent="";
+  setPracticeUi(true);
+  chooseNext();
+}
+
+function showPracticeEmpty(){
+  current=null;
+  revealed=false;
+  modeBadge.textContent="試験対策：詰め込み学習";
+  practiceProgress.textContent="対象 0語";
+  word.textContent="学習できる単語がありません";
+  meaning.textContent="";
+  hint.textContent="対象範囲を変更するか、単語を登録してください。";
+  meaning.style.display="none";
+  hint.style.display="block";
+  tapText.textContent="";
+  setPracticeButtons(false);
+}
+
+function showPracticeComplete(){
+  current=null;
+  revealed=false;
+  modeBadge.textContent="試験対策：詰め込み学習";
+  practiceProgress.textContent=`${practiceSession.totalCount.toLocaleString("ja-JP")}語をクリア`;
+  word.textContent="🎉 全単語クリア！";
+  meaning.textContent="";
+  hint.textContent="もう一度始める場合は、上の「詰め込み学習を始める」を押してください。";
+  meaning.style.display="none";
+  hint.style.display="block";
+  tapText.textContent="";
+  setPracticeButtons(false);
+}
+
+function chooseNextPractice(){
+  if(!practiceSession || practiceSession.totalCount===0){
+    showPracticeEmpty();
+    return;
+  }
+
+  const availableIds=new Set(words.map(entry=>entry.id));
+  practiceSession.remainingIds=practiceSession.remainingIds.filter(id=>availableIds.has(id));
+  practiceSession.nextRoundIds=practiceSession.nextRoundIds.filter(id=>availableIds.has(id));
+  if(practiceSession.currentId && availableIds.has(practiceSession.currentId) &&
+    !practiceSession.nextRoundIds.includes(practiceSession.currentId)){
+    practiceSession.nextRoundIds.push(practiceSession.currentId);
+  }
+  practiceSession.currentId=null;
+
+  while(true){
+    if(practiceSession.currentIndex>=practiceSession.queue.length){
+      const nextIds=[...new Set(practiceSession.nextRoundIds)].filter(id=>availableIds.has(id));
+      if(!nextIds.length){
+        practiceSession.remainingIds=[];
+        showPracticeComplete();
+        return;
+      }
+      practiceSession.round++;
+      practiceSession.remainingIds=[...nextIds];
+      practiceSession.queue=shufflePracticeIds(nextIds,practiceSession.lastPresentedId);
+      practiceSession.currentIndex=0;
+      practiceSession.nextRoundIds=[];
+    }
+
+    const id=practiceSession.queue[practiceSession.currentIndex++];
+    const entry=words.find(item=>item.id===id);
+    if(!entry || !practiceSession.remainingIds.includes(id)) continue;
+
+    current=entry;
+    practiceSession.currentId=id;
+    practiceSession.lastPresentedId=id;
+    revealed=false;
+    modeBadge.textContent="試験対策：詰め込み学習";
+    practiceProgress.textContent=`第${practiceSession.round.toLocaleString("ja-JP")}周・残り${practiceSession.remainingIds.length.toLocaleString("ja-JP")}語`;
+    word.textContent=current.word;
+    meaning.textContent=current.meaning;
+    hint.textContent=current.hint||"";
+    meaning.style.display="none";
+    hint.style.display="none";
+    tapText.textContent="カードを押すと答えを表示";
+    setPracticeButtons(false);
+    return;
+  }
+}
+
+function answerPractice(known){
+  if(!practiceSession || !current || !revealed) return;
+  const answeredId=current.id;
+  if(known){
+    practiceSession.remainingIds=practiceSession.remainingIds.filter(id=>id!==answeredId);
+  } else if(!practiceSession.nextRoundIds.includes(answeredId)){
+    practiceSession.nextRoundIds.push(answeredId);
+  }
+  practiceSession.currentId=null;
+  current=null;
+  chooseNextPractice();
+}
+
 function chooseNext(){
+  if(isPracticeMode()){
+    chooseNextPractice();
+    return;
+  }
   modeBadge.textContent=studyMode==="new" ? "新規学習" : "復習";
   const candidates=studyMode==="new"
     ? words.filter(entry=>entry.status===WORD_STATUS.UNSEEN)
@@ -861,8 +1028,9 @@ function reveal(){
   revealed = true;
   meaning.style.display = "block";
   if(current.hint) hint.style.display = "block";
-  tapText.textContent = "自己評価してね";
-  setButtons(true);
+  tapText.textContent = isPracticeMode() ? "覚えているか選んでください" : "自己評価してね";
+  if(isPracticeMode()) setPracticeButtons(true);
+  else setButtons(true);
 }
 
 function setButtons(on){
@@ -965,11 +1133,10 @@ function refreshStats(){
   reviewCount.textContent=counts.review;
   masteredCount.textContent=counts.mastered;
   const dateInfo=getStudyDateInfo();
-  daysLeft.textContent=dateInfo.days;
   const goal=Number(dailyGoal.value)||100;
   goalBar.style.width=Math.min(100,today/goal*100)+"%";
   goalText.textContent=`今日 ${today} / ${goal} 回回答`;
-  refreshStudyPlan(dateInfo,due,counts,reviewScheduleCounts);
+  refreshStudyPlan(dateInfo,due,counts,reviewScheduleCounts,today,goal);
   renderWordList();
 }
 
@@ -993,7 +1160,7 @@ function setProgressBar(element,value,target){
   element.style.width=(target>0 ? Math.min(100,value/target*100) : 0)+"%";
 }
 
-function refreshStudyPlan(dateInfo,due,counts,reviewScheduleCounts){
+function refreshStudyPlan(dateInfo,due,counts,reviewScheduleCounts,today,goal){
   const score=Number(targetScore.value)||DEFAULT_TARGET_SCORE;
   const target=VOCAB_TARGETS[score];
   const studied=counts.learning+counts.review+counts.mastered;
@@ -1016,6 +1183,7 @@ function refreshStudyPlan(dateInfo,due,counts,reviewScheduleCounts){
   overallPlanText.textContent=`${studied.toLocaleString("ja-JP")}語 / ${target.toLocaleString("ja-JP")}語（${Math.round(overallPercent)}%）`;
   setProgressBar(todayNewBar,dailyActivity.newWords,todayNewGoal);
   overallPlanBar.style.width=overallPercent+"%";
+  refreshTodayDashboard({dateInfo,due,unseen:counts.unseen,todayNewGoal,today,goal});
 
   const warnings=[];
   if(!dateInfo.valid){
@@ -1042,6 +1210,33 @@ function refreshStudyPlan(dateInfo,due,counts,reviewScheduleCounts){
   }
   planWarnings.style.display=warnings.length ? "block" : "none";
   planNotice.textContent=`学習開始済み${studied.toLocaleString("ja-JP")}語、定着済み${counts.mastered.toLocaleString("ja-JP")}語を基準に計算しています。`;
+}
+
+function refreshTodayDashboard({dateInfo,due,unseen,todayNewGoal,today,goal}){
+  const format=value=>Number(value).toLocaleString("ja-JP");
+  const setAction=(button,{label,variant,order,disabled})=>{
+    button.textContent=label;
+    button.classList.remove("primary","ghost");
+    button.classList.add(variant);
+    button.style.order=order;
+    button.disabled=disabled;
+  };
+  const isComplete=due===0 && (today>=goal || unseen===0);
+
+  todayNewCount.textContent=`${format(dailyActivity.newWords)} / ${format(todayNewGoal)}語`;
+  daysLeft.textContent=dateInfo.valid ? format(dateInfo.days) : "未設定";
+  practiceTargetScoreLabel.textContent=`目標点数まで（おすすめ・${format(targetScore.value)}点）`;
+
+  if(due>0){
+    setAction(startBtn,{label:`今日の復習（${format(due)}語）`,variant:"primary",order:1,disabled:false});
+    setAction(newStartBtn,{label:`新規学習（未学習${format(unseen)}語）`,variant:"ghost",order:2,disabled:unseen===0});
+  } else if(isComplete){
+    setAction(startBtn,{label:"今日の学習完了 🎉",variant:"primary",order:1,disabled:true});
+    setAction(newStartBtn,{label:unseen>0 ? "追加で新規学習" : "新規単語はありません",variant:"ghost",order:2,disabled:unseen===0});
+  } else {
+    setAction(newStartBtn,{label:`新規学習（未学習${format(unseen)}語）`,variant:"primary",order:1,disabled:unseen===0});
+    setAction(startBtn,{label:"復習はありません",variant:"ghost",order:2,disabled:true});
+  }
 }
 
 function getWordStatus(entry){
@@ -1517,8 +1712,11 @@ function saveCatalogCsvFile(){
 }
 
 card.addEventListener("click", reveal);
-newStartBtn.addEventListener("click",()=>{nextReviewNotice.textContent="";studyMode="new";chooseNext();});
-startBtn.addEventListener("click",()=>{nextReviewNotice.textContent="";studyMode="review";chooseNext();});
+newStartBtn.addEventListener("click",()=>startRegularStudy(STUDY_MODE.NEW));
+startBtn.addEventListener("click",()=>startRegularStudy(STUDY_MODE.REVIEW));
+practiceStartBtn.addEventListener("click",startPracticeSession);
+practiceUnknownBtn.addEventListener("click",()=>answerPractice(false));
+practiceKnownBtn.addEventListener("click",()=>answerPractice(true));
 badBtn.addEventListener("click",()=>answer("bad"));
 midBtn.addEventListener("click",()=>answer("mid"));
 goodBtn.addEventListener("click",()=>answer("good"));
@@ -1653,12 +1851,18 @@ resetAllBtn.addEventListener("click",()=>{
 });
 
 const initializationControls=[
-  newStartBtn,startBtn,resetTodayBtn,examDate,targetScore,dailyGoal,wordSearch,
-  csvFile,headerMode,fourthColumnType,addBtn,exportBtn,saveCsvBtn,resetAllBtn
+  resetTodayBtn,examDate,targetScore,dailyGoal,wordSearch,
+  csvFile,headerMode,fourthColumnType,addBtn,exportBtn,saveCsvBtn,resetAllBtn,
+  practiceTargetScore,practiceTargetAll,practiceStartBtn
 ];
 
 function setAppLoading(isLoading){
   initializationControls.forEach(control=>{control.disabled=isLoading;});
+  if(isLoading){
+    newStartBtn.disabled=true;
+    startBtn.disabled=true;
+    setPracticeButtons(false);
+  }
   if(isLoading){
     catalogLoadStatus.className="small";
     catalogLoadStatus.textContent="標準単語データを読み込んでいます…";
