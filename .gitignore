@@ -1,0 +1,13 @@
+# Audit
+audit/
+
+# Backup
+toeic-words.before-meaning-fix.csv
+
+# Review documents
+WORD_REVIEW*.md
+WORD_AUDIT_REVIEW.md
+WORD_CHANGES_APPLIED.md
+
+# Audit CSV
+word-audit-*.csv
