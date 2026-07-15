@@ -10,11 +10,33 @@
 <div class="wrap">
   <h1>TOEIC 短期詰め込み単語</h1>
 
-  <div class="top">
-    <div class="stat"><b id="dueCount">0</b><span>今すぐ復習</span></div>
-    <div class="stat"><b id="todayNewCount">0</b><span>今日の新規</span></div>
-    <div class="stat"><b id="todayReviewCount">0</b><span>今日の復習回答</span></div>
-    <div class="stat"><b id="daysLeft">0</b><span>試験まで</span></div>
+  <section class="today-study" aria-labelledby="todayStudyTitle">
+    <h2 id="todayStudyTitle">今日の学習</h2>
+    <div class="today-stats">
+      <div class="stat"><b id="dueCount">0</b><span>今すぐ復習</span></div>
+      <div class="stat"><b id="todayNewCount">0</b><span>今日の新規</span></div>
+      <div class="stat"><b id="todayReviewCount">0</b><span>今日の復習回答</span></div>
+      <div class="stat"><b id="daysLeft">0</b><span>試験まで</span></div>
+    </div>
+    <div class="study-start-actions">
+      <button class="primary" id="newStartBtn">新規学習</button>
+      <button class="ghost" id="startBtn">今日の復習</button>
+    </div>
+  </section>
+
+  <div class="card" id="card">
+    <div class="mode-badge" id="modeBadge">学習を選択</div>
+    <div class="word" id="word"><span class="initial-message">上のボタンから学習を始めましょう</span></div>
+    <div class="meaning" id="meaning"></div>
+    <div class="hint" id="hint"></div>
+    <div class="tap" id="tapText">学習開始後、カードを押すと答えを表示します</div>
+    <p class="next-review" id="nextReviewNotice" role="status" aria-live="polite"></p>
+  </div>
+
+  <div class="buttons">
+    <button class="bad" id="badBtn" disabled>知らない<br><span class="small">10分後に再登場</span></button>
+    <button class="mid" id="midBtn" disabled>微妙<br><span class="small">1時間後に再登場</span></button>
+    <button class="good" id="goodBtn" disabled>知ってる<br><span class="small">間隔を伸ばす</span></button>
   </div>
 
   <div class="status-stats">
@@ -38,8 +60,6 @@
         </select>
       </label>
       <label>1日の目標 <input type="number" id="dailyGoal" min="10" max="500" value="100" style="width:90px"></label>
-      <button class="primary" id="newStartBtn">新規単語を学習</button>
-      <button class="ghost" id="startBtn">復習を開始</button>
       <button class="ghost" id="resetTodayBtn">今日の回数をリセット</button>
     </div>
     <p class="small" id="catalogLoadStatus" role="status" aria-live="polite">標準単語データを読み込んでいます…</p>
@@ -75,21 +95,6 @@
       <p class="small plan-note" id="planNotice"></p>
       <p class="small plan-disclaimer">必要語彙数と学習量は目安であり、TOEICスコアを保証するものではありません。</p>
     </section>
-  </div>
-
-  <div class="card" id="card">
-    <div class="mode-badge" id="modeBadge">モード未選択</div>
-    <div class="word" id="word">スタートを押してね</div>
-    <div class="meaning" id="meaning"></div>
-    <div class="hint" id="hint"></div>
-    <div class="tap" id="tapText">カードを押すと答えを表示</div>
-    <p class="next-review" id="nextReviewNotice" role="status" aria-live="polite"></p>
-  </div>
-
-  <div class="buttons">
-    <button class="bad" id="badBtn" disabled>知らない<br><span class="small">10分後に再登場</span></button>
-    <button class="mid" id="midBtn" disabled>微妙<br><span class="small">1時間後に再登場</span></button>
-    <button class="good" id="goodBtn" disabled>知ってる<br><span class="small">間隔を伸ばす</span></button>
   </div>
 
   <details class="panel">

@@ -118,13 +118,6 @@ GitHub Pagesで公開
 - http://localhost:8000で開く
 ※ `index.html` を `file://` で直接開くと、Fetch APIによる標準単語CSVの自動読み込みが動作しない。
 
-## 今後の予定
-
-- 初回診断
-- 出題アルゴリズム改善
-- 忘却曲線
-- PWA化
-- 音声
 
 ## 開発ルール
 
