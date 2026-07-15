@@ -115,7 +115,7 @@ GitHub Pagesで公開
 例
 - VS Code Live Server
 - `python -m http.server`
-
+- http://localhost:8000で開く
 ※ `index.html` を `file://` で直接開くと、Fetch APIによる標準単語CSVの自動読み込みが動作しない。
 
 ## 今後の予定
